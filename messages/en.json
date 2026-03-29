@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Created in Ukraine — Ukrainian Cinema in Israel",
+    "description": "A cultural initiative promoting Ukrainian cinema in Israel"
+  },
+  "nav": {
+    "schedule": "Schedule",
+    "catalog": "Catalog",
+    "about": "About Us"
+  },
+  "hero": {
+    "title": "Created in Ukraine",
+    "tagline": "Ukrainian cinema in Israel",
+    "hashtag": "#morethancinema"
+  },
+  "schedule": {
+    "title": "Schedule",
+    "noUpcoming": "No upcoming screenings at the moment",
+    "buyTicket": "Buy ticket",
+    "cancelled": "Cancelled"
+  },
+  "catalog": {
+    "title": "Film Catalog",
+    "allGenres": "All genres",
+    "duration": "{minutes} min",
+    "year": "Year"
+  },
+  "movie": {
+    "director": "Director",
+    "duration": "Duration",
+    "genre": "Genre",
+    "year": "Year",
+    "upcomingScreenings": "Upcoming Screenings",
+    "watchTrailer": "Watch trailer"
+  },
+  "about": {
+    "title": "About Us"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "footer": {
+    "rights": "© {year} Created in Ukraine. All rights reserved."
+  }
+}

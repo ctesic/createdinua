@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "נוצר באוקראינה — קולנוע אוקראיני בישראל",
+    "description": "יוזמה תרבותית לקידום הקולנוע האוקראיני בישראל"
+  },
+  "nav": {
+    "schedule": "לוח הקרנות",
+    "catalog": "קטלוג",
+    "about": "אודות"
+  },
+  "hero": {
+    "title": "נוצר באוקראינה",
+    "tagline": "קולנוע אוקראיני בישראל",
+    "hashtag": "#morethancinema"
+  },
+  "schedule": {
+    "title": "לוח הקרנות",
+    "noUpcoming": "אין הקרנות מתוכננות כרגע",
+    "buyTicket": "רכישת כרטיס",
+    "cancelled": "בוטל"
+  },
+  "catalog": {
+    "title": "קטלוג סרטים",
+    "allGenres": "כל הז׳אנרים",
+    "duration": "{minutes} דק׳",
+    "year": "שנה"
+  },
+  "movie": {
+    "director": "במאי",
+    "duration": "משך",
+    "genre": "ז׳אנר",
+    "year": "שנה",
+    "upcomingScreenings": "הקרנות קרובות",
+    "watchTrailer": "צפה בטריילר"
+  },
+  "about": {
+    "title": "אודות"
+  },
+  "common": {
+    "learnMore": "למידע נוסף",
+    "back": "חזרה",
+    "loading": "טוען..."
+  },
+  "footer": {
+    "rights": "© {year} נוצר באוקראינה. כל הזכויות שמורות."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Знято в Україні — Українське кіно в Ізраїлі",
+    "description": "Культурна ініціатива з просування українського кіно в Ізраїлі"
+  },
+  "nav": {
+    "schedule": "Афіша",
+    "catalog": "Каталог",
+    "about": "Про нас"
+  },
+  "hero": {
+    "title": "Знято в Україні",
+    "tagline": "Українське кіно в Ізраїлі",
+    "hashtag": "#morethancinema"
+  },
+  "schedule": {
+    "title": "Афіша",
+    "noUpcoming": "Наразі немає запланованих показів",
+    "buyTicket": "Купити квиток",
+    "cancelled": "Скасовано"
+  },
+  "catalog": {
+    "title": "Каталог фільмів",
+    "allGenres": "Усі жанри",
+    "duration": "{minutes} хв",
+    "year": "Рік"
+  },
+  "movie": {
+    "director": "Режисер",
+    "duration": "Тривалість",
+    "genre": "Жанр",
+    "year": "Рік",
+    "upcomingScreenings": "Найближчі покази",
+    "watchTrailer": "Дивитись трейлер"
+  },
+  "about": {
+    "title": "Про нас"
+  },
+  "common": {
+    "learnMore": "Дізнатись більше",
+    "back": "Назад",
+    "loading": "Завантаження..."
+  },
+  "footer": {
+    "rights": "© {year} Знято в Україні. Всі права захищені."
+  }
+}
