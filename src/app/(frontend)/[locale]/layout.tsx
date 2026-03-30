@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing, rtlLocales, type Locale } from '@/i18n/routing'
@@ -44,7 +44,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer locale={locale as Locale} />
         </NextIntlClientProvider>
       </body>
     </html>

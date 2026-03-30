@@ -9,6 +9,7 @@ import { Movie } from '@/collections/Movie'
 import { Screening } from '@/collections/Screening'
 import { Place } from '@/collections/Place'
 import { Media } from '@/collections/Media'
+import { Users } from '@/collections/Users'
 import { Announcement } from '@/globals/Announcement'
 import { SiteSettings } from '@/globals/SiteSettings'
 
@@ -17,7 +18,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   editor: lexicalEditor(),
-  collections: [Movie, Screening, Place, Media],
+  collections: [Users, Movie, Screening, Place, Media],
   globals: [Announcement, SiteSettings],
   secret: process.env.PAYLOAD_SECRET || 'default-secret',
   typescript: {
