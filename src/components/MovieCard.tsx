@@ -38,10 +38,10 @@ export function MovieCard({ slug, title, year, poster, director }: Props) {
         )}
       </div>
       <div className="p-[var(--spacing-4)]">
-        <h3 className="text-[var(--text-base)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)]" style={{ transitionDuration: 'var(--transition-fast)' }}>
+        <h3 className="text-[length:var(--text-base)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)]" style={{ transitionDuration: 'var(--transition-fast)' }}>
           {title}
         </h3>
-        <p className="mt-[var(--spacing-1)] text-[var(--text-sm)] text-[var(--color-text-secondary)]">
+        <p className="mt-[var(--spacing-1)] text-[length:var(--text-sm)] text-[var(--color-text-secondary)]">
           {director && `${director} · `}{year}
         </p>
       </div>

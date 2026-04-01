@@ -1,18 +1,42 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
+/* ─── @font-face: Mariupol ─── */
+@font-face {
+  font-family: 'Mariupol';
+  src: url('/fonts/mariupol/Mariupol-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mariupol';
+  src: url('/fonts/mariupol/Mariupol-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mariupol';
+  src: url('/fonts/mariupol/Mariupol-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Base Styles ─── */
 body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background-color: var(--color-background);
-  line-height: var(--leading-normal);
+  line-height: var(--line-height-base);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
-  line-height: var(--leading-tight);
 }
 
 /* ─── Custom Tailwind Utilities via Tokens ─── */
@@ -23,6 +47,8 @@ h1, h2, h3, h4, h5, h6 {
   --color-accent: var(--color-accent);
   --color-accent-hover: var(--color-accent-hover);
   --color-accent-light: var(--color-accent-light);
+  --color-background: var(--color-background);
+  --color-background-inverted: var(--color-background-inverted);
   --color-surface: var(--color-surface);
   --color-surface-elevated: var(--color-surface-elevated);
   --color-border: var(--color-border);
@@ -31,8 +57,14 @@ h1, h2, h3, h4, h5, h6 {
   --color-text-secondary: var(--color-text-secondary);
   --color-text-muted: var(--color-text-muted);
   --color-text-inverse: var(--color-text-inverse);
+  --color-text-on-primary: var(--color-text-on-primary);
+  --color-text-on-accent: var(--color-text-on-accent);
   --color-success: var(--color-success);
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
   --color-info: var(--color-info);
+  --color-state-hover-on-dark: var(--color-state-hover-on-dark);
+  --color-state-pressed-on-dark: var(--color-state-pressed-on-dark);
+  --color-state-hover-on-light: var(--color-state-hover-on-light);
+  --color-state-pressed-on-light: var(--color-state-pressed-on-light);
 }

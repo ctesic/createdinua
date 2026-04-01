@@ -12,7 +12,7 @@ const typeStyles = {
 export function AnnouncementBanner({ text, type }: Props) {
   return (
     <div className={`${typeStyles[type]} py-[var(--spacing-3)] px-[var(--spacing-6)]`}>
-      <div className="mx-auto text-center text-[var(--text-sm)] font-[var(--font-weight-medium)]" style={{ maxWidth: 'var(--max-width-content)' }}>
+      <div className="mx-auto text-center text-[length:var(--text-sm)] font-[number:var(--font-weight-medium)]" style={{ maxWidth: 'var(--max-width-content)' }}>
         {text}
       </div>
     </div>

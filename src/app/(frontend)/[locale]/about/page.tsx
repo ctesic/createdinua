@@ -22,14 +22,14 @@ export default async function AboutPage({ params }: Props) {
   return (
     <section className="py-[var(--spacing-16)]">
       <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-narrow)' }}>
-        <h1 className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
+        <h1 className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
           {t('title')}
         </h1>
 
         <div className="prose text-[var(--color-text-secondary)] leading-[var(--leading-relaxed)]">
           {locale === 'uk' && (
             <>
-              <p className="text-[var(--text-lg)] mb-[var(--spacing-6)]">
+              <p className="text-[length:var(--text-lg)] mb-[var(--spacing-6)]">
                 <strong>«Знято в Україні»</strong> — це культурна ініціатива, яка просуває українське кіно в Ізраїлі.
               </p>
               <p className="mb-[var(--spacing-6)]">
@@ -42,7 +42,7 @@ export default async function AboutPage({ params }: Props) {
           )}
           {locale === 'en' && (
             <>
-              <p className="text-[var(--text-lg)] mb-[var(--spacing-6)]">
+              <p className="text-[length:var(--text-lg)] mb-[var(--spacing-6)]">
                 <strong>Created in Ukraine</strong> is a cultural initiative promoting Ukrainian cinema in Israel.
               </p>
               <p className="mb-[var(--spacing-6)]">
@@ -55,7 +55,7 @@ export default async function AboutPage({ params }: Props) {
           )}
           {locale === 'he' && (
             <>
-              <p className="text-[var(--text-lg)] mb-[var(--spacing-6)]">
+              <p className="text-[length:var(--text-lg)] mb-[var(--spacing-6)]">
                 <strong>נוצר באוקראינה</strong> היא יוזמה תרבותית לקידום הקולנוע האוקראיני בישראל.
               </p>
               <p className="mb-[var(--spacing-6)]">
@@ -76,7 +76,7 @@ export default async function AboutPage({ params }: Props) {
                 href={socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[length:var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
                 style={{ transitionDuration: 'var(--transition-fast)' }}
               >
                 Facebook
@@ -87,7 +87,7 @@ export default async function AboutPage({ params }: Props) {
                 href={socialLinks.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[length:var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
                 style={{ transitionDuration: 'var(--transition-fast)' }}
               >
                 Telegram
@@ -98,7 +98,7 @@ export default async function AboutPage({ params }: Props) {
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+                className="flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-lg)] border border-[var(--color-border)] px-[var(--spacing-4)] py-[var(--spacing-3)] text-[length:var(--text-sm)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
                 style={{ transitionDuration: 'var(--transition-fast)' }}
               >
                 Instagram

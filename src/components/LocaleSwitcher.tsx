@@ -29,7 +29,7 @@ export function LocaleSwitcher() {
         <button
           key={l}
           onClick={() => switchLocale(l)}
-          className={`rounded-[var(--radius-full)] px-[var(--spacing-3)] py-[var(--spacing-1)] text-[var(--text-xs)] font-[var(--font-weight-medium)] transition-colors ${
+          className={`rounded-[var(--radius-full)] px-[var(--spacing-3)] py-[var(--spacing-1)] text-[length:var(--text-xs)] font-[number:var(--font-weight-medium)] transition-colors ${
             locale === l
               ? 'bg-[var(--color-primary)] text-[var(--color-text-inverse)]'
               : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'

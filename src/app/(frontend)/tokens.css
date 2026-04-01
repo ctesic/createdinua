@@ -14,30 +14,37 @@
 
 :root {
   /* ─── Color Palette ─── */
-  /* Primary — Ukrainian blue & yellow inspiration */
-  --color-primary: #1a56db;
-  --color-primary-hover: #1648b8;
-  --color-primary-light: #e8effc;
+  /* Primary — Ukrainian blue */
+  --color-primary: #33b5ff;
+  --color-primary-hover: #1a9de6;
+  --color-primary-light: #e6f5ff;
 
-  /* Accent — warm gold */
-  --color-accent: #f5a623;
-  --color-accent-hover: #d9911b;
-  --color-accent-light: #fef6e6;
+  /* Accent — Ukrainian gold */
+  --color-accent: #ffd700;
+  --color-accent-hover: #d4b300;
+  --color-accent-light: #fff9e0;
 
   /* Neutral */
   --color-background: #ffffff;
+  --color-background-inverted: #222425;
   --color-surface: #f8f9fb;
   --color-surface-elevated: #ffffff;
   --color-border: #e2e5ea;
   --color-border-subtle: #f0f1f3;
 
   /* Text */
-  --color-text-primary: #111827;
+  --color-text-primary: #222425;
   --color-text-secondary: #4b5563;
   --color-text-muted: #9ca3af;
   --color-text-inverse: #ffffff;
   --color-text-on-primary: #ffffff;
-  --color-text-on-accent: #111827;
+  --color-text-on-accent: #222425;
+
+  /* Interaction states */
+  --color-state-hover-on-dark: rgba(255, 255, 255, 0.08);
+  --color-state-pressed-on-dark: rgba(255, 255, 255, 0.16);
+  --color-state-hover-on-light: rgba(34, 36, 37, 0.12);
+  --color-state-pressed-on-light: rgba(34, 36, 37, 0.24);
 
   /* Semantic */
   --color-success: #16a34a;
@@ -46,8 +53,9 @@
   --color-info: #2563eb;
 
   /* ─── Typography ─── */
-  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family: 'Mariupol';
+  --font-heading: 'Mariupol', system-ui, -apple-system, sans-serif;
+  --font-body: 'Mariupol', system-ui, -apple-system, sans-serif;
 
   /* Font sizes (rem) */
   --text-xs: 0.75rem;      /* 12px */
@@ -56,19 +64,24 @@
   --text-lg: 1.125rem;     /* 18px */
   --text-xl: 1.25rem;      /* 20px */
   --text-2xl: 1.5rem;      /* 24px */
-  --text-3xl: 1.875rem;    /* 30px */
+  --text-3xl: 2rem;        /* 32px */
   --text-4xl: 2.25rem;     /* 36px */
   --text-5xl: 3rem;        /* 48px */
 
-  /* Line heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.625;
+  /* Line heights (px, per size) */
+  --line-height-xs: 16px;
+  --line-height-sm: 20px;
+  --line-height-base: 24px;
+  --line-height-lg: 28px;
+  --line-height-xl: 32px;
+  --line-height-2xl: 36px;
+  --line-height-3xl: 40px;
+  --line-height-4xl: 48px;
+  --line-height-5xl: 56px;
 
   /* Font weights */
-  --font-weight-normal: 400;
+  --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
   /* ─── Spacing Scale ─── */

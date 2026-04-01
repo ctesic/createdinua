@@ -58,25 +58,25 @@ export default async function MoviePage({ params }: Props) {
 
           {/* Details */}
           <div className="flex-1">
-            <h1 className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-4)]">
+            <h1 className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-4)]">
               {movie.title}
             </h1>
 
-            <div className="flex flex-wrap gap-[var(--spacing-6)] mb-[var(--spacing-6)] text-[var(--text-sm)]">
+            <div className="flex flex-wrap gap-[var(--spacing-6)] mb-[var(--spacing-6)] text-[length:var(--text-sm)]">
               {movie.director && (
                 <div>
                   <span className="text-[var(--color-text-muted)]">{t('director')}: </span>
-                  <span className="text-[var(--color-text-primary)] font-[var(--font-weight-medium)]">{movie.director}</span>
+                  <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">{movie.director}</span>
                 </div>
               )}
               <div>
                 <span className="text-[var(--color-text-muted)]">{t('year')}: </span>
-                <span className="text-[var(--color-text-primary)] font-[var(--font-weight-medium)]">{movie.year}</span>
+                <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">{movie.year}</span>
               </div>
               {movie.duration && (
                 <div>
                   <span className="text-[var(--color-text-muted)]">{t('duration')}: </span>
-                  <span className="text-[var(--color-text-primary)] font-[var(--font-weight-medium)]">
+                  <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">
                     {tCatalog('duration', { minutes: movie.duration })}
                   </span>
                 </div>
@@ -88,7 +88,7 @@ export default async function MoviePage({ params }: Props) {
                 {genres.map((genre: string) => (
                   <span
                     key={genre}
-                    className="rounded-[var(--radius-full)] bg-[var(--color-primary-light)] px-[var(--spacing-3)] py-[var(--spacing-1)] text-[var(--text-xs)] font-[var(--font-weight-medium)] text-[var(--color-primary)]"
+                    className="rounded-[var(--radius-full)] bg-[var(--color-primary-light)] px-[var(--spacing-3)] py-[var(--spacing-1)] text-[length:var(--text-xs)] font-[number:var(--font-weight-medium)] text-[var(--color-primary)]"
                   >
                     {genre}
                   </span>
@@ -101,7 +101,7 @@ export default async function MoviePage({ params }: Props) {
                 href={movie.trailerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-full)] bg-[var(--color-primary)] px-[var(--spacing-6)] py-[var(--spacing-3)] text-[var(--text-sm)] font-[var(--font-weight-semibold)] text-[var(--color-text-on-primary)] hover:bg-[var(--color-primary-hover)] transition-colors mb-[var(--spacing-8)]"
+                className="inline-flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-full)] bg-[var(--color-primary)] px-[var(--spacing-6)] py-[var(--spacing-3)] text-[length:var(--text-sm)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-on-primary)] hover:bg-[var(--color-primary-hover)] transition-colors mb-[var(--spacing-8)]"
                 style={{ transitionDuration: 'var(--transition-fast)' }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -123,7 +123,7 @@ export default async function MoviePage({ params }: Props) {
         {/* Upcoming Screenings for this movie */}
         {upcomingScreenings.length > 0 && (
           <div className="mt-[var(--spacing-16)]">
-            <h2 className="text-[var(--text-2xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-6)]">
+            <h2 className="text-[length:var(--text-2xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-6)]">
               {t('upcomingScreenings')}
             </h2>
             <div className="flex flex-col gap-[var(--spacing-3)]">

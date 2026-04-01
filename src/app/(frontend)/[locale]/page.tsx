@@ -37,13 +37,13 @@ export default async function HomePage({ params }: Props) {
       {/* Hero Section */}
       <section className="bg-[var(--color-surface)] py-[var(--spacing-20)]">
         <div className="mx-auto px-[var(--spacing-6)] text-center" style={{ maxWidth: 'var(--max-width-content)' }}>
-          <h1 className="text-[var(--text-5xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-4)]">
+          <h1 className="text-[length:var(--text-5xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-4)]">
             {heroTitle}
           </h1>
-          <p className="text-[var(--text-xl)] text-[var(--color-text-secondary)] mb-[var(--spacing-2)]">
+          <p className="text-[length:var(--text-xl)] text-[var(--color-text-secondary)] mb-[var(--spacing-2)]">
             {heroTagline}
           </p>
-          <p className="text-[var(--text-lg)] text-[var(--color-primary)] font-[var(--font-weight-semibold)]">
+          <p className="text-[length:var(--text-lg)] text-[var(--color-primary)] font-[number:var(--font-weight-semibold)]">
             {t('hero.hashtag')}
           </p>
         </div>
@@ -53,12 +53,12 @@ export default async function HomePage({ params }: Props) {
       <section className="py-[var(--spacing-16)]">
         <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
           <div className="flex items-center justify-between mb-[var(--spacing-8)]">
-            <h2 className="text-[var(--text-3xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)]">
+            <h2 className="text-[length:var(--text-3xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)]">
               {t('schedule.title')}
             </h2>
             <Link
               href="/schedule"
-              className="text-[var(--text-sm)] font-[var(--font-weight-medium)] text-[var(--color-primary)] hover:text-[var(--color-primary-hover)]"
+              className="text-[length:var(--text-sm)] font-[number:var(--font-weight-medium)] text-[var(--color-primary)] hover:text-[var(--color-primary-hover)]"
             >
               {t('common.learnMore')}
             </Link>
@@ -98,10 +98,10 @@ export default async function HomePage({ params }: Props) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[var(--spacing-8)] text-center">
               {stats.map((stat, i) => (
                 <div key={i}>
-                  <div className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">
+                  <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">
                     {stat.value}
                   </div>
-                  <div className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">
+                  <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">
                     {stat.label}
                   </div>
                 </div>
@@ -114,20 +114,20 @@ export default async function HomePage({ params }: Props) {
           <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[var(--spacing-8)] text-center">
               <div>
-                <div className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">50+</div>
-                <div className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Ukrainian films</div>
+                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">50+</div>
+                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Ukrainian films</div>
               </div>
               <div>
-                <div className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">14</div>
-                <div className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Israeli cities</div>
+                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">14</div>
+                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Israeli cities</div>
               </div>
               <div>
-                <div className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">3</div>
-                <div className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Cinema chains</div>
+                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">3</div>
+                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Cinema chains</div>
               </div>
               <div>
-                <div className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">1</div>
-                <div className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Festival</div>
+                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">1</div>
+                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Festival</div>
               </div>
             </div>
           </div>

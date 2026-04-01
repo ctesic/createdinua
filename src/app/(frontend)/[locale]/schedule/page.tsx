@@ -30,7 +30,7 @@ export default async function SchedulePage({ params }: Props) {
   return (
     <section className="py-[var(--spacing-16)]">
       <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
-        <h1 className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
+        <h1 className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
           {t('title')}
         </h1>
 
@@ -38,7 +38,7 @@ export default async function SchedulePage({ params }: Props) {
           <div className="flex flex-col gap-[var(--spacing-10)]">
             {Object.entries(grouped).map(([date, screenings]) => (
               <div key={date}>
-                <h2 className="text-[var(--text-lg)] font-[var(--font-weight-semibold)] text-[var(--color-text-secondary)] mb-[var(--spacing-4)] capitalize">
+                <h2 className="text-[length:var(--text-lg)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-secondary)] mb-[var(--spacing-4)] capitalize">
                   {date}
                 </h2>
                 <div className="flex flex-col gap-[var(--spacing-3)]">

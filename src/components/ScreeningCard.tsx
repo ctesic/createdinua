@@ -34,10 +34,10 @@ export function ScreeningCard({ movie, place, datetime, ticketUrl, price, isCanc
   return (
     <div className={`flex items-center gap-[var(--spacing-4)] rounded-[var(--radius-lg)] border border-[var(--color-border)] p-[var(--spacing-4)] ${isCancelled ? 'opacity-60' : ''}`}>
       <div className="shrink-0 text-center">
-        <div className="text-[var(--text-2xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">
+        <div className="text-[length:var(--text-2xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">
           {formattedTime}
         </div>
-        <div className="text-[var(--text-xs)] text-[var(--color-text-muted)]">
+        <div className="text-[length:var(--text-xs)] text-[var(--color-text-muted)]">
           {formattedDate}
         </div>
       </div>
@@ -45,15 +45,15 @@ export function ScreeningCard({ movie, place, datetime, ticketUrl, price, isCanc
       <div className="flex-1 min-w-0">
         <Link
           href={{ pathname: '/movie/[slug]', params: { slug: movie.slug } }}
-          className="text-[var(--text-base)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]"
+          className="text-[length:var(--text-base)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]"
         >
           {movie.title}
         </Link>
-        <p className="text-[var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-1)]">
+        <p className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-1)]">
           {place.name}, {place.city}
         </p>
         {isCancelled && (
-          <span className="inline-block mt-[var(--spacing-1)] text-[var(--text-xs)] font-[var(--font-weight-semibold)] text-[var(--color-error)]">
+          <span className="inline-block mt-[var(--spacing-1)] text-[length:var(--text-xs)] font-[number:var(--font-weight-semibold)] text-[var(--color-error)]">
             {t('cancelled')}
           </span>
         )}
@@ -61,14 +61,14 @@ export function ScreeningCard({ movie, place, datetime, ticketUrl, price, isCanc
 
       <div className="shrink-0 flex flex-col items-end gap-[var(--spacing-2)]">
         {price && (
-          <span className="text-[var(--text-sm)] text-[var(--color-text-secondary)]">{price}</span>
+          <span className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)]">{price}</span>
         )}
         {ticketUrl && !isCancelled && (
           <a
             href={ticketUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-[var(--radius-full)] bg-[var(--color-primary)] px-[var(--spacing-4)] py-[var(--spacing-2)] text-[var(--text-xs)] font-[var(--font-weight-semibold)] text-[var(--color-text-on-primary)] hover:bg-[var(--color-primary-hover)] transition-colors"
+            className="rounded-[var(--radius-full)] bg-[var(--color-primary)] px-[var(--spacing-4)] py-[var(--spacing-2)] text-[length:var(--text-xs)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-on-primary)] hover:bg-[var(--color-primary-hover)] transition-colors"
             style={{ transitionDuration: 'var(--transition-fast)' }}
           >
             {t('buyTicket')}

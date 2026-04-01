@@ -17,7 +17,7 @@ export default async function CatalogPage({ params }: Props) {
   return (
     <section className="py-[var(--spacing-16)]">
       <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
-        <h1 className="text-[var(--text-4xl)] font-[var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
+        <h1 className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-8)]">
           {t('title')}
         </h1>
 
