@@ -4,7 +4,7 @@ export const Movie: CollectionConfig = {
   slug: 'movies',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'year', 'director'],
+    defaultColumns: ['title', 'year', 'director', 'isActive'],
   },
   fields: [
     {
@@ -28,9 +28,31 @@ export const Movie: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'temporaryDescription',
+      type: 'richText',
+      localized: true,
+      admin: {
+        description: 'Promotional or event-specific text',
+      },
+    },
+    {
       name: 'poster',
       type: 'upload',
       relationTo: 'media',
+    },
+    {
+      name: 'posterVerticalUrl',
+      type: 'text',
+      admin: {
+        description: 'External URL for vertical poster image',
+      },
+    },
+    {
+      name: 'posterHorizontalUrl',
+      type: 'text',
+      admin: {
+        description: 'External URL for horizontal poster image',
+      },
     },
     {
       name: 'trailerUrl',
@@ -42,7 +64,6 @@ export const Movie: CollectionConfig = {
     {
       name: 'year',
       type: 'number',
-      required: true,
       min: 1900,
       max: 2100,
       admin: {
@@ -50,10 +71,29 @@ export const Movie: CollectionConfig = {
       },
     },
     {
+      name: 'country',
+      type: 'text',
+      admin: {
+        description: 'e.g. "Україна" or "Україна, Франція, Бельгія"',
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'director',
       type: 'text',
-      required: true,
       localized: true,
+    },
+    {
+      name: 'screenwriter',
+      type: 'text',
+    },
+    {
+      name: 'producer',
+      type: 'text',
+    },
+    {
+      name: 'executiveProducers',
+      type: 'text',
     },
     {
       name: 'duration',
@@ -78,8 +118,45 @@ export const Movie: CollectionConfig = {
         { label: 'Historical', value: 'historical' },
         { label: 'Family', value: 'family' },
         { label: 'Short', value: 'short' },
+        { label: 'Adventure', value: 'adventure' },
+        { label: 'Sci-Fi', value: 'sci-fi' },
+        { label: 'Fantasy', value: 'fantasy' },
+        { label: 'Musical', value: 'musical' },
       ],
       admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'ageRestriction',
+      type: 'text',
+      admin: {
+        description: 'e.g. "12+", "6+", "16+"',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'language',
+      type: 'text',
+      admin: {
+        description: 'e.g. "Українська"',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'subtitles',
+      type: 'text',
+      admin: {
+        description: 'e.g. "англійські"',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'isActive',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Whether this movie is currently featured on the site',
         position: 'sidebar',
       },
     },

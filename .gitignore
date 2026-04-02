@@ -26,6 +26,9 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# data (CSV imports)
+/data/
+
 # payload
 /db/
 src/payload-types.ts
