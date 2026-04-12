@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { getUpcomingScreenings, getAnnouncement, getSiteSettings, getRecentlyScreenedMovies, getFeaturedMovie } from '@/lib/payload'
+import { getAnnouncement, getRecentlyScreenedMovies, getFeaturedMovie } from '@/lib/payload'
 import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { Button } from '@/components/Button'
 import { HeroMovie } from '@/components/HeroMovie'

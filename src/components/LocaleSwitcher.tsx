@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useLocale } from 'next-intl'
-import { usePathname, useRouter } from '@/i18n/navigation'
 import { locales, type Locale } from '@/i18n/routing'
 import { ChevronDown } from 'lucide-react'
 
@@ -14,8 +13,6 @@ const localeLabels: Record<Locale, { short: string; full: string }> = {
 
 export function LocaleSwitcher() {
   const locale = useLocale() as Locale
-  const router = useRouter()
-  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 

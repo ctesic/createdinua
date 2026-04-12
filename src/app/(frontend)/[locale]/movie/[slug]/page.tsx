@@ -128,7 +128,6 @@ export default async function MoviePage({ params }: Props) {
                 {/* Description text */}
                 {movie.description && (
                   <div className="max-w-[600px] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-primary)] self-start">
-                    {/* @ts-expect-error — Payload richtext data type */}
                     <RichText data={movie.description} />
                   </div>
                 )}

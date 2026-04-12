@@ -26,7 +26,7 @@ export default async function AboutPage({ params }: Props) {
           {t('title')}
         </h1>
 
-        <div className="prose text-[var(--color-text-secondary)] leading-[var(--leading-relaxed)]">
+        <div className="prose text-[var(--color-text-secondary)] leading-[var(--line-height-lg)]">
           {locale === 'uk' && (
             <>
               <p className="text-[length:var(--text-lg)] mb-[var(--spacing-6)]">

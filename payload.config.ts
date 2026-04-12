@@ -28,6 +28,7 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URI || 'file:./db/payload.db',
     },
+    push: false,
   }),
   sharp,
   localization: {
