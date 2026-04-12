@@ -14,7 +14,9 @@
   "hero": {
     "title": "Created in Ukraine",
     "tagline": "Ukrainian cinema in Israel",
-    "hashtag": "#morethancinema"
+    "hashtag": "#morethancinema",
+    "screenings": "Screenings:",
+    "details": "Details"
   },
   "schedule": {
     "title": "Schedule",
@@ -34,10 +36,28 @@
     "genre": "Genre",
     "year": "Year",
     "upcomingScreenings": "Upcoming Screenings",
-    "watchTrailer": "Watch trailer"
+    "watchTrailer": "Watch trailer",
+    "screenings": "Screenings",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "tickets": "Tickets",
+    "soldOut": "Sold out",
+    "noUpcomingScreenings": "No upcoming screenings",
+    "noPastScreenings": "No past screenings",
+    "producerLabel": "Producer:",
+    "directorLabel": "Director:",
+    "genreLabel": "Genre:",
+    "languageLabel": "Language:",
+    "ageRestrictionLabel": "Age restriction:"
   },
   "about": {
     "title": "About Us"
+  },
+  "stats": {
+    "films": "modern Ukrainian films",
+    "cities": "Israeli cities",
+    "chains": "cinema chains",
+    "festivals": "Festival + Ukrainian cinema days"
   },
   "pastEvents": {
     "title": "Past events",

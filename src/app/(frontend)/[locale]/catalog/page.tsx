@@ -28,7 +28,7 @@ export default async function CatalogPage({ params }: Props) {
                 key={movie.id}
                 slug={movie.slug}
                 title={movie.title}
-                posterUrl={typeof movie.poster === 'object' ? movie.poster?.url : null}
+                posterUrl={typeof movie.posterVertical === 'object' ? movie.posterVertical?.url : null}
               />
             ))}
           </div>

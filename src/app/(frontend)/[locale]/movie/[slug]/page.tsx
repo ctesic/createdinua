@@ -1,12 +1,17 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
-import { ScreeningCard } from '@/components/ScreeningCard'
+import { MovieScreenings } from '@/components/MovieScreenings'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Locale } from '@/i18n/routing'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
+}
+
+function getYouTubeEmbedUrl(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/)
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null
 }
 
 export default async function MoviePage({ params }: Props) {
@@ -14,39 +19,48 @@ export default async function MoviePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'movie' })
-  const tCatalog = await getTranslations({ locale, namespace: 'catalog' })
   const movie = await getMovieBySlug(slug, locale as Locale)
 
   if (!movie) {
     notFound()
   }
-
   const screeningsResult = await getScreeningsForMovie(movie.id, locale as Locale)
-  const upcomingScreenings = screeningsResult.docs.filter(
-    (s: any) => new Date(s.datetime) > new Date()
-  )
+  const now = new Date()
 
-  const poster = typeof movie.poster === 'object' && movie.poster ? movie.poster : null
-  const genres = Array.isArray(movie.genre) ? movie.genre : []
+  const screenings = screeningsResult.docs.map((s: any) => {
+    const dt = new Date(s.datetime)
+    const place = typeof s.place === 'object' ? s.place : null
+    return {
+      id: s.id,
+      date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
+      time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+      city: place?.city || '',
+      venue: place?.name || '',
+      note: s.notes || undefined,
+      ticketUrl: s.ticketUrl || null,
+      isPast: dt < now,
+    }
+  })
+
+  const embedUrl = movie.trailerUrl ? getYouTubeEmbedUrl(movie.trailerUrl) : null
 
   return (
-    <section className="py-[var(--spacing-16)]">
-      <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
-        <div className="flex flex-col lg:flex-row gap-[var(--spacing-10)]">
-          {/* Poster */}
-          <div className="shrink-0 w-full lg:w-[300px]">
-            <div className="aspect-[2/3] relative rounded-[var(--radius-lg)] overflow-hidden bg-[var(--color-surface)]">
-              {poster?.url ? (
-                <Image
-                  src={poster.url as string}
-                  alt={(poster as any).alt || movie.title}
-                  fill
-                  className="object-cover"
-                  sizes="300px"
-                  priority
+    <div className="bg-[var(--color-surface)] min-h-screen">
+      <div className="flex flex-col items-center w-full">
+        <div className="max-w-[1440px] w-full md:px-[var(--container-side-paddings)] md:py-[var(--spacing-10)]">
+          <div className="bg-[var(--color-background)] md:rounded-[32px] overflow-hidden w-full">
+            {/* Trailer / Video embed */}
+            <div className="aspect-[21/9] bg-[var(--color-border)] w-full">
+              {embedUrl ? (
+                <iframe
+                  src={embedUrl}
+                  title={movie.title as string}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 />
               ) : (
-                <div className="flex h-full items-center justify-center text-[var(--color-text-muted)]">
+                <div className="flex items-center justify-center w-full h-full text-[var(--color-text-muted)]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect width="18" height="18" x="3" y="3" rx="2" />
                     <path d="m10 8 6 4-6 4Z" />
@@ -54,101 +68,75 @@ export default async function MoviePage({ params }: Props) {
                 </div>
               )}
             </div>
-          </div>
 
-          {/* Details */}
-          <div className="flex-1">
-            <h1 className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-4)]">
-              {movie.title}
-            </h1>
+            {/* Screenings section */}
+            <MovieScreenings
+              screenings={screenings}
+              labels={{
+                title: t('screenings'),
+                upcoming: t('upcoming'),
+                past: t('past'),
+                tickets: t('tickets'),
+                soldOut: t('soldOut'),
+                noUpcomingScreenings: t('noUpcomingScreenings'),
+                noPastScreenings: t('noPastScreenings'),
+              }}
+            />
 
-            <div className="flex flex-wrap gap-[var(--spacing-6)] mb-[var(--spacing-6)] text-[length:var(--text-sm)]">
-              {movie.director && (
-                <div>
-                  <span className="text-[var(--color-text-muted)]">{t('director')}: </span>
-                  <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">{movie.director}</span>
+            {/* About section */}
+            <div className="flex flex-col items-start pb-[var(--spacing-16)] pt-[var(--spacing-8)] px-[var(--spacing-8)]">
+              <div className="flex flex-col md:grid md:grid-cols-[2fr_1fr] gap-6 w-full">
+                {/* Info — on top for mobile, right column for desktop */}
+                <div className="order-first md:order-last flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] self-start">
+                  {(movie.country || movie.year) && (
+                    <p className="text-[var(--color-text-primary)]">
+                      {[movie.country, movie.year].filter(Boolean).join(' ')}
+                    </p>
+                  )}
+                  {movie.director && (
+                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                      <p className="text-[var(--color-text-primary)]">{t('directorLabel')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.director}</p>
+                    </div>
+                  )}
+                  {movie.producer && (
+                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                      <p className="text-[var(--color-text-primary)]">{t('producerLabel')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.producer}</p>
+                    </div>
+                  )}
+                  {Array.isArray(movie.genre) && movie.genre.length > 0 && (
+                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                      <p className="text-[var(--color-text-primary)]">{t('genreLabel')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.genre.join(', ')}</p>
+                    </div>
+                  )}
+                  {movie.language && (
+                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                      <p className="text-[var(--color-text-primary)]">{t('languageLabel')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.language}</p>
+                    </div>
+                  )}
+                  {movie.ageRestriction && (
+                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                      <p className="text-[var(--color-text-primary)]">{t('ageRestrictionLabel')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.ageRestriction}</p>
+                    </div>
+                  )}
                 </div>
-              )}
-              <div>
-                <span className="text-[var(--color-text-muted)]">{t('year')}: </span>
-                <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">{movie.year}</span>
+
+                {/* Description text */}
+                {movie.description && (
+                  <div className="max-w-[600px] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-primary)] self-start">
+                    {/* @ts-expect-error — Payload richtext data type */}
+                    <RichText data={movie.description} />
+                  </div>
+                )}
               </div>
-              {movie.duration && (
-                <div>
-                  <span className="text-[var(--color-text-muted)]">{t('duration')}: </span>
-                  <span className="text-[var(--color-text-primary)] font-[number:var(--font-weight-medium)]">
-                    {tCatalog('duration', { minutes: movie.duration })}
-                  </span>
-                </div>
-              )}
             </div>
-
-            {genres.length > 0 && (
-              <div className="flex flex-wrap gap-[var(--spacing-2)] mb-[var(--spacing-6)]">
-                {genres.map((genre: string) => (
-                  <span
-                    key={genre}
-                    className="rounded-[var(--radius-full)] bg-[var(--color-primary-light)] px-[var(--spacing-3)] py-[var(--spacing-1)] text-[length:var(--text-xs)] font-[number:var(--font-weight-medium)] text-[var(--color-primary)]"
-                  >
-                    {genre}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {movie.trailerUrl && (
-              <a
-                href={movie.trailerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-[var(--spacing-2)] rounded-[var(--radius-full)] bg-[var(--color-primary)] px-[var(--spacing-6)] py-[var(--spacing-3)] text-[length:var(--text-sm)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-on-primary)] hover:bg-[var(--color-primary-hover)] transition-colors mb-[var(--spacing-8)]"
-                style={{ transitionDuration: 'var(--transition-fast)' }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="m10 8 6 4-6 4Z" />
-                </svg>
-                {t('watchTrailer')}
-              </a>
-            )}
-
-            {/* Description */}
-            {movie.description && (
-              <div className="prose text-[var(--color-text-secondary)] max-w-none">
-                {/* Rich text content would be rendered here */}
-              </div>
-            )}
           </div>
         </div>
-
-        {/* Upcoming Screenings for this movie */}
-        {upcomingScreenings.length > 0 && (
-          <div className="mt-[var(--spacing-16)]">
-            <h2 className="text-[length:var(--text-2xl)] font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] mb-[var(--spacing-6)]">
-              {t('upcomingScreenings')}
-            </h2>
-            <div className="flex flex-col gap-[var(--spacing-3)]">
-              {upcomingScreenings.map((screening: any) => (
-                <ScreeningCard
-                  key={screening.id}
-                  movie={{
-                    title: movie.title as string,
-                    slug: movie.slug,
-                    poster: poster,
-                  }}
-                  place={{
-                    name: typeof screening.place === 'object' ? screening.place.name : '',
-                    city: typeof screening.place === 'object' ? screening.place.city : '',
-                  }}
-                  datetime={screening.datetime}
-                  ticketUrl={screening.ticketUrl}
-                  price={screening.price}
-                  isCancelled={screening.isCancelled}
-                />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
-    </section>
+    </div>
   )
 }

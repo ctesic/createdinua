@@ -21,11 +21,11 @@ export function LocaleSwitcher() {
 
   function switchLocale(nextLocale: Locale) {
     setOpen(false)
-    router.replace(
-      // @ts-expect-error — pathname is valid
-      { pathname },
-      { locale: nextLocale },
-    )
+    // Build the new URL by replacing the locale prefix in the current browser path
+    const currentPath = window.location.pathname
+    // Remove the current locale prefix (e.g. /uk/film/nu-mam -> /film/nu-mam)
+    const pathWithoutLocale = currentPath.replace(/^\/(uk|en|he)/, '') || '/'
+    window.location.href = `/${nextLocale}${pathWithoutLocale}`
   }
 
   useEffect(() => {

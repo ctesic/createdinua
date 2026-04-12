@@ -3,7 +3,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'default' | 'outline'
+  variant?: 'default' | 'outline' | 'inverse'
   children: ReactNode
 }
 
@@ -21,11 +21,17 @@ const variants = {
     'hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2))]',
     'active:border-[var(--color-text-primary)] active:text-[var(--color-text-primary)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(white,white)]',
   ].join(' '),
+  inverse: [
+    'bg-[var(--color-background)] text-[var(--color-text-primary)]',
+    'hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(white,white)]',
+    'active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(white,white)]',
+  ].join(' '),
 } as const
 
 const disabledVariants = {
   default: 'bg-[var(--color-accent-light)] text-[var(--color-text-muted)] cursor-not-allowed',
   outline: 'border border-[var(--color-border)] bg-[#e2e5ea] text-[var(--color-text-muted)] cursor-not-allowed',
+  inverse: 'bg-[var(--color-surface)] text-[var(--color-text-muted)] cursor-not-allowed',
 } as const
 
 export function Button({ variant = 'default', children, className, disabled, ...props }: Props) {

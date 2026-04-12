@@ -14,7 +14,9 @@
   "hero": {
     "title": "Знято в Україні",
     "tagline": "Українське кіно в Ізраїлі",
-    "hashtag": "#morethancinema"
+    "hashtag": "#morethancinema",
+    "screenings": "Сеанси:",
+    "details": "Детальніше"
   },
   "schedule": {
     "title": "Афіша",
@@ -34,10 +36,28 @@
     "genre": "Жанр",
     "year": "Рік",
     "upcomingScreenings": "Найближчі покази",
-    "watchTrailer": "Дивитись трейлер"
+    "watchTrailer": "Дивитись трейлер",
+    "screenings": "Сеанси",
+    "upcoming": "Наступні",
+    "past": "Минулі",
+    "tickets": "Квитки",
+    "soldOut": "Продано",
+    "noUpcomingScreenings": "Немає запланованих сеансів",
+    "noPastScreenings": "Минулих сеансів немає",
+    "producerLabel": "Продюсер:",
+    "directorLabel": "Режисер:",
+    "genreLabel": "Жанр:",
+    "languageLabel": "Мова:",
+    "ageRestrictionLabel": "Вікові обмеження:"
   },
   "about": {
     "title": "Про нас"
+  },
+  "stats": {
+    "films": "сучасних українських фільмів",
+    "cities": "міст Ізраїлю",
+    "chains": "кінотеатральні мережі",
+    "festivals": "Фестиваль+дні українського кіно"
   },
   "pastEvents": {
     "title": "Минулі події",

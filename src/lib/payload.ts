@@ -79,6 +79,53 @@ export async function getScreeningsForMovie(movieId: number | string, locale: Lo
   }
 }
 
+export async function getFeaturedMovie(locale: Locale) {
+  try {
+    const payload = await getPayloadClient()
+    const now = new Date().toISOString()
+
+    // Get the next upcoming screening with its movie
+    const result = await payload.find({
+      collection: 'screenings',
+      where: {
+        datetime: { greater_than: now },
+        isCancelled: { equals: false },
+      },
+      sort: 'datetime',
+      limit: 20,
+      locale,
+      depth: 2,
+    })
+
+    if (result.docs.length === 0) return null
+
+    // Group screenings by movie, take the first movie
+    const firstScreening = result.docs[0]
+    const movie = typeof firstScreening.movie === 'object' ? firstScreening.movie : null
+    if (!movie) return null
+
+    // Collect all screenings for this movie
+    const screenings = result.docs
+      .filter((s: any) => {
+        const m = typeof s.movie === 'object' ? s.movie : null
+        return m && m.id === movie.id
+      })
+      .map((s: any) => {
+        const dt = new Date(s.datetime)
+        const place = typeof s.place === 'object' ? s.place : null
+        return {
+          date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
+          time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+          city: place?.city || '',
+        }
+      })
+
+    return { movie, screenings }
+  } catch {
+    return null
+  }
+}
+
 export async function getRecentlyScreenedMovies(locale: Locale, limit = 4) {
   try {
     const payload = await getPayloadClient()

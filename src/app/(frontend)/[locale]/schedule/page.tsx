@@ -48,7 +48,7 @@ export default async function SchedulePage({ params }: Props) {
                       movie={{
                         title: typeof screening.movie === 'object' ? screening.movie.title : '',
                         slug: typeof screening.movie === 'object' ? screening.movie.slug : '',
-                        poster: typeof screening.movie === 'object' ? screening.movie.poster : null,
+                        poster: typeof screening.movie === 'object' ? screening.movie.posterVertical : null,
                       }}
                       place={{
                         name: typeof screening.place === 'object' ? screening.place.name : '',

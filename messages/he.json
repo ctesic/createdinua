@@ -14,7 +14,9 @@
   "hero": {
     "title": "נוצר באוקראינה",
     "tagline": "קולנוע אוקראיני בישראל",
-    "hashtag": "#morethancinema"
+    "hashtag": "#morethancinema",
+    "screenings": "הקרנות:",
+    "details": "פרטים"
   },
   "schedule": {
     "title": "לוח הקרנות",
@@ -34,10 +36,28 @@
     "genre": "ז׳אנר",
     "year": "שנה",
     "upcomingScreenings": "הקרנות קרובות",
-    "watchTrailer": "צפה בטריילר"
+    "watchTrailer": "צפה בטריילר",
+    "screenings": "הקרנות",
+    "upcoming": "הבאות",
+    "past": "עברו",
+    "tickets": "כרטיסים",
+    "soldOut": "אזל",
+    "noUpcomingScreenings": "אין הקרנות מתוכננות",
+    "noPastScreenings": "אין הקרנות שעברו",
+    "producerLabel": "מפיק:",
+    "directorLabel": "במאי:",
+    "genreLabel": "ז׳אנר:",
+    "languageLabel": "שפה:",
+    "ageRestrictionLabel": "הגבלת גיל:"
   },
   "about": {
     "title": "אודות"
+  },
+  "stats": {
+    "films": "סרטים אוקראינים מודרניים",
+    "cities": "ערים בישראל",
+    "chains": "רשתות קולנוע",
+    "festivals": "פסטיבל + ימי קולנוע אוקראיני"
   },
   "pastEvents": {
     "title": "אירועים שעברו",

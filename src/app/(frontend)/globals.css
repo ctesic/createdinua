@@ -68,3 +68,16 @@ h1, h2, h3, h4, h5, h6 {
   --color-state-hover-on-light: var(--color-state-hover-on-light);
   --color-state-pressed-on-light: var(--color-state-pressed-on-light);
 }
+
+/* ─── Responsive Token Overrides ─── */
+@media (min-width: 768px) {
+  :root {
+    --container-side-paddings: var(--spacing-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-side-paddings: var(--spacing-10);
+  }
+}

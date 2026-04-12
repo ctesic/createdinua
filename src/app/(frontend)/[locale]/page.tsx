@@ -1,10 +1,10 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { getUpcomingScreenings, getAnnouncement, getSiteSettings, getRecentlyScreenedMovies } from '@/lib/payload'
+import { getUpcomingScreenings, getAnnouncement, getSiteSettings, getRecentlyScreenedMovies, getFeaturedMovie } from '@/lib/payload'
 import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { Button } from '@/components/Button'
+import { HeroMovie } from '@/components/HeroMovie'
 import { MovieCard } from '@/components/MovieCard'
-import { ScreeningCard } from '@/components/ScreeningCard'
 import type { Locale } from '@/i18n/routing'
 
 type Props = {
@@ -16,14 +16,11 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale })
-  const [screeningsResult, announcement, siteSettings, recentMovies] = await Promise.all([
-    getUpcomingScreenings(locale as Locale, 5),
+  const [announcement, recentMovies, featured] = await Promise.all([
     getAnnouncement(locale as Locale),
-    getSiteSettings(locale as Locale),
     getRecentlyScreenedMovies(locale as Locale, 4),
+    getFeaturedMovie(locale as Locale),
   ])
-
-  const stats = (siteSettings?.stats as Array<{ value: string; label: string }>) || []
 
   return (
     <div>
@@ -35,15 +32,27 @@ export default async function HomePage({ params }: Props) {
         />
       )}
 
-      {/* Section — Featured (placeholder) */}
-      <section className="w-full">
-        <div className="h-[80px] max-w-[1600px] mx-auto" />
-      </section>
+      {/* Section — Featured */}
+      {featured && (
+        <section className="w-full">
+          <div className="max-w-[1600px] mx-auto p-[var(--container-side-paddings)]">
+            <HeroMovie
+              slug={featured.movie.slug}
+              title={featured.movie.title}
+              genre={Array.isArray(featured.movie.genre) ? featured.movie.genre.join(', ') : ''}
+              posterUrl={typeof featured.movie.posterHorizontal === 'object' && featured.movie.posterHorizontal?.url ? featured.movie.posterHorizontal.url : (typeof featured.movie.posterVertical === 'object' && featured.movie.posterVertical?.url ? featured.movie.posterVertical.url : '')}
+              screenings={featured.screenings}
+              screeningsLabel={t('hero.screenings')}
+              detailLabel={t('hero.details')}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Section — Past Events */}
       {recentMovies.length > 0 && (
         <section className="w-full">
-          <div className="flex flex-col gap-[var(--spacing-10)] p-[var(--spacing-10)] max-w-[1600px] mx-auto overflow-hidden">
+          <div className="flex flex-col gap-[var(--spacing-10)] max-w-[1600px] mx-auto overflow-hidden px-[var(--container-side-paddings)] py-[var(--spacing-10)]">
             {/* Header row */}
             <div className="flex items-center gap-[var(--spacing-2)] w-full">
               <h2 className="flex-1 font-[family-name:var(--font-heading)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] font-[number:var(--font-weight-medium)] text-[var(--color-text-primary)]">
@@ -54,20 +63,19 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Movie cards row */}
-            <div className="flex gap-[var(--spacing-10)] w-full">
+            {/* Movie cards: 1 col default, 2 col md, 4 col lg */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[var(--spacing-10)]">
               {recentMovies.map((movie: any) => {
-                const posterUrl = typeof movie.poster === 'object' && movie.poster?.url
-                  ? movie.poster.url
+                const posterUrl = typeof movie.posterVertical === 'object' && movie.posterVertical?.url
+                  ? movie.posterVertical.url
                   : null
                 return (
-                  <div key={movie.id} className="flex-1 min-w-0">
-                    <MovieCard
-                      slug={movie.slug}
-                      title={movie.title}
-                      posterUrl={posterUrl}
-                    />
-                  </div>
+                  <MovieCard
+                    key={movie.id}
+                    slug={movie.slug}
+                    title={movie.title}
+                    posterUrl={posterUrl}
+                  />
                 )
               })}
             </div>
@@ -76,51 +84,37 @@ export default async function HomePage({ params }: Props) {
       )}
 
       {/* Section — Stats */}
-      {stats.length > 0 ? (
-        <section className="w-full bg-[var(--color-surface)]">
-          <div className="max-w-[1600px] mx-auto py-[var(--spacing-16)] px-[var(--spacing-10)]">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-[var(--spacing-8)] text-center">
-              {stats.map((stat, i) => (
-                <div key={i}>
-                  <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">
-                    {stat.value}
-                  </div>
-                  <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+      <section className="w-full">
+        <div className="max-w-[1600px] mx-auto flex flex-col gap-[var(--spacing-10)] overflow-hidden px-[var(--container-side-paddings)] py-[var(--spacing-10)]">
+          <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-4xl)] leading-[var(--line-height-4xl)] text-[var(--color-primary)] text-center w-full">
+            {t('nav.hashtag')}
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { value: '50 +', label: t('stats.films') },
+              { value: '14', label: t('stats.cities') },
+              { value: '3', label: t('stats.chains') },
+              { value: '1+2', label: t('stats.festivals') },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-2 items-start p-[var(--spacing-5)] rounded-[var(--radius-xl)] bg-[var(--color-accent)]"
+              >
+                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-5xl)] leading-[var(--line-height-5xl)] text-black w-full">
+                  {stat.value}
+                </p>
+                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-text-secondary)] w-full">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
-        </section>
-      ) : (
-        <section className="w-full bg-[var(--color-surface)]">
-          <div className="max-w-[1600px] mx-auto py-[var(--spacing-16)] px-[var(--spacing-10)]">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-[var(--spacing-8)] text-center">
-              <div>
-                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">50+</div>
-                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Ukrainian films</div>
-              </div>
-              <div>
-                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">14</div>
-                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Israeli cities</div>
-              </div>
-              <div>
-                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">3</div>
-                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Cinema chains</div>
-              </div>
-              <div>
-                <div className="text-[length:var(--text-4xl)] font-[number:var(--font-weight-bold)] text-[var(--color-primary)]">1</div>
-                <div className="text-[length:var(--text-sm)] text-[var(--color-text-secondary)] mt-[var(--spacing-2)]">Festival</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Section — Image Grid */}
       <section className="w-full">
-        <div className="max-w-[1600px] mx-auto overflow-hidden p-[var(--spacing-10)]">
+        <div className="max-w-[1600px] mx-auto overflow-hidden p-[var(--container-side-paddings)]">
           <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] auto-rows-[120px] md:grid-cols-[repeat(11,minmax(0,1fr))] md:auto-rows-[200px] lg:auto-rows-[400px] gap-4 overflow-hidden">
             {/* 1 */}
             <div className="rounded-[16px] overflow-hidden col-[1/5] row-[1] md:col-[1/3] md:row-[1]">

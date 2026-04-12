@@ -36,22 +36,19 @@ export const Movie: CollectionConfig = {
       },
     },
     {
-      name: 'poster',
+      name: 'posterVertical',
       type: 'upload',
       relationTo: 'media',
-    },
-    {
-      name: 'posterVerticalUrl',
-      type: 'text',
       admin: {
-        description: 'External URL for vertical poster image',
+        description: 'Vertical poster (2:3 aspect ratio)',
       },
     },
     {
-      name: 'posterHorizontalUrl',
-      type: 'text',
+      name: 'posterHorizontal',
+      type: 'upload',
+      relationTo: 'media',
       admin: {
-        description: 'External URL for horizontal poster image',
+        description: 'Horizontal poster (16:9 aspect ratio)',
       },
     },
     {
