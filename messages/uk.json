@@ -6,7 +6,10 @@
   "nav": {
     "schedule": "Афіша",
     "catalog": "Каталог",
-    "about": "Про нас"
+    "about": "Про нас",
+    "siteTitle": "Знято в Україні",
+    "siteTagline": "Українське кіно в Ізраїлі",
+    "hashtag": "#більшеніжкіно"
   },
   "hero": {
     "title": "Знято в Україні",
@@ -35,6 +38,10 @@
   },
   "about": {
     "title": "Про нас"
+  },
+  "pastEvents": {
+    "title": "Минулі події",
+    "allEvents": "Всі події"
   },
   "common": {
     "learnMore": "Дізнатись більше",

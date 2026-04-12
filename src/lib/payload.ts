@@ -79,6 +79,42 @@ export async function getScreeningsForMovie(movieId: number | string, locale: Lo
   }
 }
 
+export async function getRecentlyScreenedMovies(locale: Locale, limit = 4) {
+  try {
+    const payload = await getPayloadClient()
+    const now = new Date().toISOString()
+
+    // Get recent past screenings, sorted by most recent first
+    const screenings = await payload.find({
+      collection: 'screenings',
+      where: {
+        datetime: { less_than: now },
+        isCancelled: { equals: false },
+      },
+      sort: '-datetime',
+      limit: 50,
+      locale,
+      depth: 2,
+    })
+
+    // Deduplicate by movie, keeping only the first (most recent) screening per movie
+    const seen = new Set<number | string>()
+    const movies: any[] = []
+    for (const screening of screenings.docs) {
+      const movie = typeof screening.movie === 'object' ? screening.movie : null
+      if (movie && !seen.has(movie.id)) {
+        seen.add(movie.id)
+        movies.push(movie)
+        if (movies.length >= limit) break
+      }
+    }
+
+    return movies
+  } catch {
+    return []
+  }
+}
+
 export async function getAnnouncement(locale: Locale) {
   try {
     const payload = await getPayloadClient()

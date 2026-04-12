@@ -6,7 +6,10 @@
   "nav": {
     "schedule": "לוח הקרנות",
     "catalog": "קטלוג",
-    "about": "אודות"
+    "about": "אודות",
+    "siteTitle": "נוצר באוקראינה",
+    "siteTagline": "קולנוע אוקראיני בישראל",
+    "hashtag": "#morethancinema"
   },
   "hero": {
     "title": "נוצר באוקראינה",
@@ -35,6 +38,10 @@
   },
   "about": {
     "title": "אודות"
+  },
+  "pastEvents": {
+    "title": "אירועים שעברו",
+    "allEvents": "כל האירועים"
   },
   "common": {
     "learnMore": "למידע נוסף",

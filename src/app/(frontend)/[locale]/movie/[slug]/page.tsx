@@ -32,9 +32,9 @@ export default async function MoviePage({ params }: Props) {
   return (
     <section className="py-[var(--spacing-16)]">
       <div className="mx-auto px-[var(--spacing-6)]" style={{ maxWidth: 'var(--max-width-content)' }}>
-        <div className="flex flex-col md:flex-row gap-[var(--spacing-10)]">
+        <div className="flex flex-col lg:flex-row gap-[var(--spacing-10)]">
           {/* Poster */}
-          <div className="shrink-0 w-full md:w-[300px]">
+          <div className="shrink-0 w-full lg:w-[300px]">
             <div className="aspect-[2/3] relative rounded-[var(--radius-lg)] overflow-hidden bg-[var(--color-surface)]">
               {poster?.url ? (
                 <Image

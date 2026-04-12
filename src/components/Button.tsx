@@ -1,0 +1,41 @@
+'use client'
+
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
+
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'default' | 'outline'
+  children: ReactNode
+}
+
+const base =
+  'inline-flex items-center justify-center rounded-[var(--radius-full)] px-[var(--spacing-6)] py-[var(--spacing-2)] h-10 font-[family-name:var(--font-body)] text-[length:var(--text-base)] leading-[var(--line-height-base)] whitespace-nowrap transition-colors cursor-pointer'
+
+const variants = {
+  default: [
+    'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
+    'hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(var(--color-accent),var(--color-accent))]',
+    'active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(var(--color-accent),var(--color-accent))]',
+  ].join(' '),
+  outline: [
+    'border border-[var(--color-text-primary)] text-[var(--color-text-primary)] bg-[rgba(255,255,255,0.2)]',
+    'hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2))]',
+    'active:border-[var(--color-text-primary)] active:text-[var(--color-text-primary)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(white,white)]',
+  ].join(' '),
+} as const
+
+const disabledVariants = {
+  default: 'bg-[var(--color-accent-light)] text-[var(--color-text-muted)] cursor-not-allowed',
+  outline: 'border border-[var(--color-border)] bg-[#e2e5ea] text-[var(--color-text-muted)] cursor-not-allowed',
+} as const
+
+export function Button({ variant = 'default', children, className, disabled, ...props }: Props) {
+  return (
+    <button
+      className={`${base} ${disabled ? disabledVariants[variant] : variants[variant]} ${className ?? ''}`}
+      disabled={disabled}
+      {...props}
+    >
+      {children}
+    </button>
+  )
+}

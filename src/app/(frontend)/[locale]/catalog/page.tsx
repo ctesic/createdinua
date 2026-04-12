@@ -22,7 +22,7 @@ export default async function CatalogPage({ params }: Props) {
         </h1>
 
         {moviesResult.docs.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-[var(--spacing-6)] gap-y-[var(--spacing-8)]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[var(--spacing-6)] gap-y-[var(--spacing-8)]">
             {moviesResult.docs.map((movie: any) => (
               <MovieCard
                 key={movie.id}

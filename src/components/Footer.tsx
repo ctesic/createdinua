@@ -86,7 +86,7 @@ export async function Footer({ locale }: Props) {
       <div className="h-[2px] bg-[var(--color-accent)]" />
 
       {/* Desktop */}
-      <div className="hidden sm:flex items-center justify-between gap-[var(--spacing-3)] px-[var(--spacing-10)] py-[var(--spacing-8)]">
+      <div className="hidden md:flex items-center justify-between gap-[var(--spacing-3)] px-[var(--spacing-10)] py-[var(--spacing-8)]">
         {/* Left: logo + brand + social */}
         <div className="flex items-center gap-[var(--spacing-3)]">
           <Logo />
@@ -109,7 +109,7 @@ export async function Footer({ locale }: Props) {
       </div>
 
       {/* Mobile */}
-      <div className="flex sm:hidden flex-col gap-[var(--spacing-4)] px-[var(--spacing-10)] py-[var(--spacing-8)]">
+      <div className="flex md:hidden flex-col gap-[var(--spacing-4)] px-[var(--spacing-10)] py-[var(--spacing-8)]">
         <div className="flex gap-[var(--spacing-3)] items-start pb-[var(--spacing-4)] border-b border-[var(--color-border)]">
           <Logo />
           <BrandText />

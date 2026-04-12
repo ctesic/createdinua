@@ -13,7 +13,7 @@ export function MovieCard({ slug, title, posterUrl }: Props) {
       href={{ pathname: '/movie/[slug]', params: { slug } }}
       className="group block"
     >
-      <div className="relative aspect-[2/3] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-border-subtle)] transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.2)]">
+      <div className="relative aspect-[350/525] overflow-hidden rounded-[16px] bg-[var(--color-background-inverted)] transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.2)]">
         {posterUrl ? (
           <Image
             src={posterUrl}
@@ -41,7 +41,7 @@ export function MovieCard({ slug, title, posterUrl }: Props) {
           </div>
         )}
       </div>
-      <h3 className="mt-[var(--spacing-3)] text-center text-[length:var(--text-base)] font-[number:var(--font-weight-medium)] text-[var(--color-text-primary)] transition-colors duration-200 group-hover:text-[var(--color-primary)]">
+      <h3 className="mt-[var(--spacing-3)] text-center font-[family-name:var(--font-heading)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] font-[number:var(--font-weight-medium)] text-[var(--color-text-primary)] transition-colors duration-200 group-hover:text-[var(--color-primary)]">
         {title}
       </h3>
     </Link>

@@ -6,7 +6,10 @@
   "nav": {
     "schedule": "Schedule",
     "catalog": "Catalog",
-    "about": "About Us"
+    "about": "About Us",
+    "siteTitle": "Created in Ukraine",
+    "siteTagline": "Ukrainian cinema in Israel",
+    "hashtag": "#morethancinema"
   },
   "hero": {
     "title": "Created in Ukraine",
@@ -35,6 +38,10 @@
   },
   "about": {
     "title": "About Us"
+  },
+  "pastEvents": {
+    "title": "Past events",
+    "allEvents": "All events"
   },
   "common": {
     "learnMore": "Learn more",
