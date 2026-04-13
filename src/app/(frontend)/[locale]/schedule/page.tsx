@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getUpcomingScreenings } from '@/lib/payload'
-import { ScreeningCard } from '@/components/ScreeningCard'
+import { ScreeningItem } from '@/components/ScreeningItem'
 import type { Locale } from '@/i18n/routing'
 
 type Props = {
@@ -14,17 +14,34 @@ export default async function SchedulePage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'schedule' })
   const screeningsResult = await getUpcomingScreenings(locale as Locale, 50)
 
+  const intlLocale = locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : 'uk-UA'
+
   // Group screenings by date
-  const grouped: Record<string, typeof screeningsResult.docs> = {}
+  const grouped: Record<string, any[]> = {}
   for (const screening of screeningsResult.docs) {
-    const date = new Date(screening.datetime).toLocaleDateString('uk-UA', {
+    const dt = new Date(screening.datetime)
+    const dateKey = dt.toLocaleDateString(intlLocale, {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
-      year: 'numeric',
     })
-    if (!grouped[date]) grouped[date] = []
-    grouped[date].push(screening)
+    if (!grouped[dateKey]) grouped[dateKey] = []
+
+    const movie = typeof screening.movie === 'object' ? screening.movie : null
+    const place = typeof screening.place === 'object' ? screening.place : null
+
+    grouped[dateKey].push({
+      id: screening.id,
+      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' }),
+      date: dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit' }),
+      city: place?.city || '',
+      venue: place?.name || '',
+      note: screening.notes || undefined,
+      ticketUrl: screening.ticketUrl || null,
+      movieTitle: movie?.title || '',
+      movieSlug: movie?.slug || '',
+      isCancelled: screening.isCancelled,
+    })
   }
 
   return (
@@ -36,28 +53,25 @@ export default async function SchedulePage({ params }: Props) {
 
         {screeningsResult.docs.length > 0 ? (
           <div className="flex flex-col gap-[var(--spacing-10)]">
-            {Object.entries(grouped).map(([date, screenings]) => (
-              <div key={date}>
+            {Object.entries(grouped).map(([dateLabel, screenings]) => (
+              <div key={dateLabel}>
                 <h2 className="text-[length:var(--text-lg)] font-[number:var(--font-weight-semibold)] text-[var(--color-text-secondary)] mb-[var(--spacing-4)] capitalize">
-                  {date}
+                  {dateLabel}
                 </h2>
-                <div className="flex flex-col gap-[var(--spacing-3)]">
-                  {screenings.map((screening: any) => (
-                    <ScreeningCard
-                      key={screening.id}
-                      movie={{
-                        title: typeof screening.movie === 'object' ? screening.movie.title : '',
-                        slug: typeof screening.movie === 'object' ? screening.movie.slug : '',
-                        poster: typeof screening.movie === 'object' ? screening.movie.posterVertical : null,
-                      }}
-                      place={{
-                        name: typeof screening.place === 'object' ? screening.place.name : '',
-                        city: typeof screening.place === 'object' ? screening.place.city : '',
-                      }}
-                      datetime={screening.datetime}
-                      ticketUrl={screening.ticketUrl}
-                      price={screening.price}
-                      isCancelled={screening.isCancelled}
+                <div className="flex flex-col gap-[var(--spacing-4)]">
+                  {screenings.map((s: any) => (
+                    <ScreeningItem
+                      key={s.id}
+                      date={s.time}
+                      time={s.date}
+                      city={s.city}
+                      venue={s.venue}
+                      note={s.note}
+                      ticketUrl={s.isCancelled ? null : s.ticketUrl}
+                      ticketLabel={t('buyTicket')}
+                      isPast={false}
+                      movieTitle={s.movieTitle}
+                      movieSlug={s.movieSlug}
                     />
                   ))}
                 </div>

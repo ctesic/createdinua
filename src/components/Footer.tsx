@@ -37,6 +37,7 @@ function SocialButton({ href, label, children }: { href?: string; label: string;
 const navItems = [
   { href: '/schedule' as const, labelKey: 'schedule' as const },
   { href: '/about' as const, labelKey: 'about' as const },
+  { href: '/catalog' as const, labelKey: 'catalog' as const },
 ]
 
 export async function Footer({ locale }: Props) {

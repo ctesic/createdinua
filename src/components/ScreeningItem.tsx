@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from '@/i18n/navigation'
 import { Button } from './Button'
 
 type Props = {
@@ -13,9 +14,11 @@ type Props = {
   soldOutLabel?: string
   soldOut?: boolean
   isPast?: boolean
+  movieTitle?: string
+  movieSlug?: string
 }
 
-export function ScreeningItem({ date, time, city, venue, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false }: Props) {
+export function ScreeningItem({ date, time, city, venue, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug }: Props) {
   const showButton = !isPast
 
   const buttonEl = showButton && (
@@ -43,11 +46,25 @@ export function ScreeningItem({ date, time, city, venue, note, ticketUrl, ticket
           </p>
         </div>
         <div className="flex flex-col items-start flex-1 min-w-0">
-          <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
-            {city}
-          </p>
+          {movieTitle && movieSlug ? (
+            <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+              {movieTitle}
+            </Link>
+          ) : (
+            <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+              {city}
+            </p>
+          )}
           <div className="flex gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)] whitespace-nowrap">
-            <p>{venue}</p>
+            {movieTitle ? (
+              <>
+                <p>{city}</p>
+                <p>•</p>
+                <p>{venue}</p>
+              </>
+            ) : (
+              <p>{venue}</p>
+            )}
             {note && (
               <>
                 <p>•</p>
@@ -71,11 +88,21 @@ export function ScreeningItem({ date, time, city, venue, note, ticketUrl, ticket
             </p>
           </div>
           <div className="flex flex-col items-start flex-1 min-w-0">
-            <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
-              {city}
-            </p>
+            {movieTitle && movieSlug ? (
+              <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+                {movieTitle}
+              </Link>
+            ) : (
+              <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+                {city}
+              </p>
+            )}
             <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
-              <p>{venue}</p>
+              {movieTitle ? (
+                <p>{city} • {venue}</p>
+              ) : (
+                <p>{venue}</p>
+              )}
               {note && <p>{note}</p>}
             </div>
           </div>

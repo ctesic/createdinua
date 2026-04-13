@@ -79,6 +79,10 @@
   --line-height-4xl: 48px;
   --line-height-5xl: 56px;
 
+  /* Paragraph spacing */
+  --paragraph-spacing-base: 0.5rem; /* 8px */
+  --paragraph-spacing-lg: 0.75rem;  /* 12px */
+
   /* Font weights */
   --font-weight-regular: 400;
   --font-weight-medium: 500;

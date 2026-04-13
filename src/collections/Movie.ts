@@ -157,5 +157,14 @@ export const Movie: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'isCatalog',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Movie we have distribution rights for (shown in Catalog)',
+        position: 'sidebar',
+      },
+    },
   ],
 }

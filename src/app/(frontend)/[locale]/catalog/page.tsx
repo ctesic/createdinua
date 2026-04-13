@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { getAllMovies } from '@/lib/payload'
+import { getCatalogMovies } from '@/lib/payload'
 import { MovieCard } from '@/components/MovieCard'
 import type { Locale } from '@/i18n/routing'
 
@@ -12,7 +12,7 @@ export default async function CatalogPage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'catalog' })
-  const moviesResult = await getAllMovies(locale as Locale)
+  const moviesResult = await getCatalogMovies(locale as Locale)
 
   return (
     <section className="py-[var(--spacing-16)]">
@@ -34,9 +34,7 @@ export default async function CatalogPage({ params }: Props) {
           </div>
         ) : (
           <p className="text-[var(--color-text-muted)]">
-            {locale === 'uk' ? 'Фільми з\'являться тут після додавання в адмін-панелі.' :
-             locale === 'he' ? 'סרטים יופיעו כאן לאחר הוספה בפאנל הניהול.' :
-             'Movies will appear here once added in the admin panel.'}
+            {t('empty')}
           </p>
         )}
       </div>

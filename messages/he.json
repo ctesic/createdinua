@@ -5,6 +5,7 @@
   },
   "nav": {
     "schedule": "לוח הקרנות",
+    "movies": "סרטים",
     "catalog": "קטלוג",
     "about": "אודות",
     "siteTitle": "נוצר באוקראינה",
@@ -24,8 +25,15 @@
     "buyTicket": "רכישת כרטיס",
     "cancelled": "בוטל"
   },
+  "movies": {
+    "title": "סרטים",
+    "nowShowing": "מוקרנים כעת",
+    "previouslyShown": "הוקרנו בעבר",
+    "empty": "אין סרטים זמינים עדיין."
+  },
   "catalog": {
-    "title": "קטלוג סרטים",
+    "title": "קטלוג הפצה",
+    "empty": "אין סרטים בקטלוג ההפצה עדיין.",
     "allGenres": "כל הז׳אנרים",
     "duration": "{minutes} דק׳",
     "year": "שנה"
@@ -51,7 +59,7 @@
     "ageRestrictionLabel": "הגבלת גיל:"
   },
   "about": {
-    "title": "אודות"
+    "title": "קולנוע אוקראיני בישראל"
   },
   "stats": {
     "films": "סרטים אוקראינים מודרניים",

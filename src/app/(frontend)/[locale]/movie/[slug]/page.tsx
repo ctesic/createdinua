@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
 import { MovieScreenings } from '@/components/MovieScreenings'
+import { TrailerPlayer } from '@/components/TrailerPlayer'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Locale } from '@/i18n/routing'
 
@@ -43,6 +44,9 @@ export default async function MoviePage({ params }: Props) {
   })
 
   const embedUrl = movie.trailerUrl ? getYouTubeEmbedUrl(movie.trailerUrl) : null
+  const posterUrl = typeof movie.posterHorizontal === 'object' && movie.posterHorizontal?.url
+    ? movie.posterHorizontal.url
+    : null
 
   return (
     <div className="bg-[var(--color-surface)] min-h-screen">
@@ -52,12 +56,16 @@ export default async function MoviePage({ params }: Props) {
             {/* Trailer / Video embed */}
             <div className="aspect-[21/9] bg-[var(--color-border)] w-full">
               {embedUrl ? (
-                <iframe
-                  src={embedUrl}
+                <TrailerPlayer
+                  embedUrl={embedUrl}
+                  posterUrl={posterUrl}
                   title={movie.title as string}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                />
+              ) : posterUrl ? (
+                <img
+                  src={posterUrl}
+                  alt={movie.title as string}
+                  className="w-full h-full object-cover"
                 />
               ) : (
                 <div className="flex items-center justify-center w-full h-full text-[var(--color-text-muted)]">

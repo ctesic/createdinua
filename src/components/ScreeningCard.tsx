@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
 type Props = {
@@ -19,14 +19,16 @@ type Props = {
 
 export function ScreeningCard({ movie, place, datetime, ticketUrl, price, isCancelled }: Props) {
   const t = useTranslations('schedule')
+  const locale = useLocale()
+  const intlLocale = locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : 'uk-UA'
   const date = new Date(datetime)
 
-  const formattedDate = date.toLocaleDateString('uk-UA', {
+  const formattedDate = date.toLocaleDateString(intlLocale, {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
   })
-  const formattedTime = date.toLocaleTimeString('uk-UA', {
+  const formattedTime = date.toLocaleTimeString(intlLocale, {
     hour: '2-digit',
     minute: '2-digit',
   })

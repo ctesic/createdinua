@@ -5,6 +5,7 @@
   },
   "nav": {
     "schedule": "Schedule",
+    "movies": "Movies",
     "catalog": "Catalog",
     "about": "About Us",
     "siteTitle": "Created in Ukraine",
@@ -24,8 +25,15 @@
     "buyTicket": "Buy ticket",
     "cancelled": "Cancelled"
   },
+  "movies": {
+    "title": "Movies",
+    "nowShowing": "Now Showing",
+    "previouslyShown": "Previously Shown",
+    "empty": "No movies available yet."
+  },
   "catalog": {
-    "title": "Film Catalog",
+    "title": "Distribution Catalog",
+    "empty": "No films in distribution catalog yet.",
     "allGenres": "All genres",
     "duration": "{minutes} min",
     "year": "Year"
@@ -51,7 +59,7 @@
     "ageRestrictionLabel": "Age restriction:"
   },
   "about": {
-    "title": "About Us"
+    "title": "Ukrainian Cinema in Israel"
   },
   "stats": {
     "films": "modern Ukrainian films",

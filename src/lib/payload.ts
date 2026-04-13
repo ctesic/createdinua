@@ -162,6 +162,72 @@ export async function getRecentlyScreenedMovies(locale: Locale, limit = 4) {
   }
 }
 
+export async function getMoviesGroupedByScreeningStatus(locale: Locale) {
+  try {
+    const payload = await getPayloadClient()
+    const now = new Date().toISOString()
+
+    const [upcoming, past] = await Promise.all([
+      payload.find({
+        collection: 'screenings',
+        where: { datetime: { greater_than: now }, isCancelled: { equals: false } },
+        limit: 200,
+        locale,
+        depth: 2,
+      }),
+      payload.find({
+        collection: 'screenings',
+        where: { datetime: { less_than: now } },
+        sort: '-datetime',
+        limit: 200,
+        locale,
+        depth: 2,
+      }),
+    ])
+
+    const upcomingMovieIds = new Set<number | string>()
+    const nowShowing: any[] = []
+    for (const s of upcoming.docs) {
+      const movie = typeof s.movie === 'object' ? s.movie : null
+      if (movie && !upcomingMovieIds.has(movie.id)) {
+        upcomingMovieIds.add(movie.id)
+        nowShowing.push(movie)
+      }
+    }
+
+    const pastMovieIds = new Set<number | string>()
+    const previouslyShown: any[] = []
+    for (const s of past.docs) {
+      const movie = typeof s.movie === 'object' ? s.movie : null
+      if (movie && !pastMovieIds.has(movie.id) && !upcomingMovieIds.has(movie.id)) {
+        pastMovieIds.add(movie.id)
+        previouslyShown.push(movie)
+      }
+    }
+
+    return { nowShowing, previouslyShown }
+  } catch {
+    return { nowShowing: [], previouslyShown: [] }
+  }
+}
+
+export async function getCatalogMovies(locale: Locale) {
+  try {
+    const payload = await getPayloadClient()
+
+    return await payload.find({
+      collection: 'movies',
+      where: { isCatalog: { equals: true } },
+      sort: '-year',
+      limit: 100,
+      locale,
+      depth: 1,
+    })
+  } catch {
+    return { docs: [], totalDocs: 0, totalPages: 0, page: 1, limit: 100, hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null, pagingCounter: 1 }
+  }
+}
+
 export async function getAnnouncement(locale: Locale) {
   try {
     const payload = await getPayloadClient()

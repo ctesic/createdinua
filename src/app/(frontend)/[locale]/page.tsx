@@ -4,6 +4,7 @@ import { getAnnouncement, getRecentlyScreenedMovies, getFeaturedMovie } from '@/
 import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { Button } from '@/components/Button'
 import { HeroMovie } from '@/components/HeroMovie'
+import { ImageGrid } from '@/components/ImageGrid'
 import { MovieCard } from '@/components/MovieCard'
 import type { Locale } from '@/i18n/routing'
 
@@ -115,72 +116,7 @@ export default async function HomePage({ params }: Props) {
       {/* Section — Image Grid */}
       <section className="w-full">
         <div className="max-w-[1600px] mx-auto overflow-hidden p-[var(--container-side-paddings)]">
-          <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] auto-rows-[120px] md:grid-cols-[repeat(11,minmax(0,1fr))] md:auto-rows-[200px] lg:auto-rows-[400px] gap-4 overflow-hidden">
-            {/* 1 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/5] row-[1] md:col-[1/3] md:row-[1]">
-              <img src="/images/grid-imgs/1.webp.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 2 */}
-            <div className="rounded-[16px] overflow-hidden col-[5/8] row-[1] md:col-[3/7] md:row-[1]">
-              <img src="/images/grid-imgs/2.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 3 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/3] row-[2] md:col-[7/9] md:row-[1]">
-              <img src="/images/grid-imgs/3.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 4 */}
-            <div className="rounded-[16px] overflow-hidden col-[3/6] row-[2] md:col-[9/12] md:row-[1]">
-              <img src="/images/grid-imgs/4.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 5 */}
-            <div className="rounded-[16px] overflow-hidden col-[6/8] row-[2] md:col-[1/4] md:row-[2]">
-              <img src="/images/grid-imgs/5.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 6 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/5] row-[3] md:col-[4/6] md:row-[2]">
-              <img src="/images/grid-imgs/6.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 7 */}
-            <div className="rounded-[16px] overflow-hidden col-[5/8] row-[3] md:col-[6/10] md:row-[2]">
-              <img src="/images/grid-imgs/7.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 8 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/4] row-[4] md:col-[10/12] md:row-[2]">
-              <img src="/images/grid-imgs/8.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 9 */}
-            <div className="rounded-[16px] overflow-hidden col-[4/6] row-[4] md:col-[1/5] md:row-[3]">
-              <img src="/images/grid-imgs/9.jpeg" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 10 */}
-            <div className="rounded-[16px] overflow-hidden col-[6/8] row-[4] md:col-[5/7] md:row-[3]">
-              <img src="/images/grid-imgs/10.jpeg" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 11 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/3] row-[5] md:col-[7/9] md:row-[3]">
-              <img src="/images/grid-imgs/11.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 12 */}
-            <div className="rounded-[16px] overflow-hidden col-[3/6] row-[5] md:col-[9/12] md:row-[3]">
-              <img src="/images/grid-imgs/12.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 13 */}
-            <div className="rounded-[16px] overflow-hidden col-[6/8] row-[5] md:col-[1/4] md:row-[4]">
-              <img src="/images/grid-imgs/13.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 14 */}
-            <div className="rounded-[16px] overflow-hidden col-[1/4] row-[6] md:col-[4/7] md:row-[4]">
-              <img src="/images/grid-imgs/14.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 15 */}
-            <div className="rounded-[16px] overflow-hidden col-[4/6] row-[6] md:col-[7/10] md:row-[4]">
-              <img src="/images/grid-imgs/15.avif" alt="" className="w-full h-full object-cover" />
-            </div>
-            {/* 16 */}
-            <div className="rounded-[16px] overflow-hidden col-[6/8] row-[6] md:col-[10/12] md:row-[4]">
-              <img src="/images/grid-imgs/16.webp" alt="" className="w-full h-full object-cover" />
-            </div>
-          </div>
+          <ImageGrid />
         </div>
       </section>
     </div>

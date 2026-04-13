@@ -11,25 +11,10 @@ export const routing = defineRouting({
   localePrefix: 'always',
   pathnames: {
     '/': '/',
-    '/schedule': {
-      uk: '/afisha',
-      en: '/schedule',
-      he: '/luach',
-    },
-    '/catalog': {
-      uk: '/kataloh',
-      en: '/catalog',
-      he: '/katalog',
-    },
-    '/movie/[slug]': {
-      uk: '/film/[slug]',
-      en: '/movie/[slug]',
-      he: '/seret/[slug]',
-    },
-    '/about': {
-      uk: '/pro-nas',
-      en: '/about',
-      he: '/odot',
-    },
+    '/schedule': '/schedule',
+    '/movies': '/movies',
+    '/catalog': '/catalog',
+    '/movie/[slug]': '/movie/[slug]',
+    '/about': '/about',
   },
 })

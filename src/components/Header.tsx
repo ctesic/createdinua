@@ -69,7 +69,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navItems = [
-    { href: '/catalog' as const, label: t('catalog') },
+    { href: '/movies' as const, label: t('movies') },
     { href: '/about' as const, label: t('about') },
     { href: '/schedule' as const, label: t('schedule') },
   ]
