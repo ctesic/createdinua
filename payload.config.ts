@@ -1,5 +1,6 @@
 import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 import path from 'path'
@@ -41,6 +42,16 @@ export default buildConfig({
     defaultLocale: 'uk',
     fallback: true,
   },
+  plugins: [
+    ...(process.env.BLOB_READ_WRITE_TOKEN
+      ? [
+          vercelBlobStorage({
+            collections: { media: true },
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          }),
+        ]
+      : []),
+  ],
   admin: {
     importMap: {
       baseDir: path.resolve(dirname),
