@@ -4,7 +4,7 @@ export const Movie: CollectionConfig = {
   slug: 'movies',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'year', 'director', 'isActive'],
+    defaultColumns: ['title', 'year', 'director', 'isCatalog'],
   },
   fields: [
     {
@@ -145,15 +145,6 @@ export const Movie: CollectionConfig = {
       type: 'text',
       admin: {
         description: 'e.g. "англійські"',
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'isActive',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        description: 'Whether this movie is currently featured on the site',
         position: 'sidebar',
       },
     },
