@@ -74,7 +74,8 @@
   "common": {
     "learnMore": "Learn more",
     "back": "Back",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "directions": "Directions"
   },
   "error": {
     "notFound": "Page not found",

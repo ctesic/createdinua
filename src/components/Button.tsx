@@ -1,9 +1,10 @@
 'use client'
 
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { MapPin } from 'lucide-react'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'default' | 'outline' | 'inverse'
+  variant?: 'default' | 'outline' | 'inverse' | 'link'
   children: ReactNode
 }
 
@@ -35,6 +36,23 @@ const disabledVariants = {
 } as const
 
 export function Button({ variant = 'default', children, className, disabled, ...props }: Props) {
+  if (variant === 'link') {
+    return (
+      <button
+        className={`inline-flex items-center gap-[var(--spacing-1)] px-[var(--spacing-1)] rounded-[var(--radius-sm)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] whitespace-nowrap cursor-pointer transition-colors ${
+          disabled
+            ? 'text-[var(--color-text-muted)] bg-[var(--color-surface)]'
+            : 'text-[var(--color-text-primary)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(white,white)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(white,white)]'
+        } ${className ?? ''}`}
+        disabled={disabled}
+        {...props}
+      >
+        <MapPin size={16} />
+        {children}
+      </button>
+    )
+  }
+
   return (
     <button
       className={`${base} ${disabled ? disabledVariants[variant] : variants[variant]} ${className ?? ''}`}

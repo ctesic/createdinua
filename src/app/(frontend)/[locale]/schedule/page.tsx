@@ -14,6 +14,7 @@ export default async function SchedulePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'schedule' })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
   const screeningsResult = await getUpcomingScreenings(locale as Locale, 50)
 
   const intlLocale = locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : 'uk-UA'
@@ -38,6 +39,8 @@ export default async function SchedulePage({ params }: Props) {
       date: dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit' }),
       city: place?.city || '',
       venue: place?.name || '',
+      address: place?.address || undefined,
+      googleMapsUrl: place?.googleMapsUrl || undefined,
       note: screening.notes || undefined,
       ticketUrl: screening.ticketUrl || null,
       movieTitle: movie?.title || '',
@@ -68,12 +71,15 @@ export default async function SchedulePage({ params }: Props) {
                       time={s.date}
                       city={s.city}
                       venue={s.venue}
+                      address={s.address}
+                      googleMapsUrl={s.googleMapsUrl}
                       note={s.note}
                       ticketUrl={s.isCancelled ? null : s.ticketUrl}
                       ticketLabel={t('buyTicket')}
                       isPast={false}
                       movieTitle={s.movieTitle}
                       movieSlug={s.movieSlug}
+                      directionsLabel={tCommon('directions')}
                     />
                   ))}
                 </div>

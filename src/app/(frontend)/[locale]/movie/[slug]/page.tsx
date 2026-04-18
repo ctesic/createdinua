@@ -20,6 +20,7 @@ export default async function MoviePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'movie' })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
   const movie = await getMovieBySlug(slug, locale as Locale)
 
   if (!movie) {
@@ -37,6 +38,8 @@ export default async function MoviePage({ params }: Props) {
       time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
       city: place?.city || '',
       venue: place?.name || '',
+      address: place?.address || undefined,
+      googleMapsUrl: place?.googleMapsUrl || undefined,
       note: s.notes || undefined,
       ticketUrl: s.ticketUrl || null,
       isPast: dt < now,
@@ -89,6 +92,7 @@ export default async function MoviePage({ params }: Props) {
                 soldOut: t('soldOut'),
                 noUpcomingScreenings: t('noUpcomingScreenings'),
                 noPastScreenings: t('noPastScreenings'),
+                directions: tCommon('directions'),
               }}
             />
 

@@ -10,6 +10,8 @@ type Screening = {
   time: string
   city: string
   venue: string
+  address?: string
+  googleMapsUrl?: string
   note?: string
   ticketUrl?: string | null
   isPast: boolean
@@ -25,6 +27,7 @@ type Props = {
     soldOut: string
     noUpcomingScreenings: string
     noPastScreenings: string
+    directions: string
   }
 }
 
@@ -61,11 +64,14 @@ export function MovieScreenings({ screenings, labels }: Props) {
               time={s.time}
               city={s.city}
               venue={s.venue}
+              address={s.address}
+              googleMapsUrl={s.googleMapsUrl}
               note={s.note}
               ticketUrl={s.ticketUrl}
               ticketLabel={labels.tickets}
               soldOutLabel={labels.soldOut}
               isPast={s.isPast}
+              directionsLabel={labels.directions}
             />
           ))}
         </div>

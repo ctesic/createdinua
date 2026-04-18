@@ -74,7 +74,8 @@
   "common": {
     "learnMore": "למידע נוסף",
     "back": "חזרה",
-    "loading": "טוען..."
+    "loading": "טוען...",
+    "directions": "הוראות הגעה"
   },
   "error": {
     "notFound": "הדף לא נמצא",
