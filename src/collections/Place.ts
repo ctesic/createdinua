@@ -28,17 +28,20 @@ export const Place: CollectionConfig = {
     {
       name: 'displayTitle',
       type: 'text',
+      localized: true,
       admin: { hidden: true },
     },
     {
       name: 'name',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'city',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'address',
