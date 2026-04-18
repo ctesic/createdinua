@@ -99,7 +99,7 @@ export async function getFeaturedMovies(locale: Locale) {
     if (result.docs.length === 0) return []
 
     // Group screenings by movie
-    const movieMap = new Map<string | number, { movie: any; screenings: { date: string; time: string; city: string }[] }>()
+    const movieMap = new Map<string | number, { movie: any; screenings: { date: string; time: string; city: string; ticketUrl?: string }[] }>()
 
     for (const s of result.docs) {
       const movie = typeof s.movie === 'object' ? s.movie : null
@@ -115,6 +115,7 @@ export async function getFeaturedMovies(locale: Locale) {
         date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
         time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
         city: place?.city || '',
+        ticketUrl: s.ticketUrl || undefined,
       })
     }
 

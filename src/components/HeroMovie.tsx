@@ -7,6 +7,7 @@ type Screening = {
   time: string
   city: string
   soldOut?: boolean
+  ticketUrl?: string
 }
 
 type Props = {
@@ -65,6 +66,7 @@ export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLab
                 time={s.time}
                 city={s.city}
                 soldOut={s.soldOut}
+                ticketUrl={s.ticketUrl}
                 className="md:shrink-0"
               />
             ))}
