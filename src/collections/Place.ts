@@ -3,10 +3,32 @@ import type { CollectionConfig } from 'payload'
 export const Place: CollectionConfig = {
   slug: 'places',
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'displayTitle',
     defaultColumns: ['name', 'city', 'cinemaChain'],
   },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data) {
+          data.displayTitle = data.city ? `${data.name} — ${data.city}` : data.name
+        }
+        return data
+      },
+    ],
+  },
   fields: [
+    {
+      name: 'displayTitle',
+      type: 'text',
+      admin: { hidden: true },
+      hooks: {
+        beforeValidate: [
+          ({ siblingData }) => {
+            return siblingData?.city ? `${siblingData.name} — ${siblingData.city}` : siblingData?.name
+          },
+        ],
+      },
+    },
     {
       name: 'name',
       type: 'text',
