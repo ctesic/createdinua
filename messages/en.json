@@ -76,6 +76,14 @@
     "back": "Back",
     "loading": "Loading..."
   },
+  "error": {
+    "notFound": "Page not found",
+    "notFoundDescription": "Sorry, we couldn't find the page you're looking for.",
+    "goHome": "Go home",
+    "genericTitle": "Something went wrong",
+    "genericDescription": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try again"
+  },
   "footer": {
     "rights": "© {year} Created in Ukraine. All rights reserved."
   }

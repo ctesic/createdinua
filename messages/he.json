@@ -76,6 +76,14 @@
     "back": "חזרה",
     "loading": "טוען..."
   },
+  "error": {
+    "notFound": "הדף לא נמצא",
+    "notFoundDescription": "מצטערים, לא הצלחנו למצוא את הדף שחיפשת.",
+    "goHome": "לדף הבית",
+    "genericTitle": "משהו השתבש",
+    "genericDescription": "אירעה שגיאה בלתי צפויה. אנא נסו שוב.",
+    "tryAgain": "נסו שוב"
+  },
   "footer": {
     "rights": "© {year} נוצר באוקראינה. כל הזכויות שמורות."
   }
