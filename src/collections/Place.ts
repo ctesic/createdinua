@@ -4,7 +4,7 @@ export const Place: CollectionConfig = {
   slug: 'places',
   admin: {
     useAsTitle: 'displayTitle',
-    defaultColumns: ['name', 'city', 'cinemaChain'],
+    defaultColumns: ['name', 'city'],
   },
   hooks: {
     afterRead: [
@@ -46,20 +46,13 @@ export const Place: CollectionConfig = {
     {
       name: 'address',
       type: 'text',
+      localized: true,
     },
     {
       name: 'googleMapsUrl',
       type: 'text',
       admin: {
         description: 'Google Maps link',
-      },
-    },
-    {
-      name: 'cinemaChain',
-      type: 'text',
-      admin: {
-        description: 'e.g. "Yes Planet", "Cinema City"',
-        position: 'sidebar',
       },
     },
   ],
