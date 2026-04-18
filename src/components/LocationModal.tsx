@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { X, Navigation } from 'lucide-react'
 import { Button } from './Button'
 
@@ -13,32 +13,12 @@ type Props = {
   directionsLabel: string
 }
 
-function getEmbedUrl(googleMapsUrl: string): string | null {
-  // Extract coordinates or place from Google Maps URL for embed
-  // Support formats: maps.google.com, goo.gl/maps, google.com/maps
-  try {
-    const url = new URL(googleMapsUrl)
-    const q = url.searchParams.get('q') || url.searchParams.get('query')
-    if (q) return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&output=embed`
-
-    // Try to extract from @lat,lng in path
-    const coordMatch = googleMapsUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/)
-    if (coordMatch) return `https://maps.google.com/maps?q=${coordMatch[1]},${coordMatch[2]}&output=embed`
-
-    // Try place name from path
-    const placeMatch = url.pathname.match(/\/place\/([^/]+)/)
-    if (placeMatch) return `https://maps.google.com/maps?q=${encodeURIComponent(placeMatch[1].replace(/\+/g, ' '))}&output=embed`
-
-    // Fallback: use the whole URL as a query
-    return `https://maps.google.com/maps?q=${encodeURIComponent(googleMapsUrl)}&output=embed`
-  } catch {
-    return null
-  }
+function getEmbedUrl(venue: string, city: string, address?: string): string {
+  const query = [venue, address, city].filter(Boolean).join(', ')
+  return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`
 }
 
 export function LocationModal({ venue, city, address, googleMapsUrl, onClose, directionsLabel }: Props) {
-  const overlayRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -51,19 +31,21 @@ export function LocationModal({ venue, city, address, googleMapsUrl, onClose, di
     }
   }, [onClose])
 
-  const embedUrl = googleMapsUrl ? getEmbedUrl(googleMapsUrl) : null
+  const embedUrl = getEmbedUrl(venue, city, address)
 
   return (
     <div
-      ref={overlayRef}
       className="fixed inset-0 z-50 flex items-end md:items-center justify-center"
-      onClick={(e) => { if (e.target === overlayRef.current) onClose() }}
+      onClick={onClose}
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Modal */}
-      <div className="relative bg-[var(--color-background)] rounded-t-[var(--radius-2xl)] md:rounded-[var(--radius-2xl)] w-full max-w-[560px] md:mx-[var(--spacing-4)] overflow-hidden">
+      <div
+        className="relative bg-[var(--color-background)] rounded-t-[var(--radius-2xl)] md:rounded-[var(--radius-2xl)] w-full max-w-[560px] md:mx-[var(--spacing-4)] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-start justify-between p-[var(--spacing-6)] pb-0">
           <div className="flex-1 min-w-0">
@@ -84,20 +66,18 @@ export function LocationModal({ venue, city, address, googleMapsUrl, onClose, di
         </div>
 
         {/* Map embed */}
-        {embedUrl && (
-          <div className="mx-[var(--spacing-6)] mt-[var(--spacing-4)] rounded-[var(--radius-xl)] overflow-hidden">
-            <iframe
-              src={embedUrl}
-              width="100%"
-              height="240"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`Map: ${venue}`}
-            />
-          </div>
-        )}
+        <div className="mx-[var(--spacing-6)] mt-[var(--spacing-4)] rounded-[var(--radius-xl)] overflow-hidden">
+          <iframe
+            src={embedUrl}
+            width="100%"
+            height="240"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title={`Map: ${venue}`}
+          />
+        </div>
 
         {/* Actions */}
         <div className="p-[var(--spacing-6)]">

@@ -41,7 +41,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
 
   const locationButton = (
     <Button variant="link" onClick={() => setShowLocation(true)}>
-      {venue}, {city}
+      {venue}
     </Button>
   )
 
