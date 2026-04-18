@@ -31,6 +31,13 @@ export const Screening: CollectionConfig = {
       },
     },
     {
+      name: 'hall',
+      type: 'text',
+      admin: {
+        description: 'Screen/hall number, e.g. "2" or "Hall 5"',
+      },
+    },
+    {
       name: 'ticketUrl',
       type: 'text',
       admin: {
