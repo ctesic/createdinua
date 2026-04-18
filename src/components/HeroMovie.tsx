@@ -17,12 +17,13 @@ type Props = {
   screenings: Screening[]
   detailLabel: string
   screeningsLabel: string
+  className?: string
 }
 
-export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLabel, screeningsLabel }: Props) {
+export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLabel, screeningsLabel, className }: Props) {
   return (
     <div
-      className="relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[var(--spacing-24)] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full"
+      className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[var(--spacing-24)] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
     >
       {/* Background image + gradient */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[var(--radius-2xl)]">

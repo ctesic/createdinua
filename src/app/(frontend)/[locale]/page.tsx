@@ -2,10 +2,10 @@ export const revalidate = 3600
 
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { getAnnouncement, getRecentlyScreenedMovies, getFeaturedMovie } from '@/lib/payload'
+import { getAnnouncement, getRecentlyScreenedMovies, getFeaturedMovies } from '@/lib/payload'
 import { AnnouncementBanner } from '@/components/AnnouncementBanner'
 import { Button } from '@/components/Button'
-import { HeroMovie } from '@/components/HeroMovie'
+import { HeroSlider } from '@/components/HeroSlider'
 import { ImageGrid } from '@/components/ImageGrid'
 import { MovieCard } from '@/components/MovieCard'
 import type { Locale } from '@/i18n/routing'
@@ -19,10 +19,10 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale })
-  const [announcement, recentMovies, featured] = await Promise.all([
+  const [announcement, recentMovies, featuredMovies] = await Promise.all([
     getAnnouncement(locale as Locale),
     getRecentlyScreenedMovies(locale as Locale, 4),
-    getFeaturedMovie(locale as Locale),
+    getFeaturedMovies(locale as Locale),
   ])
 
   return (
@@ -36,17 +36,19 @@ export default async function HomePage({ params }: Props) {
       )}
 
       {/* Section — Featured */}
-      {featured && (
+      {featuredMovies.length > 0 && (
         <section className="w-full">
           <div className="max-w-[1600px] mx-auto p-[var(--container-side-paddings)]">
-            <HeroMovie
-              slug={featured.movie.slug}
-              title={featured.movie.title}
-              genre={Array.isArray(featured.movie.genre) ? featured.movie.genre.join(', ') : ''}
-              posterUrl={typeof featured.movie.posterHorizontal === 'object' && featured.movie.posterHorizontal?.url ? featured.movie.posterHorizontal.url : (typeof featured.movie.posterVertical === 'object' && featured.movie.posterVertical?.url ? featured.movie.posterVertical.url : '')}
-              screenings={featured.screenings}
-              screeningsLabel={t('hero.screenings')}
-              detailLabel={t('hero.details')}
+            <HeroSlider
+              slides={featuredMovies.map((f) => ({
+                slug: f.movie.slug,
+                title: f.movie.title,
+                genre: Array.isArray(f.movie.genre) ? f.movie.genre.join(', ') : '',
+                posterUrl: typeof f.movie.posterHorizontal === 'object' && f.movie.posterHorizontal?.url ? f.movie.posterHorizontal.url : (typeof f.movie.posterVertical === 'object' && f.movie.posterVertical?.url ? f.movie.posterVertical.url : ''),
+                screenings: f.screenings,
+                screeningsLabel: t('hero.screenings'),
+                detailLabel: t('hero.details'),
+              }))}
             />
           </div>
         </section>

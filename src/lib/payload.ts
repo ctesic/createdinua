@@ -79,6 +79,51 @@ export async function getScreeningsForMovie(movieId: number | string, locale: Lo
   }
 }
 
+export async function getFeaturedMovies(locale: Locale) {
+  try {
+    const payload = await getPayloadClient()
+    const now = new Date().toISOString()
+
+    const result = await payload.find({
+      collection: 'screenings',
+      where: {
+        datetime: { greater_than: now },
+        isCancelled: { equals: false },
+      },
+      sort: 'datetime',
+      limit: 100,
+      locale,
+      depth: 2,
+    })
+
+    if (result.docs.length === 0) return []
+
+    // Group screenings by movie
+    const movieMap = new Map<string | number, { movie: any; screenings: { date: string; time: string; city: string }[] }>()
+
+    for (const s of result.docs) {
+      const movie = typeof s.movie === 'object' ? s.movie : null
+      if (!movie) continue
+
+      if (!movieMap.has(movie.id)) {
+        movieMap.set(movie.id, { movie, screenings: [] })
+      }
+
+      const dt = new Date(s.datetime)
+      const place = typeof s.place === 'object' ? s.place : null
+      movieMap.get(movie.id)!.screenings.push({
+        date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
+        time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+        city: place?.city || '',
+      })
+    }
+
+    return Array.from(movieMap.values())
+  } catch {
+    return []
+  }
+}
+
 export async function getFeaturedMovie(locale: Locale) {
   try {
     const payload = await getPayloadClient()
