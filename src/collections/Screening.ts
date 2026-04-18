@@ -1,10 +1,24 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
+
+const revalidatePages = () => {
+  try {
+    revalidatePath('/[locale]', 'page')
+    revalidatePath('/[locale]/schedule', 'page')
+  } catch {
+    // revalidatePath may fail during build or seed
+  }
+}
 
 export const Screening: CollectionConfig = {
   slug: 'screenings',
   admin: {
     useAsTitle: 'datetime',
     defaultColumns: ['movie', 'place', 'datetime', 'isCancelled'],
+  },
+  hooks: {
+    afterChange: [() => revalidatePages()],
+    afterDelete: [() => revalidatePages()],
   },
   fields: [
     {
