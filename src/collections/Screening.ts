@@ -1,10 +1,13 @@
 import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
+import { locales } from '@/i18n/routing'
 
 const revalidatePages = () => {
   try {
-    revalidatePath('/[locale]', 'page')
-    revalidatePath('/[locale]/schedule', 'page')
+    for (const locale of locales) {
+      revalidatePath(`/${locale}`)
+      revalidatePath(`/${locale}/schedule`)
+    }
   } catch {
     // revalidatePath may fail during build or seed
   }
