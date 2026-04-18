@@ -7,6 +7,12 @@ export const Place: CollectionConfig = {
     defaultColumns: ['name', 'city', 'cinemaChain'],
   },
   hooks: {
+    afterRead: [
+      ({ doc }) => {
+        doc.displayTitle = doc.city ? `${doc.name} — ${doc.city}` : doc.name
+        return doc
+      },
+    ],
     beforeChange: [
       ({ data }) => {
         if (data) {
@@ -21,13 +27,6 @@ export const Place: CollectionConfig = {
       name: 'displayTitle',
       type: 'text',
       admin: { hidden: true },
-      hooks: {
-        beforeValidate: [
-          ({ siblingData }) => {
-            return siblingData?.city ? `${siblingData.name} — ${siblingData.city}` : siblingData?.name
-          },
-        ],
-      },
     },
     {
       name: 'name',
