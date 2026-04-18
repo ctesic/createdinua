@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getUpcomingScreenings } from '@/lib/payload'
 import { ScreeningItem } from '@/components/ScreeningItem'
