@@ -1,10 +1,27 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
+import { locales } from '@/i18n/routing'
+
+const revalidatePages = () => {
+  try {
+    for (const locale of locales) {
+      revalidatePath(`/${locale}`)
+      revalidatePath(`/${locale}/movies`)
+    }
+  } catch {
+    // may fail during build
+  }
+}
 
 export const Movie: CollectionConfig = {
   slug: 'movies',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'year', 'director', 'isCatalog'],
+  },
+  hooks: {
+    afterChange: [() => revalidatePages()],
+    afterDelete: [() => revalidatePages()],
   },
   fields: [
     {
