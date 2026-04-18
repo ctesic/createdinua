@@ -4,7 +4,7 @@ import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
 import { MovieScreenings } from '@/components/MovieScreenings'
 import { TrailerPlayer } from '@/components/TrailerPlayer'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import type { Locale } from '@/i18n/routing'
+import { rtlLocales, type Locale } from '@/i18n/routing'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -43,6 +43,7 @@ export default async function MoviePage({ params }: Props) {
     }
   })
 
+  const dir = rtlLocales.includes(locale as Locale) ? 'rtl' : 'ltr'
   const embedUrl = movie.trailerUrl ? getYouTubeEmbedUrl(movie.trailerUrl) : null
   const posterUrl = typeof movie.posterHorizontal === 'object' && movie.posterHorizontal?.url
     ? movie.posterHorizontal.url
@@ -135,7 +136,7 @@ export default async function MoviePage({ params }: Props) {
 
                 {/* Description text */}
                 {movie.description && (
-                  <div className="max-w-[600px] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-primary)] self-start">
+                  <div dir={dir} className="max-w-[600px] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-primary)] self-start">
                     <RichText data={movie.description} />
                   </div>
                 )}
