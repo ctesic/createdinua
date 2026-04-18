@@ -30,13 +30,13 @@ export function ScreeningChip({ date, time, city, soldOut = false, ticketUrl, on
     </>
   )
 
-  const classes = `flex flex-col items-start overflow-hidden py-[var(--spacing-2)] rounded-[var(--radius-md)] ${
+  const classes = `flex flex-col items-start overflow-hidden py-[var(--spacing-2)] rounded-[var(--radius-md)] border border-transparent ${
     soldOut
       ? 'bg-[rgba(0,0,0,0.1)] px-[var(--spacing-3)]'
       : 'bg-[rgba(0,0,0,0.1)] ps-[var(--spacing-3)] pe-[var(--spacing-6)]'
   } ${
     interactive
-      ? 'cursor-pointer hover:border hover:border-[rgba(255,255,255,0.4)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1))] active:border active:border-[rgba(255,255,255,0.4)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1))]'
+      ? 'cursor-pointer hover:border-[rgba(255,255,255,0.4)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1))] active:border-[rgba(255,255,255,0.4)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1))]'
       : ''
   } ${className ?? ''}`
 
