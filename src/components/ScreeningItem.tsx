@@ -12,6 +12,7 @@ type Props = {
   venue: string
   address?: string
   googleMapsUrl?: string
+  mapQuery?: string
   note?: string
   ticketUrl?: string | null
   ticketLabel: string
@@ -23,7 +24,7 @@ type Props = {
   directionsLabel?: string
 }
 
-export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions' }: Props) {
+export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions' }: Props) {
   const [showLocation, setShowLocation] = useState(false)
   const showButton = !isPast
 
@@ -118,6 +119,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
           city={city}
           address={address}
           googleMapsUrl={googleMapsUrl}
+          mapQuery={mapQuery}
           onClose={() => setShowLocation(false)}
           directionsLabel={directionsLabel}
         />

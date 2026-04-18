@@ -15,7 +15,18 @@ export default async function SchedulePage({ params }: Props) {
 
   const t = await getTranslations({ locale, namespace: 'schedule' })
   const tCommon = await getTranslations({ locale, namespace: 'common' })
-  const screeningsResult = await getUpcomingScreenings(locale as Locale, 50)
+  const [screeningsResult, hebrewPlaces] = await Promise.all([
+    getUpcomingScreenings(locale as Locale, 50),
+    // Fetch places in Hebrew for Google Maps search (Israeli addresses work best in Hebrew)
+    (async () => {
+      const { getPayloadClient } = await import('@/lib/payload')
+      const payload = await getPayloadClient()
+      const result = await payload.find({ collection: 'places', limit: 100, locale: 'he', depth: 0 })
+      const map = new Map<number | string, { name: string; city: string; address?: string }>()
+      for (const p of result.docs) map.set(p.id, { name: p.name as string, city: p.city as string, address: p.address as string || undefined })
+      return map
+    })(),
+  ])
 
   const intlLocale = locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : 'uk-UA'
 
@@ -32,6 +43,7 @@ export default async function SchedulePage({ params }: Props) {
 
     const movie = typeof screening.movie === 'object' ? screening.movie : null
     const place = typeof screening.place === 'object' ? screening.place : null
+    const hePlace = place ? hebrewPlaces.get(place.id) : undefined
 
     grouped[dateKey].push({
       id: screening.id,
@@ -41,6 +53,7 @@ export default async function SchedulePage({ params }: Props) {
       venue: place?.name || '',
       address: place?.address || undefined,
       googleMapsUrl: place?.googleMapsUrl || undefined,
+      mapQuery: hePlace ? [hePlace.name, hePlace.address, hePlace.city].filter(Boolean).join(', ') : undefined,
       note: screening.notes || undefined,
       ticketUrl: screening.ticketUrl || null,
       movieTitle: movie?.title || '',
@@ -73,6 +86,7 @@ export default async function SchedulePage({ params }: Props) {
                       venue={s.venue}
                       address={s.address}
                       googleMapsUrl={s.googleMapsUrl}
+                      mapQuery={s.mapQuery}
                       note={s.note}
                       ticketUrl={s.isCancelled ? null : s.ticketUrl}
                       ticketLabel={t('buyTicket')}

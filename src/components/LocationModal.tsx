@@ -9,16 +9,17 @@ type Props = {
   city: string
   address?: string
   googleMapsUrl?: string
+  mapQuery?: string
   onClose: () => void
   directionsLabel: string
 }
 
-function getEmbedUrl(venue: string, city: string, address?: string): string {
-  const query = [venue, address, city].filter(Boolean).join(', ')
+function getEmbedUrl(mapQuery?: string, venue?: string, city?: string, address?: string): string {
+  const query = mapQuery || [venue, address, city].filter(Boolean).join(', ')
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`
 }
 
-export function LocationModal({ venue, city, address, googleMapsUrl, onClose, directionsLabel }: Props) {
+export function LocationModal({ venue, city, address, googleMapsUrl, mapQuery, onClose, directionsLabel }: Props) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -31,7 +32,7 @@ export function LocationModal({ venue, city, address, googleMapsUrl, onClose, di
     }
   }, [onClose])
 
-  const embedUrl = getEmbedUrl(venue, city, address)
+  const embedUrl = getEmbedUrl(mapQuery, venue, city, address)
 
   return (
     <div

@@ -12,6 +12,7 @@ type Screening = {
   venue: string
   address?: string
   googleMapsUrl?: string
+  mapQuery?: string
   note?: string
   ticketUrl?: string | null
   isPast: boolean
@@ -66,6 +67,7 @@ export function MovieScreenings({ screenings, labels }: Props) {
               venue={s.venue}
               address={s.address}
               googleMapsUrl={s.googleMapsUrl}
+              mapQuery={s.mapQuery}
               note={s.note}
               ticketUrl={s.ticketUrl}
               ticketLabel={labels.tickets}

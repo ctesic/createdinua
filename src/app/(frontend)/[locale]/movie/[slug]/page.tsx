@@ -26,12 +26,21 @@ export default async function MoviePage({ params }: Props) {
   if (!movie) {
     notFound()
   }
-  const screeningsResult = await getScreeningsForMovie(movie.id, locale as Locale)
+  // Fetch screenings + Hebrew place names for Google Maps
+  const payload = await (await import('@/lib/payload')).getPayloadClient()
+  const [screeningsResult, hePlacesResult] = await Promise.all([
+    getScreeningsForMovie(movie.id, locale as Locale),
+    payload.find({ collection: 'places', limit: 100, locale: 'he', depth: 0 }),
+  ])
+  const hebrewPlaces = new Map<number | string, { name: string; city: string; address?: string }>()
+  for (const p of hePlacesResult.docs) hebrewPlaces.set(p.id, { name: p.name as string, city: p.city as string, address: p.address as string || undefined })
+
   const now = new Date()
 
   const screenings = screeningsResult.docs.map((s: any) => {
     const dt = new Date(s.datetime)
     const place = typeof s.place === 'object' ? s.place : null
+    const hePlace = place ? hebrewPlaces.get(place.id) : undefined
     return {
       id: s.id,
       date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
@@ -40,6 +49,7 @@ export default async function MoviePage({ params }: Props) {
       venue: place?.name || '',
       address: place?.address || undefined,
       googleMapsUrl: place?.googleMapsUrl || undefined,
+      mapQuery: hePlace ? [hePlace.name, hePlace.address, hePlace.city].filter(Boolean).join(', ') : undefined,
       note: s.notes || undefined,
       ticketUrl: s.ticketUrl || null,
       isPast: dt < now,
