@@ -70,6 +70,7 @@ export const Movie: CollectionConfig = {
     {
       name: 'country',
       type: 'text',
+      localized: true,
       admin: {
         description: 'e.g. "Україна" or "Україна, Франція, Бельгія"',
         position: 'sidebar',
@@ -83,14 +84,17 @@ export const Movie: CollectionConfig = {
     {
       name: 'screenwriter',
       type: 'text',
+      localized: true,
     },
     {
       name: 'producer',
       type: 'text',
+      localized: true,
     },
     {
       name: 'executiveProducers',
       type: 'text',
+      localized: true,
     },
     {
       name: 'duration',
@@ -120,6 +124,7 @@ export const Movie: CollectionConfig = {
     {
       name: 'language',
       type: 'text',
+      localized: true,
       admin: {
         description: 'e.g. "Українська"',
         position: 'sidebar',
@@ -128,6 +133,7 @@ export const Movie: CollectionConfig = {
     {
       name: 'subtitles',
       type: 'text',
+      localized: true,
       admin: {
         description: 'e.g. "англійські"',
         position: 'sidebar',
