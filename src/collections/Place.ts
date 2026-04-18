@@ -3,35 +3,17 @@ import type { CollectionConfig } from 'payload'
 export const Place: CollectionConfig = {
   slug: 'places',
   admin: {
-    useAsTitle: 'displayTitle',
+    useAsTitle: 'name',
     defaultColumns: ['name', 'city', 'cinemaChain'],
   },
-  hooks: {
-    afterRead: [
-      ({ doc }) => {
-        doc.displayTitle = doc.city ? `${doc.name} — ${doc.city}` : doc.name
-        return doc
-      },
-    ],
-    beforeChange: [
-      ({ data }) => {
-        if (data) {
-          data.displayTitle = data.city ? `${data.name} — ${data.city}` : data.name
-        }
-        return data
-      },
-    ],
-  },
   fields: [
-    {
-      name: 'displayTitle',
-      type: 'text',
-      admin: { hidden: true },
-    },
     {
       name: 'name',
       type: 'text',
       required: true,
+      admin: {
+        description: 'Include city for clarity, e.g. "HOT Cinema, Hall 5 — Haifa"',
+      },
     },
     {
       name: 'city',
