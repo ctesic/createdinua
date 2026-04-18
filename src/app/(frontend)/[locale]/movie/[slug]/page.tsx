@@ -113,10 +113,10 @@ export default async function MoviePage({ params }: Props) {
                       <p className="text-[var(--color-text-secondary)]">{movie.producer}</p>
                     </div>
                   )}
-                  {Array.isArray(movie.genre) && movie.genre.length > 0 && (
+                  {movie.genre && (
                     <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
                       <p className="text-[var(--color-text-primary)]">{t('genreLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.genre.join(', ')}</p>
+                      <p className="text-[var(--color-text-secondary)]">{movie.genre}</p>
                     </div>
                   )}
                   {movie.language && (
