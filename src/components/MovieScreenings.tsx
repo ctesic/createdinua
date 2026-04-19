@@ -20,6 +20,7 @@ type Screening = {
 
 type Props = {
   screenings: Screening[]
+  movieTitle: string
   labels: {
     title: string
     upcoming: string
@@ -32,7 +33,7 @@ type Props = {
   }
 }
 
-export function MovieScreenings({ screenings, labels }: Props) {
+export function MovieScreenings({ screenings, movieTitle, labels }: Props) {
   const upcoming = screenings.filter((s) => !s.isPast)
   const past = screenings.filter((s) => s.isPast)
   const defaultTab = upcoming.length > 0 ? 'upcoming' : 'past'
@@ -42,6 +43,9 @@ export function MovieScreenings({ screenings, labels }: Props) {
 
   return (
     <div className="flex flex-col gap-[var(--spacing-4)] p-[var(--spacing-8)]">
+      <h1 className="text-center font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] md:font-[number:var(--font-weight-bold)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] md:text-[length:var(--text-4xl)] md:leading-[var(--line-height-4xl)] lg:text-[length:var(--text-5xl)] lg:leading-[var(--line-height-5xl)] text-[var(--color-text-primary)]">
+        {movieTitle}
+      </h1>
       <div className="flex items-start gap-2">
         <h2 className="flex-1 font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
           {labels.title}
