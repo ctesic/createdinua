@@ -117,33 +117,33 @@ export default async function MoviePage({ params }: Props) {
                     </p>
                   )}
                   {movie.director && (
-                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
                       <p className="text-[var(--color-text-primary)]">{t('directorLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.director}</p>
+                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.director}</p>
                     </div>
                   )}
                   {movie.producer && (
-                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
                       <p className="text-[var(--color-text-primary)]">{t('producerLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.producer}</p>
+                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.producer}</p>
                     </div>
                   )}
                   {movie.genre && (
-                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
                       <p className="text-[var(--color-text-primary)]">{t('genreLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.genre}</p>
+                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.genre}</p>
                     </div>
                   )}
                   {movie.language && (
-                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
                       <p className="text-[var(--color-text-primary)]">{t('languageLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.language}</p>
+                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.language}</p>
                     </div>
                   )}
                   {movie.ageRestriction && (
-                    <div className="flex gap-[var(--spacing-1)] whitespace-nowrap overflow-hidden h-[28px] items-start">
+                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
                       <p className="text-[var(--color-text-primary)]">{t('ageRestrictionLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)]">{movie.ageRestriction}</p>
+                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.ageRestriction}</p>
                     </div>
                   )}
                 </div>
