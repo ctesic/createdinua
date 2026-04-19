@@ -44,10 +44,10 @@ export default async function HomePage({ params }: Props) {
                 slug: f.movie.slug,
                 title: f.movie.title,
                 genre: f.movie.genre || '',
+                ageRestriction: f.movie.ageRestriction || undefined,
                 posterUrl: typeof f.movie.posterHorizontal === 'object' && f.movie.posterHorizontal?.url ? f.movie.posterHorizontal.url : (typeof f.movie.posterVertical === 'object' && f.movie.posterVertical?.url ? f.movie.posterVertical.url : ''),
                 screenings: f.screenings,
                 screeningsLabel: t('hero.screenings'),
-                detailLabel: t('hero.details'),
               }))}
             />
           </div>
