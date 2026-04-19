@@ -32,3 +32,8 @@ next-env.d.ts
 # payload
 /db/
 src/payload-types.ts
+
+# local dev / seed artifacts — should never be tracked
+/db-backup-*.json
+/media/
+/public/posters/
