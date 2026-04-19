@@ -48,7 +48,7 @@ export default async function SchedulePage({ params }: Props) {
 
     grouped[dateKey].push({
       id: screening.id,
-      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jerusalem' }),
+      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
       date: dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }),
       city: place?.city || '',
       venue: place?.name || '',
