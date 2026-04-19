@@ -51,7 +51,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
       <div className="border border-[var(--color-border)] overflow-hidden px-[var(--spacing-6)] py-[var(--spacing-5)] rounded-[var(--radius-xl)]">
         {/* Desktop: single row */}
         <div className="hidden md:flex gap-2 items-start">
-          <div className="flex flex-col items-start w-[120px] shrink-0 whitespace-nowrap">
+          <div className="flex flex-col items-start w-[128px] shrink-0 whitespace-nowrap">
             <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)]">
               {date}
             </p>
@@ -61,11 +61,11 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
           </div>
           <div className="flex flex-col items-start flex-1 min-w-0">
             {movieTitle && movieSlug ? (
-              <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+              <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
                 {movieTitle}
               </Link>
             ) : (
-              <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+              <p className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
                 {city}
               </p>
             )}
@@ -95,11 +95,11 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
             </div>
             <div className="flex flex-col items-start flex-1 min-w-0">
               {movieTitle && movieSlug ? (
-                <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+                <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
                   {movieTitle}
                 </Link>
               ) : (
-                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+                <p className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
                   {city}
                 </p>
               )}
