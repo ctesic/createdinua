@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Link } from '@/i18n/navigation'
 import { Button } from './Button'
 import { LocationModal } from './LocationModal'
+import { trackTicketClick } from '@/lib/analytics'
 
 type Props = {
   date: string
@@ -22,9 +23,10 @@ type Props = {
   movieTitle?: string
   movieSlug?: string
   directionsLabel?: string
+  trackingLocation?: 'movie-page' | 'schedule'
 }
 
-export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions' }: Props) {
+export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions', trackingLocation }: Props) {
   const [showLocation, setShowLocation] = useState(false)
   const showButton = !isPast
 
@@ -32,7 +34,15 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
     soldOut ? (
       <Button disabled className="w-full md:w-auto">{soldOutLabel}</Button>
     ) : ticketUrl ? (
-      <a href={ticketUrl} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
+      <a
+        href={ticketUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full md:w-auto"
+        onClick={() => {
+          if (trackingLocation) trackTicketClick({ location: trackingLocation, movieSlug, city })
+        }}
+      >
         <Button className="w-full md:w-auto">{ticketLabel}</Button>
       </a>
     ) : (
@@ -48,7 +58,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
 
   return (
     <>
-      <div className="border border-[var(--color-border)] overflow-hidden px-[var(--spacing-6)] py-[var(--spacing-5)] rounded-[var(--radius-xl)]">
+      <div className="border border-[var(--color-border)] overflow-hidden p-[var(--spacing-4)] md:px-[var(--spacing-6)] md:py-[var(--spacing-5)] rounded-[var(--radius-xl)]">
         {/* Desktop: single row */}
         <div className="hidden md:flex gap-2 items-start">
           <div className="flex flex-col items-start w-[128px] shrink-0 whitespace-nowrap">

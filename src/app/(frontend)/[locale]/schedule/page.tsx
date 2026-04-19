@@ -95,6 +95,7 @@ export default async function SchedulePage({ params }: Props) {
                       movieTitle={s.movieTitle}
                       movieSlug={s.movieSlug}
                       directionsLabel={tCommon('directions')}
+                      trackingLocation="schedule"
                     />
                   ))}
                 </div>

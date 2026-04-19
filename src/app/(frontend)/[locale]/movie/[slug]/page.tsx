@@ -170,6 +170,7 @@ export default async function MoviePage({ params }: Props) {
             <MovieScreenings
               screenings={screenings}
               movieTitle={movie.title as string}
+              movieSlug={movie.slug as string}
               labels={{
                 title: t('screenings'),
                 upcoming: t('upcoming'),

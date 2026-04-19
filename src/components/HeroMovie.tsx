@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation'
+import { Button } from './Button'
 import { ScreeningChip } from './ScreeningChip'
 
 type Screening = {
@@ -16,12 +17,13 @@ type Props = {
   ageRestriction?: string
   posterUrl: string
   screenings: Screening[]
+  detailLabel: string
   screeningsLabel: string
   className?: string
   priority?: boolean
 }
 
-export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, screenings, screeningsLabel, className, priority = false }: Props) {
+export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
   return (
     <div
       className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[var(--spacing-24)] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
@@ -43,12 +45,11 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
         />
       </div>
 
-      {/* Stretched link — whole card navigates to the movie page. Sits
-          behind interactive children (chips) via z-index. */}
+      {/* Mobile-only stretched link — whole card navigates to the movie page. */}
       <Link
         href={{ pathname: '/movie/[slug]', params: { slug } }}
         aria-label={title}
-        className="absolute inset-0 z-[1] rounded-[var(--radius-2xl)]"
+        className="md:hidden absolute inset-0 z-[1] rounded-[var(--radius-2xl)]"
       />
 
       {/* Age restriction badge — top-right on all breakpoints */}
@@ -58,8 +59,9 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
         </div>
       )}
 
-      {/* Title (non-interactive, lets clicks pass through to the card link) */}
-      <div className="pointer-events-none relative z-[1] text-[var(--color-text-inverse)] w-full">
+      {/* Title. On mobile the title area is click-through to the stretched link;
+          on desktop it behaves normally so the text can be selected. */}
+      <div className="pointer-events-none md:pointer-events-auto relative z-[1] text-[var(--color-text-inverse)] w-full">
         <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] opacity-80">
           {genre}
         </p>
@@ -68,10 +70,10 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
         </p>
       </div>
 
-      {/* Action row — screenings. Above the card link so chip clicks hit the chip, not the card. */}
+      {/* Action row — screenings + (desktop) details button. z-[2] keeps chip and button clicks above the mobile stretched link. */}
       <div className="relative z-[2] flex flex-col md:flex-row md:items-end gap-[var(--spacing-3)] w-full">
         <div className="flex flex-col gap-2 flex-1 overflow-hidden">
-          <p className="pointer-events-none font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-inverse)] opacity-80">
+          <p className="pointer-events-none md:pointer-events-auto font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-inverse)] opacity-80">
             {screeningsLabel}
           </p>
           <div className="flex flex-col md:flex-row gap-2 w-full">
@@ -83,10 +85,19 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
                 city={s.city}
                 soldOut={s.soldOut}
                 ticketUrl={s.ticketUrl}
+                trackingLocation="hero"
+                trackingMovieSlug={slug}
                 className="md:shrink-0"
               />
             ))}
           </div>
+        </div>
+
+        {/* Details button — desktop only */}
+        <div className="hidden md:block shrink-0">
+          <Link href={{ pathname: '/movie/[slug]', params: { slug } }}>
+            <Button variant="inverse">{detailLabel}</Button>
+          </Link>
         </div>
       </div>
     </div>

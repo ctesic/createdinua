@@ -21,6 +21,7 @@ type Screening = {
 type Props = {
   screenings: Screening[]
   movieTitle: string
+  movieSlug: string
   labels: {
     title: string
     upcoming: string
@@ -33,7 +34,7 @@ type Props = {
   }
 }
 
-export function MovieScreenings({ screenings, movieTitle, labels }: Props) {
+export function MovieScreenings({ screenings, movieTitle, movieSlug, labels }: Props) {
   const upcoming = screenings.filter((s) => !s.isPast)
   const past = screenings.filter((s) => s.isPast)
   const defaultTab = upcoming.length > 0 ? 'upcoming' : 'past'
@@ -78,6 +79,8 @@ export function MovieScreenings({ screenings, movieTitle, labels }: Props) {
               soldOutLabel={labels.soldOut}
               isPast={s.isPast}
               directionsLabel={labels.directions}
+              movieSlug={movieSlug}
+              trackingLocation="movie-page"
             />
           ))}
         </div>

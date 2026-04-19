@@ -1,5 +1,7 @@
 'use client'
 
+import { trackTicketClick } from '@/lib/analytics'
+
 type Props = {
   date: string
   time?: string
@@ -8,9 +10,11 @@ type Props = {
   ticketUrl?: string
   onClick?: () => void
   className?: string
+  trackingLocation?: 'hero' | 'movie-page' | 'schedule'
+  trackingMovieSlug?: string
 }
 
-export function ScreeningChip({ date, time, city, soldOut = false, ticketUrl, onClick, className }: Props) {
+export function ScreeningChip({ date, time, city, soldOut = false, ticketUrl, onClick, className, trackingLocation, trackingMovieSlug }: Props) {
   const interactive = !soldOut && (!!onClick || !!ticketUrl)
 
   const content = (
@@ -42,7 +46,15 @@ export function ScreeningChip({ date, time, city, soldOut = false, ticketUrl, on
 
   if (ticketUrl && !soldOut) {
     return (
-      <a href={ticketUrl} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a
+        href={ticketUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        onClick={() => {
+          if (trackingLocation) trackTicketClick({ location: trackingLocation, movieSlug: trackingMovieSlug, city })
+        }}
+      >
         {content}
       </a>
     )

@@ -48,6 +48,7 @@ export default async function HomePage({ params }: Props) {
                 posterUrl: typeof f.movie.posterHorizontal === 'object' && f.movie.posterHorizontal?.url ? f.movie.posterHorizontal.url : (typeof f.movie.posterVertical === 'object' && f.movie.posterVertical?.url ? f.movie.posterVertical.url : ''),
                 screenings: f.screenings,
                 screeningsLabel: t('hero.screenings'),
+                detailLabel: t('hero.details'),
               }))}
             />
           </div>
