@@ -1,4 +1,5 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import type { Metadata } from 'next'
+import { getTranslations, getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
 import { MovieScreenings } from '@/components/MovieScreenings'
@@ -13,6 +14,34 @@ type Props = {
 function getYouTubeEmbedUrl(url: string): string | null {
   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/)
   return match ? `https://www.youtube.com/embed/${match[1]}` : null
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params
+  const movie = await getMovieBySlug(slug, locale as Locale)
+  if (!movie) return {}
+
+  const messages = await getMessages({ locale })
+  const meta = messages.meta as Record<string, string>
+  const brand = meta?.brand || 'Created in Ukraine'
+  const title = `${movie.title} | ${brand}`
+
+  const horizontal = typeof movie.posterHorizontal === 'object' ? movie.posterHorizontal?.url : null
+  const vertical = typeof movie.posterVertical === 'object' ? movie.posterVertical?.url : null
+  const ogImage = horizontal || vertical
+
+  return {
+    title,
+    openGraph: {
+      title,
+      ...(ogImage ? { images: [{ url: ogImage, alt: movie.title as string }] } : {}),
+    },
+    twitter: {
+      card: ogImage ? 'summary_large_image' : 'summary',
+      title,
+      ...(ogImage ? { images: [ogImage] } : {}),
+    },
+  }
 }
 
 export default async function MoviePage({ params }: Props) {

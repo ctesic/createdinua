@@ -81,3 +81,11 @@ h1, h2, h3, h4, h5, h6 {
     --container-side-paddings: var(--spacing-10);
   }
 }
+
+/* Payload's rich text renderer emits inline `style="text-align:left"` for
+   Lexical paragraphs saved with `format: "start"`. That's correct in LTR but
+   forces a left-aligned block in RTL locales. Revert it inside any RTL
+   container so short lines end flush-right as expected. */
+[dir="rtl"] p[style*="text-align:left"] {
+  text-align: start !important;
+}
