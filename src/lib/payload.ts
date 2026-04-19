@@ -112,8 +112,8 @@ export async function getFeaturedMovies(locale: Locale) {
       const dt = new Date(s.datetime)
       const place = typeof s.place === 'object' ? s.place : null
       movieMap.get(movie.id)!.screenings.push({
-        date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
-        time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+        date: dt.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }).replace('/', '.'),
+        time: dt.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
         city: place?.city || '',
         ticketUrl: s.ticketUrl || undefined,
       })
@@ -160,8 +160,8 @@ export async function getFeaturedMovie(locale: Locale) {
         const dt = new Date(s.datetime)
         const place = typeof s.place === 'object' ? s.place : null
         return {
-          date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
-          time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+          date: dt.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }).replace('/', '.'),
+          time: dt.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
           city: place?.city || '',
         }
       })

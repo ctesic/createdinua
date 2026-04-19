@@ -43,8 +43,8 @@ export default async function MoviePage({ params }: Props) {
     const hePlace = place ? hebrewPlaces.get(place.id) : undefined
     return {
       id: s.id,
-      date: `${dt.getDate().toString().padStart(2, '0')}.${(dt.getMonth() + 1).toString().padStart(2, '0')}`,
-      time: `${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`,
+      date: dt.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }).replace('/', '.'),
+      time: dt.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
       city: place?.city || '',
       venue: place?.name || '',
       address: place?.address || undefined,

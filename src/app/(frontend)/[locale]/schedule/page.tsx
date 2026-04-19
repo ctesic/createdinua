@@ -38,6 +38,7 @@ export default async function SchedulePage({ params }: Props) {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
+      timeZone: 'Asia/Jerusalem',
     })
     if (!grouped[dateKey]) grouped[dateKey] = []
 
@@ -47,8 +48,8 @@ export default async function SchedulePage({ params }: Props) {
 
     grouped[dateKey].push({
       id: screening.id,
-      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit' }),
-      date: dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit' }),
+      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jerusalem' }),
+      date: dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }),
       city: place?.city || '',
       venue: place?.name || '',
       address: place?.address || undefined,

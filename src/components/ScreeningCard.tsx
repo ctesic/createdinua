@@ -27,10 +27,12 @@ export function ScreeningCard({ movie, place, datetime, ticketUrl, price, isCanc
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
+    timeZone: 'Asia/Jerusalem',
   })
   const formattedTime = date.toLocaleTimeString(intlLocale, {
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'Asia/Jerusalem',
   })
 
   return (
