@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -38,9 +39,20 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const dir = rtlLocales.includes(locale as Locale) ? 'rtl' : 'ltr'
 
+  const umamiSrc = process.env.NEXT_PUBLIC_UMAMI_URL
+  const umamiId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+
   return (
     <html lang={locale} dir={dir}>
       <body className="min-h-screen flex flex-col">
+        {umamiSrc && umamiId && (
+          <Script
+            defer
+            src={umamiSrc}
+            data-website-id={umamiId}
+            strategy="afterInteractive"
+          />
+        )}
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>
