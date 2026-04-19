@@ -2,11 +2,13 @@ import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 import { locales } from '@/i18n/routing'
 
-const revalidatePages = () => {
+const revalidatePages = (slug?: string) => {
   try {
     for (const locale of locales) {
       revalidatePath(`/${locale}`)
       revalidatePath(`/${locale}/movies`)
+      revalidatePath(`/${locale}/catalog`)
+      if (slug) revalidatePath(`/${locale}/movie/${slug}`)
     }
   } catch {
     // may fail during build
@@ -20,8 +22,11 @@ export const Movie: CollectionConfig = {
     defaultColumns: ['title', 'year', 'director', 'isCatalog'],
   },
   hooks: {
-    afterChange: [() => revalidatePages()],
-    afterDelete: [() => revalidatePages()],
+    afterChange: [({ doc, previousDoc }) => {
+      revalidatePages(doc?.slug)
+      if (previousDoc?.slug && previousDoc.slug !== doc?.slug) revalidatePages(previousDoc.slug)
+    }],
+    afterDelete: [({ doc }) => revalidatePages(doc?.slug)],
   },
   fields: [
     {
