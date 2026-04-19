@@ -21,10 +21,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const messages = await getMessages({ locale })
   const meta = messages.meta as Record<string, string>
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://createdinua.org'
+  const title = meta?.title || 'Created in Ukraine'
+  const description = meta?.description
+  const ogImage = '/images/service/opengraph_general.jpg'
 
   return {
-    title: meta?.title || 'Created in Ukraine',
-    description: meta?.description,
+    metadataBase: new URL(siteUrl),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   }
 }
 

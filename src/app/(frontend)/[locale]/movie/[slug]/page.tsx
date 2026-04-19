@@ -16,6 +16,18 @@ function getYouTubeEmbedUrl(url: string): string | null {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null
 }
 
+function richTextToPlain(node: any): string {
+  if (!node) return ''
+  if (Array.isArray(node)) return node.map(richTextToPlain).join('')
+  if (typeof node !== 'object') return ''
+  if (node.type === 'text') return node.text || ''
+  if (node.type === 'linebreak') return '\n'
+  const children = Array.isArray(node.children) ? node.children.map(richTextToPlain).join('') : ''
+  if (node.root) return richTextToPlain(node.root)
+  if (node.type === 'paragraph' || node.type === 'listitem') return children + '\n'
+  return children
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
   const movie = await getMovieBySlug(slug, locale as Locale)
@@ -95,9 +107,32 @@ export default async function MoviePage({ params }: Props) {
   const posterUrl = typeof movie.posterHorizontal === 'object' && movie.posterHorizontal?.url
     ? movie.posterHorizontal.url
     : null
+  const verticalUrl = typeof movie.posterVertical === 'object' && movie.posterVertical?.url
+    ? movie.posterVertical.url
+    : null
+
+  const plainDescription = movie.description ? richTextToPlain(movie.description).trim() : undefined
+  const jsonLd: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Movie',
+    name: movie.title,
+    ...(plainDescription ? { description: plainDescription.slice(0, 5000) } : {}),
+    ...(posterUrl || verticalUrl ? { image: posterUrl || verticalUrl } : {}),
+    ...(movie.year ? { datePublished: String(movie.year) } : {}),
+    ...(movie.director ? { director: { '@type': 'Person', name: movie.director } } : {}),
+    ...(movie.duration ? { duration: `PT${movie.duration}M` } : {}),
+    ...(movie.genre ? { genre: movie.genre } : {}),
+    ...(movie.language ? { inLanguage: movie.language } : {}),
+    ...(movie.ageRestriction ? { contentRating: movie.ageRestriction } : {}),
+    ...(movie.trailerUrl ? { trailer: { '@type': 'VideoObject', url: movie.trailerUrl, name: movie.title } } : {}),
+  }
 
   return (
     <div className="bg-[var(--color-surface)] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="flex flex-col items-center w-full">
         <div className="max-w-[1440px] w-full md:px-[var(--container-side-paddings)] md:py-[var(--spacing-10)]">
           <div className="bg-[var(--color-background)] md:rounded-[32px] overflow-hidden w-full">
