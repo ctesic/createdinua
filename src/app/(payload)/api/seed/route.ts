@@ -153,6 +153,10 @@ function combineDatetime(dateStr: string, timeStr: string): string | null {
 // ─── Main seed logic ───
 
 export async function POST(request: Request) {
+  if (process.env.NODE_ENV === 'production') {
+    return new NextResponse('Not Found', { status: 404 })
+  }
+
   const payload = await getPayload({ config })
 
   // Parse optional query param to force reseed
