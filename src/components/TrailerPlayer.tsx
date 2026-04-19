@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 type Props = {
   embedUrl: string
@@ -33,7 +34,14 @@ export function TrailerPlayer({ embedUrl, posterUrl, title }: Props) {
       aria-label={`Play ${title}`}
     >
       {thumbnail && (
-        <img src={thumbnail} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+        <Image
+          src={thumbnail}
+          alt={title}
+          fill
+          priority
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover"
+        />
       )}
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
       <div className="absolute inset-0 flex items-center justify-center">

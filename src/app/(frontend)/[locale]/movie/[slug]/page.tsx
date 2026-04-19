@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getTranslations, getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
@@ -145,11 +146,16 @@ export default async function MoviePage({ params }: Props) {
                   title={movie.title as string}
                 />
               ) : posterUrl ? (
-                <img
-                  src={posterUrl}
-                  alt={movie.title as string}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={posterUrl}
+                    alt={movie.title as string}
+                    fill
+                    priority
+                    sizes="(max-width: 1440px) 100vw, 1440px"
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <div className="flex items-center justify-center w-full h-full text-[var(--color-text-muted)]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
