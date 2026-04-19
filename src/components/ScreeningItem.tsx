@@ -51,7 +51,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
       <div className="border border-[var(--color-border)] overflow-hidden px-[var(--spacing-6)] py-[var(--spacing-5)] rounded-[var(--radius-xl)]">
         {/* Desktop: single row */}
         <div className="hidden md:flex gap-2 items-start">
-          <div className="flex flex-col items-start w-[80px] shrink-0 whitespace-nowrap">
+          <div className="flex flex-col items-start w-[120px] shrink-0 whitespace-nowrap">
             <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)]">
               {date}
             </p>
@@ -85,8 +85,8 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
         {/* Mobile: stacked */}
         <div className="flex md:hidden flex-col gap-2">
           <div className="flex gap-2 items-start">
-            <div className="flex flex-col items-start w-[80px] shrink-0 whitespace-nowrap">
-              <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)]">
+            <div className="flex flex-col items-start w-[96px] shrink-0 whitespace-nowrap">
+              <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)]">
                 {date}
               </p>
               <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">

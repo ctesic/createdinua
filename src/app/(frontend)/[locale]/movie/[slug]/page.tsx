@@ -36,15 +36,20 @@ export default async function MoviePage({ params }: Props) {
   for (const p of hePlacesResult.docs) hebrewPlaces.set(p.id, { name: p.name as string, city: p.city as string, address: p.address as string || undefined })
 
   const now = new Date()
+  const intlLocale = locale === 'he' ? 'he-IL' : locale === 'en' ? 'en-US' : 'uk-UA'
 
   const screenings = screeningsResult.docs.map((s: any) => {
     const dt = new Date(s.datetime)
     const place = typeof s.place === 'object' ? s.place : null
     const hePlace = place ? hebrewPlaces.get(place.id) : undefined
+    const isPast = dt < now
+    const dateStr = isPast
+      ? dt.toLocaleDateString(intlLocale, { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Asia/Jerusalem' })
+      : dt.toLocaleDateString(intlLocale, { day: 'numeric', month: 'long', timeZone: 'Asia/Jerusalem' })
     return {
       id: s.id,
-      date: dt.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', timeZone: 'Asia/Jerusalem' }).replace('/', '.'),
-      time: dt.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
+      date: dateStr,
+      time: dt.toLocaleTimeString(intlLocale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' }),
       city: place?.city || '',
       venue: place?.name || '',
       address: place?.address || undefined,
@@ -52,7 +57,7 @@ export default async function MoviePage({ params }: Props) {
       mapQuery: hePlace ? [hePlace.name, hePlace.address, hePlace.city].filter(Boolean).join(', ') : undefined,
       note: s.notes || undefined,
       ticketUrl: s.ticketUrl || null,
-      isPast: dt < now,
+      isPast,
     }
   })
 
