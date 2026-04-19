@@ -42,7 +42,7 @@ export function MovieScreenings({ screenings, movieTitle, labels }: Props) {
   const visible = tab === 'upcoming' ? upcoming : past
 
   return (
-    <div className="flex flex-col gap-[var(--spacing-4)] p-[var(--spacing-8)]">
+    <div className="flex flex-col gap-[var(--spacing-4)] px-[var(--spacing-5)] py-[var(--spacing-8)] md:px-[var(--spacing-8)]">
       <h1 className="text-center font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] md:font-[number:var(--font-weight-bold)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] md:text-[length:var(--text-4xl)] md:leading-[var(--line-height-4xl)] lg:text-[length:var(--text-5xl)] lg:leading-[var(--line-height-5xl)] text-[var(--color-text-primary)]">
         {movieTitle}
       </h1>

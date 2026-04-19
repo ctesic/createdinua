@@ -177,6 +177,24 @@ export async function getRecentlyScreenedMovies(locale: Locale, limit = 4) {
     const payload = await getPayloadClient()
     const now = new Date().toISOString()
 
+    // Find all movies with any upcoming screening so we can exclude them.
+    const upcoming = await payload.find({
+      collection: 'screenings',
+      where: {
+        datetime: { greater_than: now },
+        isCancelled: { equals: false },
+      },
+      limit: 500,
+      locale,
+      depth: 0,
+    })
+
+    const hasUpcoming = new Set<number | string>()
+    for (const s of upcoming.docs) {
+      const id = typeof s.movie === 'object' ? s.movie?.id : s.movie
+      if (id !== undefined && id !== null) hasUpcoming.add(id)
+    }
+
     // Get recent past screenings, sorted by most recent first
     const screenings = await payload.find({
       collection: 'screenings',
@@ -191,11 +209,12 @@ export async function getRecentlyScreenedMovies(locale: Locale, limit = 4) {
     })
 
     // Deduplicate by movie, keeping only the first (most recent) screening per movie
+    // and skipping any movie that has an upcoming screening.
     const seen = new Set<number | string>()
     const movies: any[] = []
     for (const screening of screenings.docs) {
       const movie = typeof screening.movie === 'object' ? screening.movie : null
-      if (movie && !seen.has(movie.id)) {
+      if (movie && !seen.has(movie.id) && !hasUpcoming.has(movie.id)) {
         seen.add(movie.id)
         movies.push(movie)
         if (movies.length >= limit) break

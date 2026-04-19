@@ -183,7 +183,7 @@ export default async function MoviePage({ params }: Props) {
             />
 
             {/* About section */}
-            <div className="flex flex-col items-start pb-[var(--spacing-16)] pt-[var(--spacing-8)] px-[var(--spacing-8)]">
+            <div className="flex flex-col items-start pb-[var(--spacing-16)] pt-[var(--spacing-8)] px-[var(--spacing-5)] md:px-[var(--spacing-8)]">
               <div className="flex flex-col md:grid md:grid-cols-[2fr_1fr] gap-6 w-full">
                 {/* Info — on top for mobile, right column for desktop */}
                 <div className="order-first md:order-last flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] self-start">
