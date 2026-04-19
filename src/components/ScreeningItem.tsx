@@ -92,33 +92,36 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
           {buttonEl && <div className="shrink-0">{buttonEl}</div>}
         </div>
 
-        {/* Mobile: stacked */}
-        <div className="flex md:hidden flex-col gap-2">
-          <div className="flex gap-2 items-start">
-            <div className="flex flex-col items-start w-[96px] shrink-0 whitespace-nowrap">
-              <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)]">
-                {date}
-              </p>
-              <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
-                {time}
-              </p>
-            </div>
-            <div className="flex flex-col items-start flex-1 min-w-0">
-              {movieTitle && movieSlug ? (
-                <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
-                  {movieTitle}
-                </Link>
-              ) : (
-                <p className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
-                  {city}
-                </p>
-              )}
-              <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
-                {locationButton}
-                {note && <p>{note}</p>}
-              </div>
-            </div>
+        {/* Mobile: single column — date+time inline on top, city / venue / notes below, button at bottom */}
+        <div className="flex md:hidden flex-col gap-[var(--spacing-2)]">
+          {/* Date + time inline */}
+          <div className="flex items-baseline gap-[var(--spacing-2)] whitespace-nowrap">
+            <span className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)]">
+              {date}
+            </span>
+            <span className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
+              {time}
+            </span>
           </div>
+
+          {/* City / movie title */}
+          {movieTitle && movieSlug ? (
+            <Link href={{ pathname: '/movie/[slug]', params: { slug: movieSlug } }} className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+              {movieTitle}
+            </Link>
+          ) : (
+            <p className="pl-[var(--spacing-1)] font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+              {city}
+            </p>
+          )}
+
+          {/* Venue + notes */}
+          <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
+            {locationButton}
+            {note && <p>{note}</p>}
+          </div>
+
+          {/* Full-width ticket button */}
           {buttonEl && <div className="w-full">{buttonEl}</div>}
         </div>
       </div>
