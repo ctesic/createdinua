@@ -60,6 +60,11 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} dir={dir}>
+      <head>
+        <link rel="preload" href="/fonts/mariupol/Mariupol-Regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/mariupol/Mariupol-Medium.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/mariupol/Mariupol-Bold.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-screen flex flex-col">
         {umamiSrc && umamiId && (
           <Script

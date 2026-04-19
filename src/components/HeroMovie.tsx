@@ -19,9 +19,10 @@ type Props = {
   detailLabel: string
   screeningsLabel: string
   className?: string
+  priority?: boolean
 }
 
-export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLabel, screeningsLabel, className }: Props) {
+export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
   return (
     <div
       className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[var(--spacing-24)] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
@@ -32,6 +33,8 @@ export function HeroMovie({ slug, title, genre, posterUrl, screenings, detailLab
           <img
             src={posterUrl}
             alt=""
+            fetchPriority={priority ? 'high' : 'auto'}
+            loading={priority ? 'eager' : 'lazy'}
             className="absolute w-full h-full object-cover rounded-[var(--radius-2xl)]"
           />
         )}

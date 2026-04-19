@@ -30,7 +30,7 @@ export function HeroSlider({ slides }: Props) {
 
   // Single slide — render directly, no slider UI
   if (slides.length <= 1) {
-    return slides[0] ? <HeroMovie {...slides[0]} /> : null
+    return slides[0] ? <HeroMovie {...slides[0]} priority /> : null
   }
 
   return (
@@ -51,7 +51,7 @@ export function HeroSlider({ slides }: Props) {
                 : 'opacity-0 pointer-events-none'
             } ${i === 0 ? 'relative' : 'absolute inset-0'}`}
           >
-            <HeroMovie {...slide} />
+            <HeroMovie {...slide} priority={i === 0} />
           </div>
         ))}
 
