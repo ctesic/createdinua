@@ -26,7 +26,7 @@ type Props = {
 export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
   return (
     <div
-      className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[var(--spacing-24)] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
+      className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[192px] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pt-[var(--spacing-24)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
     >
       {/* Background image + gradient */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[var(--radius-2xl)]">
@@ -65,7 +65,7 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
         <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] opacity-80">
           {genre}
         </p>
-        <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-5xl)] leading-[var(--line-height-5xl)]">
+        <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] md:font-[number:var(--font-weight-bold)] md:text-[length:var(--text-5xl)] md:leading-[var(--line-height-5xl)]">
           {title}
         </p>
       </div>
