@@ -76,7 +76,7 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
           <p className="pointer-events-none md:pointer-events-auto font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-inverse)] opacity-80">
             {screeningsLabel}
           </p>
-          <div className="flex flex-col md:flex-row gap-2 w-full">
+          <div className="flex gap-2 w-full overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {screenings.map((s, i) => (
               <ScreeningChip
                 key={i}
@@ -87,7 +87,7 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
                 ticketUrl={s.ticketUrl}
                 trackingLocation="hero"
                 trackingMovieSlug={slug}
-                className="md:shrink-0"
+                className="shrink-0"
               />
             ))}
           </div>
