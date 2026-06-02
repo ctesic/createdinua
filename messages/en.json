@@ -51,6 +51,7 @@
     "past": "Past",
     "tickets": "Tickets",
     "soldOut": "Sold out",
+    "cancelled": "Cancelled",
     "noUpcomingScreenings": "No upcoming screenings",
     "noPastScreenings": "No past screenings",
     "producerLabel": "Producer:",

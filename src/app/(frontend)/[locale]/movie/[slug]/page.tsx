@@ -100,6 +100,7 @@ export default async function MoviePage({ params }: Props) {
       note: s.notes || undefined,
       ticketUrl: s.ticketUrl || null,
       isPast,
+      isCancelled: Boolean(s.isCancelled),
     }
   })
 
@@ -177,6 +178,7 @@ export default async function MoviePage({ params }: Props) {
                 past: t('past'),
                 tickets: t('tickets'),
                 soldOut: t('soldOut'),
+                cancelled: t('cancelled'),
                 noUpcomingScreenings: t('noUpcomingScreenings'),
                 noPastScreenings: t('noPastScreenings'),
                 directions: tCommon('directions'),

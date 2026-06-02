@@ -16,6 +16,7 @@ type Props = {
   genre: string
   ageRestriction?: string
   posterUrl: string
+  posterUrlMobile?: string
   screenings: Screening[]
   detailLabel: string
   screeningsLabel: string
@@ -23,7 +24,7 @@ type Props = {
   priority?: boolean
 }
 
-export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
+export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, posterUrlMobile, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
   return (
     <div
       className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[192px] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pt-[var(--spacing-24)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
@@ -31,13 +32,17 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, scree
       {/* Background image + gradient */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[var(--radius-2xl)]">
         {posterUrl && (
-          <img
-            src={posterUrl}
-            alt=""
-            fetchPriority={priority ? 'high' : 'auto'}
-            loading={priority ? 'eager' : 'lazy'}
-            className="absolute w-full h-full object-cover rounded-[var(--radius-2xl)]"
-          />
+          <picture>
+            {/* Mobile uses the vertical poster; desktop (>=768px) the horizontal one. */}
+            {posterUrlMobile && <source media="(max-width: 767px)" srcSet={posterUrlMobile} />}
+            <img
+              src={posterUrl}
+              alt=""
+              fetchPriority={priority ? 'high' : 'auto'}
+              loading={priority ? 'eager' : 'lazy'}
+              className="absolute w-full h-full object-cover rounded-[var(--radius-2xl)]"
+            />
+          </picture>
         )}
         <div
           className="absolute inset-0 rounded-[var(--radius-2xl)]"

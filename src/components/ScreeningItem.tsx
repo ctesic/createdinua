@@ -19,6 +19,8 @@ type Props = {
   ticketLabel: string
   soldOutLabel?: string
   soldOut?: boolean
+  cancelledLabel?: string
+  isCancelled?: boolean
   isPast?: boolean
   movieTitle?: string
   movieSlug?: string
@@ -26,11 +28,13 @@ type Props = {
   trackingLocation?: 'movie-page' | 'schedule'
 }
 
-export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions', trackingLocation }: Props) {
+export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, cancelledLabel = 'Скасовано', isCancelled = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions', trackingLocation }: Props) {
   const [showLocation, setShowLocation] = useState(false)
-  const showButton = !isPast
+  const showButton = !isPast && !isCancelled
 
-  const buttonEl = showButton && (
+  const buttonEl = isCancelled ? (
+    <Button disabled className="w-full md:w-auto">{cancelledLabel}</Button>
+  ) : showButton && (
     soldOut ? (
       <Button disabled className="w-full md:w-auto">{soldOutLabel}</Button>
     ) : ticketUrl ? (
@@ -58,11 +62,11 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
 
   return (
     <>
-      <div className="border border-[var(--color-border)] overflow-hidden p-[var(--spacing-4)] md:px-[var(--spacing-6)] md:py-[var(--spacing-5)] rounded-[var(--radius-xl)]">
+      <div className={`border border-[var(--color-border)] overflow-hidden p-[var(--spacing-4)] md:px-[var(--spacing-6)] md:py-[var(--spacing-5)] rounded-[var(--radius-xl)] ${isCancelled ? 'opacity-60' : ''}`}>
         {/* Desktop: single row */}
         <div className="hidden md:flex gap-2 items-start">
           <div className="flex flex-col items-start w-[128px] shrink-0 whitespace-nowrap">
-            <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)]">
+            <p className={`font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)] ${isCancelled ? 'line-through' : ''}`}>
               {date}
             </p>
             <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
@@ -96,7 +100,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
         <div className="flex md:hidden flex-col gap-[var(--spacing-2)]">
           {/* Date + time inline */}
           <div className="flex items-baseline gap-[var(--spacing-2)] whitespace-nowrap">
-            <span className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)]">
+            <span className={`font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)] ${isCancelled ? 'line-through' : ''}`}>
               {date}
             </span>
             <span className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">

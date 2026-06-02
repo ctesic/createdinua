@@ -16,6 +16,7 @@ type Screening = {
   note?: string
   ticketUrl?: string | null
   isPast: boolean
+  isCancelled?: boolean
 }
 
 type Props = {
@@ -28,6 +29,7 @@ type Props = {
     past: string
     tickets: string
     soldOut: string
+    cancelled: string
     noUpcomingScreenings: string
     noPastScreenings: string
     directions: string
@@ -77,6 +79,8 @@ export function MovieScreenings({ screenings, movieTitle, movieSlug, labels }: P
               ticketUrl={s.ticketUrl}
               ticketLabel={labels.tickets}
               soldOutLabel={labels.soldOut}
+              cancelledLabel={labels.cancelled}
+              isCancelled={s.isCancelled}
               isPast={s.isPast}
               directionsLabel={labels.directions}
               movieSlug={movieSlug}
