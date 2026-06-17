@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import { getSiteSettings } from '@/lib/payload'
 import Image from 'next/image'
 import type { Locale } from '@/i18n/routing'
+import { SOCIAL_LINKS } from '@/lib/social'
 import { NavLink } from './NavLink'
 
 type Props = {
@@ -47,14 +47,6 @@ export async function Footer({ locale }: Props) {
     getTranslations({ locale, namespace: 'nav' }),
   ])
 
-  let socialLinks: { facebook?: string; telegram?: string; instagram?: string } = {}
-  try {
-    const settings = await getSiteSettings(locale)
-    socialLinks = (settings?.socialLinks as typeof socialLinks) || {}
-  } catch {
-    // Settings may not exist yet
-  }
-
   const Logo = () => (
     <Image
       src="/images/service/logo-footer.svg"
@@ -94,9 +86,9 @@ export async function Footer({ locale }: Props) {
           <Logo />
           <BrandText />
           <div className="flex items-center gap-[var(--spacing-2)]">
-            <SocialButton href={socialLinks.instagram} label="Instagram"><InstagramIcon /></SocialButton>
-            <SocialButton href={socialLinks.facebook} label="Facebook"><FacebookIcon /></SocialButton>
-            <SocialButton href={socialLinks.telegram} label="Telegram"><TelegramIcon /></SocialButton>
+            <SocialButton href={SOCIAL_LINKS.instagram} label="Instagram"><InstagramIcon /></SocialButton>
+            <SocialButton href={SOCIAL_LINKS.facebook} label="Facebook"><FacebookIcon /></SocialButton>
+            <SocialButton href={SOCIAL_LINKS.telegram} label="Telegram"><TelegramIcon /></SocialButton>
           </div>
         </div>
 

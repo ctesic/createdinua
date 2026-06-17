@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react'
 import { LocaleSwitcher } from './LocaleSwitcher'
 import { NavLink } from './NavLink'
 import { IconButton } from './IconButton'
+import { SOCIAL_LINKS } from '@/lib/social'
 
 const InstagramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -26,12 +27,26 @@ const TelegramIcon = () => (
   </svg>
 )
 
+function SocialIconLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="inline-flex items-center justify-center w-8 h-8 rounded-[var(--radius-full)] p-[var(--spacing-2)] [&>*]:size-4 bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-accent)] transition-colors"
+    >
+      {children}
+    </a>
+  )
+}
+
 function SocialIcons() {
   return (
     <div className="flex items-center gap-[var(--spacing-2)]">
-      <IconButton icon={<InstagramIcon />} label="Instagram" variant="yellow" size="sm" />
-      <IconButton icon={<FacebookIcon />} label="Facebook" variant="yellow" size="sm" />
-      <IconButton icon={<TelegramIcon />} label="Telegram" variant="yellow" size="sm" />
+      <SocialIconLink href={SOCIAL_LINKS.instagram} label="Instagram"><InstagramIcon /></SocialIconLink>
+      <SocialIconLink href={SOCIAL_LINKS.facebook} label="Facebook"><FacebookIcon /></SocialIconLink>
+      <SocialIconLink href={SOCIAL_LINKS.telegram} label="Telegram"><TelegramIcon /></SocialIconLink>
     </div>
   )
 }

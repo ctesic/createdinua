@@ -1,16 +1,11 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { SOCIAL_LINKS } from '@/lib/social'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
 const CONTACT_EMAIL = 'contact@createdinua.org'
-
-const SOCIAL_LINKS = {
-  instagram: 'https://www.instagram.com/created.in.ukraine',
-  facebook: 'https://www.facebook.com/createdinua',
-  telegram: 'https://t.me/createdinUkraine',
-} as const
 
 const InstagramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
