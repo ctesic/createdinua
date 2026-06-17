@@ -161,9 +161,6 @@ export default async function AboutPage({ params }: Props) {
                 <h1 className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-5xl)] leading-[var(--line-height-5xl)] text-[var(--color-text-primary)]">
                   {t('title')}
                 </h1>
-                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-text-secondary)]">
-                  kozyrievas@gmail.com
-                </p>
               </div>
 
               {/* Body */}

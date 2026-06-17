@@ -16,5 +16,6 @@ export const routing = defineRouting({
     '/catalog': '/catalog',
     '/movie/[slug]': '/movie/[slug]',
     '/about': '/about',
+    '/contact': '/contact',
   },
 })

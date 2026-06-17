@@ -9,6 +9,7 @@
     "movies": "Movies",
     "catalog": "Catalog",
     "about": "About Us",
+    "contact": "Contact",
     "siteTitle": "Created in Ukraine",
     "siteTagline": "Ukrainian cinema in Israel",
     "hashtag": "#morethancinema"
@@ -62,6 +63,11 @@
   },
   "about": {
     "title": "Ukrainian Cinema in Israel"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "For collaboration, partnership, and press inquiries, write to us:",
+    "social": "Follow us"
   },
   "stats": {
     "films": "modern Ukrainian films",

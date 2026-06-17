@@ -72,6 +72,7 @@ export function Header() {
     { href: '/movies' as const, label: t('movies') },
     { href: '/about' as const, label: t('about') },
     { href: '/schedule' as const, label: t('schedule') },
+    { href: '/contact' as const, label: t('contact') },
   ]
 
   return (

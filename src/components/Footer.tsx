@@ -38,6 +38,7 @@ const navItems = [
   { href: '/schedule' as const, labelKey: 'schedule' as const },
   { href: '/about' as const, labelKey: 'about' as const },
   { href: '/catalog' as const, labelKey: 'catalog' as const },
+  { href: '/contact' as const, labelKey: 'contact' as const },
 ]
 
 export async function Footer({ locale }: Props) {
