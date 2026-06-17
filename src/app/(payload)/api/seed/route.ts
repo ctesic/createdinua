@@ -389,8 +389,8 @@ export async function POST(request: Request) {
         heroTagline: 'Українське кіно в Ізраїлі',
         socialLinks: {
           facebook: 'https://www.facebook.com/createdinua',
-          telegram: 'https://t.me/createdinua',
-          instagram: 'https://www.instagram.com/createdinua',
+          telegram: 'https://t.me/createdinUkraine',
+          instagram: 'https://www.instagram.com/created.in.ukraine',
         },
         stats: [
           { value: '50+', label: 'сучасних українських фільмів' },

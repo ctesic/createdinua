@@ -9,7 +9,7 @@ const CONTACT_EMAIL = 'contact@createdinua.org'
 const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/created.in.ukraine',
   facebook: 'https://www.facebook.com/createdinua',
-  telegram: 'https://t.me/createdinua',
+  telegram: 'https://t.me/createdinUkraine',
 } as const
 
 const InstagramIcon = () => (
