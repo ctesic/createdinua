@@ -8,6 +8,7 @@ import { Button } from '@/components/Button'
 import { HeroSlider } from '@/components/HeroSlider'
 import { ImageGrid } from '@/components/ImageGrid'
 import { MovieCard } from '@/components/MovieCard'
+import { PromoBanner } from '@/components/PromoBanner'
 import type { Locale } from '@/i18n/routing'
 
 type Props = {
@@ -34,6 +35,13 @@ export default async function HomePage({ params }: Props) {
           type={(announcement.type as 'info' | 'warning' | 'urgent') || 'info'}
         />
       )}
+
+      {/* Section — Promo banner */}
+      <section className="w-full">
+        <div className="max-w-[1600px] mx-auto px-[var(--container-side-paddings)] pt-[var(--container-side-paddings)]">
+          <PromoBanner locale={locale} alt="KUZMA — Israel coming soon" />
+        </div>
+      </section>
 
       {/* Section — Featured */}
       {featuredMovies.length > 0 && (
