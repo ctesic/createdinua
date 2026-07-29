@@ -39,7 +39,7 @@ export default async function HomePage({ params }: Props) {
       {/* Section — Promo banner */}
       <section className="w-full">
         <div className="max-w-[1600px] mx-auto px-[var(--container-side-paddings)] pt-[var(--container-side-paddings)]">
-          <PromoBanner locale={locale} alt="KUZMA — Israel coming soon" />
+          <PromoBanner alt="KUZMA — Israel coming soon" />
         </div>
       </section>
 

@@ -1,19 +1,12 @@
 import Image from 'next/image'
 
-const banners: Record<string, string> = {
-  uk: '/images/kuzma/kuzma-16x9-Israel-uk.jpg',
-  en: '/images/kuzma/kuzma-16x9-Israel-en.jpg',
-  he: '/images/kuzma/kuzma-16x9-Israel-he.jpg',
-}
+const src = '/images/kuzma/kuzma-16x9-Israel-en.jpg'
 
 type Props = {
-  locale: string
   alt: string
 }
 
-export function PromoBanner({ locale, alt }: Props) {
-  const src = banners[locale] || banners.en
-
+export function PromoBanner({ alt }: Props) {
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[var(--radius-xl)]">
       <Image
