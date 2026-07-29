@@ -139,7 +139,7 @@ export default async function MoviePage({ params }: Props) {
         <div className="max-w-[1440px] w-full md:px-[var(--container-side-paddings)] md:py-[var(--spacing-10)]">
           <div className="bg-[var(--color-background)] md:rounded-[32px] overflow-hidden w-full">
             {/* Trailer / Video embed */}
-            <div className="aspect-[21/9] bg-[var(--color-border)] w-full">
+            <div className="aspect-video bg-[var(--color-border)] w-full">
               {embedUrl ? (
                 <TrailerPlayer
                   embedUrl={embedUrl}
