@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-const src = '/images/kuzma/kuzma-16x9-Israel-en.jpg'
+const src = '/images/kuzma/kuzma-coming-soon.webp'
 
 type Props = {
   alt: string
