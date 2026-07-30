@@ -69,8 +69,10 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
       <div className={`border border-[var(--color-border)] overflow-hidden p-[var(--spacing-4)] md:px-[var(--spacing-6)] md:py-[var(--spacing-5)] rounded-[var(--radius-xl)] ${isCancelled ? 'opacity-60' : ''}`}>
         {/* Desktop: single row */}
         <div className="hidden md:flex gap-2 items-start">
-          <div className="flex flex-col items-start w-[128px] shrink-0 whitespace-nowrap">
-            <p className={`font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-primary)] ${isCancelled ? 'line-through' : ''}`}>
+          {/* 144px fits the longest localised date — English months such as
+              "September 30" overflowed the old 128px column. */}
+          <div className="flex flex-col items-start w-[144px] shrink-0 whitespace-nowrap">
+            <p className={`font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-primary)] ${isCancelled ? 'line-through' : ''}`}>
               {date}
             </p>
             <p className="font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">

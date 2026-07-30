@@ -116,6 +116,18 @@ export async function Footer({ locale }: Props) {
           ))}
         </nav>
       </div>
+
+      {/* Credit — deliberately quiet */}
+      <div className="flex justify-center md:justify-end px-[var(--spacing-10)] pb-[var(--spacing-6)]">
+        <a
+          href="https://www.linkedin.com/in/kisets/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[length:var(--text-xs)] leading-[var(--line-height-xs)] text-[var(--color-text-muted)] opacity-50 hover:opacity-90 transition-opacity"
+        >
+          design + development: @kisets
+        </a>
+      </div>
     </footer>
   )
 }
