@@ -8,7 +8,6 @@ import { Button } from '@/components/Button'
 import { HeroSlider } from '@/components/HeroSlider'
 import { ImageGrid } from '@/components/ImageGrid'
 import { MovieCard } from '@/components/MovieCard'
-import { PromoBanner } from '@/components/PromoBanner'
 import type { Locale } from '@/i18n/routing'
 
 type Props = {
@@ -35,13 +34,6 @@ export default async function HomePage({ params }: Props) {
           type={(announcement.type as 'info' | 'warning' | 'urgent') || 'info'}
         />
       )}
-
-      {/* Section — Promo banner */}
-      <section className="w-full">
-        <div className="max-w-[1600px] mx-auto px-[var(--container-side-paddings)] pt-[var(--container-side-paddings)]">
-          <PromoBanner alt="KUZMA — Israel coming soon" />
-        </div>
-      </section>
 
       {/* Section — Featured */}
       {featuredMovies.length > 0 && (
@@ -73,7 +65,7 @@ export default async function HomePage({ params }: Props) {
               <h2 className="flex-1 font-[family-name:var(--font-heading)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] font-[number:var(--font-weight-medium)] text-[var(--color-text-primary)]">
                 {t('pastEvents.title')}
               </h2>
-              <Link href="/schedule">
+              <Link href="/movies">
                 <Button>{t('pastEvents.allEvents')}</Button>
               </Link>
             </div>
