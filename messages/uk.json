@@ -59,7 +59,9 @@
     "directorLabel": "Режисер:",
     "genreLabel": "Жанр:",
     "languageLabel": "Мова:",
-    "ageRestrictionLabel": "Вікові обмеження:"
+    "ageRestrictionLabel": "Вікові обмеження:",
+    "aboutTitle": "Про фільм",
+    "stillsTitle": "Кадри"
   },
   "about": {
     "title": "Українське кіно в Ізраїлі"
@@ -83,7 +85,11 @@
     "learnMore": "Дізнатись більше",
     "back": "Назад",
     "loading": "Завантаження...",
-    "directions": "Маршрут"
+    "directions": "Маршрут",
+    "close": "Закрити",
+    "previous": "Попереднє",
+    "next": "Наступне",
+    "image": "Зображення"
   },
   "error": {
     "notFound": "Сторінку не знайдено",

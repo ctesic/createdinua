@@ -125,6 +125,7 @@
   /* ─── Layout ─── */
   --max-width-content: 1200px;
   --max-width-narrow: 768px;
+  --movie-container-max: 1320px;
 
   /* ─── Responsive Tokens (defaults) ─── */
   /* container-side-paddings: default=5(20px), md=8(32px), lg=10(40px) */

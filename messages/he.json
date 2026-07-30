@@ -59,7 +59,9 @@
     "directorLabel": "במאי:",
     "genreLabel": "ז׳אנר:",
     "languageLabel": "שפה:",
-    "ageRestrictionLabel": "הגבלת גיל:"
+    "ageRestrictionLabel": "הגבלת גיל:",
+    "aboutTitle": "על הסרט",
+    "stillsTitle": "תמונות מהסרט"
   },
   "about": {
     "title": "קולנוע אוקראיני בישראל"
@@ -83,7 +85,11 @@
     "learnMore": "למידע נוסף",
     "back": "חזרה",
     "loading": "טוען...",
-    "directions": "הוראות הגעה"
+    "directions": "הוראות הגעה",
+    "close": "סגור",
+    "previous": "הקודם",
+    "next": "הבא",
+    "image": "תמונה"
   },
   "error": {
     "notFound": "הדף לא נמצא",

@@ -59,7 +59,9 @@
     "directorLabel": "Director:",
     "genreLabel": "Genre:",
     "languageLabel": "Language:",
-    "ageRestrictionLabel": "Age restriction:"
+    "ageRestrictionLabel": "Age restriction:",
+    "aboutTitle": "About the film",
+    "stillsTitle": "Stills"
   },
   "about": {
     "title": "Ukrainian Cinema in Israel"
@@ -83,7 +85,11 @@
     "learnMore": "Learn more",
     "back": "Back",
     "loading": "Loading...",
-    "directions": "Directions"
+    "directions": "Directions",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "image": "Image"
   },
   "error": {
     "notFound": "Page not found",

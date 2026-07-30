@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { getMovieBySlug, getScreeningsForMovie } from '@/lib/payload'
 import { MovieScreenings } from '@/components/MovieScreenings'
 import { TrailerPlayer } from '@/components/TrailerPlayer'
+import { StillsGallery, type Still } from '@/components/StillsGallery'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { rtlLocales, type Locale } from '@/i18n/routing'
 
@@ -113,6 +114,16 @@ export default async function MoviePage({ params }: Props) {
     ? movie.posterVertical.url
     : null
 
+  const stills: Still[] = (Array.isArray(movie.stills) ? movie.stills : [])
+    .filter((s: any) => typeof s === 'object' && s?.url)
+    .map((s: any) => ({
+      id: s.id,
+      url: s.url,
+      alt: s.alt || undefined,
+      width: s.width || undefined,
+      height: s.height || undefined,
+    }))
+
   const plainDescription = movie.description ? richTextToPlain(movie.description).trim() : undefined
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -136,7 +147,7 @@ export default async function MoviePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="flex flex-col items-center w-full">
-        <div className="max-w-[1440px] w-full md:px-[var(--container-side-paddings)] md:py-[var(--spacing-10)]">
+        <div className="max-w-[var(--movie-container-max)] w-full md:px-[var(--container-side-paddings)] md:py-[var(--spacing-10)]">
           <div className="bg-[var(--color-background)] md:rounded-[32px] overflow-hidden w-full">
             {/* Trailer / Video embed */}
             <div className="aspect-video bg-[var(--color-border)] w-full">
@@ -153,7 +164,7 @@ export default async function MoviePage({ params }: Props) {
                     alt={movie.title as string}
                     fill
                     priority
-                    sizes="(max-width: 1440px) 100vw, 1440px"
+                    sizes="(max-width: 1320px) 100vw, 1320px"
                     className="object-cover"
                   />
                 </div>
@@ -185,11 +196,25 @@ export default async function MoviePage({ params }: Props) {
               }}
             />
 
-            {/* About section */}
-            <div className="flex flex-col items-start pb-[var(--spacing-16)] pt-[var(--spacing-8)] px-[var(--spacing-5)] md:px-[var(--spacing-8)]">
-              <div className="flex flex-col md:grid md:grid-cols-[2fr_1fr] gap-6 w-full">
-                {/* Info — on top for mobile, right column for desktop */}
-                <div className="order-first md:order-last flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] self-start">
+          </div>
+
+          {/* About — sits on the page background, outside the white card */}
+          <div className="flex flex-col gap-[var(--spacing-10)] pb-[var(--spacing-16)] pt-[var(--spacing-8)] md:pt-[var(--spacing-10)] px-[var(--spacing-5)] md:px-0">
+            <div className="flex flex-col md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-[var(--spacing-8)] lg:gap-[var(--spacing-10)] w-full">
+              {/* Info — poster on top, then the facts */}
+              <div className="flex flex-col gap-[var(--spacing-5)] self-start">
+                {verticalUrl && (
+                  <div className="relative w-full aspect-[2/3] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-border-subtle)]">
+                    <Image
+                      src={verticalUrl}
+                      alt={movie.title as string}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
                   {(movie.country || movie.year) && (
                     <p className="text-[var(--color-text-primary)]">
                       {[movie.country, movie.year].filter(Boolean).join(' ')}
@@ -226,15 +251,37 @@ export default async function MoviePage({ params }: Props) {
                     </div>
                   )}
                 </div>
-
-                {/* Description text */}
-                {movie.description && (
-                  <div dir={dir} className="max-w-[600px] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] self-start">
-                    <RichText className="rich-text" data={movie.description} />
-                  </div>
-                )}
               </div>
+
+              {/* Description */}
+              {movie.description && (
+                <div dir={dir} className="flex flex-col gap-[var(--spacing-4)] self-start text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
+                  <h2 className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+                    {t('aboutTitle')}
+                  </h2>
+                  <RichText className="rich-text" data={movie.description} />
+                </div>
+              )}
             </div>
+
+            {/* Stills gallery */}
+            {stills.length > 0 && (
+              <div dir={dir} className="flex flex-col gap-[var(--spacing-4)] w-full">
+                <h2 className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
+                  {t('stillsTitle')}
+                </h2>
+                <StillsGallery
+                  stills={stills}
+                  dir={dir}
+                  labels={{
+                    close: tCommon('close'),
+                    previous: tCommon('previous'),
+                    next: tCommon('next'),
+                    image: tCommon('image'),
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

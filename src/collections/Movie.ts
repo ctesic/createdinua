@@ -74,6 +74,15 @@ export const Movie: CollectionConfig = {
       },
     },
     {
+      name: 'stills',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true,
+      admin: {
+        description: 'Stills gallery shown on the movie page (opens in a lightbox)',
+      },
+    },
+    {
       name: 'trailerUrl',
       type: 'text',
       admin: {
