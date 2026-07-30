@@ -11,7 +11,9 @@ type Props = {
 /**
  * Silent hero loop. Nothing is requested until the page itself has finished
  * loading, and the video only becomes visible once it can play through, so it
- * never competes with the poster image or stutters on first paint.
+ * never competes with the poster image or stutters on first paint. The same
+ * landscape file serves every breakpoint — on portrait phone screens
+ * object-cover shows the middle of the frame.
  */
 export function HeroVideo({ src, active = true }: Props) {
   const ref = useRef<HTMLVideoElement>(null)
@@ -21,12 +23,8 @@ export function HeroVideo({ src, active = true }: Props) {
   useEffect(() => {
     if (!active || mounted) return
 
-    // Skip where motion is unwanted, data is metered, or the screen is small
-    // enough that the vertical image is the better experience anyway.
-    const skip =
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      !window.matchMedia('(min-width: 768px)').matches
-    if (skip) return
+    // Skip where motion is unwanted or data is metered.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const connection = (navigator as { connection?: { saveData?: boolean; effectiveType?: string } }).connection
     if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '')) return

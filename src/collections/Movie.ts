@@ -95,7 +95,7 @@ export const Movie: CollectionConfig = {
       relationTo: 'videos',
       admin: {
         description:
-          'Homepage hero loop — plays silently over the background image once it has fully downloaded, desktop only. MP4 (H.264), 1920×660, no audio track, ≤5 MB.',
+          'Homepage hero loop — plays silently over the background image once it has fully downloaded. MP4 (H.264) 720p, no audio track, ≤5 MB. Keep the subject centred: on phones only the middle ~38% of the frame is visible.',
       },
     },
     {
