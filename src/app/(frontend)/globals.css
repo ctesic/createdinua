@@ -82,6 +82,149 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ─── Rich Text (Payload / Lexical output) ─── */
+/* Payload's React renderer emits bare semantic tags (p, h1–h6, blockquote,
+   ul/ol with `list-bullet`/`list-number`, li, a, hr) with no styling of their
+   own. Everything below uses logical properties so Hebrew (RTL) mirrors. */
+.rich-text {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  text-wrap: pretty;
+}
+
+/* Baseline rhythm: every block gets breathing room from the one before it. */
+.rich-text > * + * {
+  margin-block-start: var(--spacing-5);
+}
+
+.rich-text > :first-child {
+  margin-block-start: 0;
+}
+
+.rich-text > :last-child {
+  margin-block-end: 0;
+}
+
+/* Headings sit tighter to the text they introduce, looser from what precedes. */
+.rich-text :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.rich-text > :is(h1, h2, h3, h4, h5, h6) + * {
+  margin-block-start: var(--spacing-3);
+}
+
+.rich-text > * + :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-start: var(--spacing-8);
+}
+
+.rich-text h1,
+.rich-text h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.rich-text h3 {
+  font-size: var(--text-xl);
+  line-height: var(--line-height-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.rich-text :is(h4, h5, h6) {
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Quotes: accent rule on the leading edge, tinted panel, slightly quieter text.
+   Mariupol ships no italic face, so weight and color carry the emphasis. */
+.rich-text blockquote {
+  margin-inline: 0;
+  padding: var(--spacing-4) var(--spacing-5);
+  border-inline-start: 3px solid var(--color-primary);
+  border-start-end-radius: var(--radius-md);
+  border-end-end-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+}
+
+.rich-text blockquote > * + * {
+  margin-block-start: var(--spacing-3);
+}
+
+/* Attribution line ("— Name") reads as part of the quote above it. */
+.rich-text > blockquote + p {
+  margin-block-start: var(--spacing-3);
+  color: var(--color-text-secondary);
+}
+
+.rich-text :is(ul, ol) {
+  padding-inline-start: var(--spacing-6);
+}
+
+.rich-text ul,
+.rich-text .list-bullet {
+  list-style: disc;
+}
+
+.rich-text ol,
+.rich-text .list-number {
+  list-style: decimal;
+}
+
+.rich-text li + li,
+.rich-text li > :is(ul, ol) {
+  margin-block-start: var(--spacing-2);
+}
+
+.rich-text li::marker {
+  color: var(--color-text-muted);
+}
+
+.rich-text li.nestedListItem {
+  list-style: none;
+}
+
+.rich-text a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+.rich-text a:hover {
+  color: var(--color-primary-hover);
+}
+
+.rich-text :is(strong, b) {
+  font-weight: var(--font-weight-bold);
+}
+
+.rich-text hr {
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.rich-text > hr {
+  margin-block: var(--spacing-8);
+}
+
+/* Lexical renders an empty line as `<p><br></p>`. With real paragraph spacing
+   in place those would double the gap, so drop them. */
+.rich-text > p:has(> br:only-child) {
+  display: none;
+}
+
+.rich-text :is(img, video) {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
 /* Payload's rich text renderer emits inline `style="text-align:left"` for
    Lexical paragraphs saved with `format: "start"`. That's correct in LTR but
    forces a left-aligned block in RTL locales. Revert it inside any RTL

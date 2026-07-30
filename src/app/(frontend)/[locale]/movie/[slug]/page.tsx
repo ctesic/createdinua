@@ -229,8 +229,8 @@ export default async function MoviePage({ params }: Props) {
 
                 {/* Description text */}
                 {movie.description && (
-                  <div dir={dir} className="max-w-[600px] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-primary)] self-start">
-                    <RichText data={movie.description} />
+                  <div dir={dir} className="max-w-[600px] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] self-start">
+                    <RichText className="rich-text" data={movie.description} />
                   </div>
                 )}
               </div>
