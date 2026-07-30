@@ -78,7 +78,15 @@ export const Movie: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       admin: {
-        description: 'Homepage hero image — used instead of the horizontal poster, on the homepage only',
+        description: 'Homepage hero image, desktop — used instead of the horizontal poster, on the homepage only. Recommended 3040×1040 (~2.9:1) WebP.',
+      },
+    },
+    {
+      name: 'backgroundMobile',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Homepage hero image, mobile (<768px) — used instead of the vertical poster, on the homepage only. Recommended 1200×1800 (2:3) WebP.',
       },
     },
     {

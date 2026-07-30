@@ -50,6 +50,7 @@ export default async function HomePage({ params }: Props) {
                 // The hero uses the dedicated background image; the horizontal
                 // poster is the fallback for movies that don't have one yet.
                 const background = mediaUrl(f.movie.background)
+                const backgroundMobile = mediaUrl(f.movie.backgroundMobile)
                 const horizontal = mediaUrl(f.movie.posterHorizontal)
                 const vertical = mediaUrl(f.movie.posterVertical)
                 return {
@@ -58,7 +59,7 @@ export default async function HomePage({ params }: Props) {
                   genre: f.movie.genre || '',
                   ageRestriction: f.movie.ageRestriction || undefined,
                   posterUrl: background || horizontal || vertical || '',
-                  posterUrlMobile: vertical || background || horizontal || '',
+                  posterUrlMobile: backgroundMobile || vertical || background || horizontal || '',
                   screenings: f.screenings,
                   screeningsLabel: t('hero.screenings'),
                   detailLabel: t('hero.details'),
