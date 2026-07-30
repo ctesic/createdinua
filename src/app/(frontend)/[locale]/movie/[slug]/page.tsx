@@ -209,8 +209,9 @@ export default async function MoviePage({ params }: Props) {
           {/* About — sits on the page background, outside the white card */}
           <div className="flex flex-col gap-[var(--spacing-10)] pb-[var(--spacing-16)] pt-[var(--spacing-8)] md:pt-[var(--spacing-10)] px-[var(--spacing-5)] md:px-0">
             <div className="flex flex-col md:grid md:grid-cols-[312px_minmax(0,1fr)] gap-[var(--spacing-8)] lg:gap-[var(--spacing-10)] w-full">
-              {/* Info — poster on top, then the facts */}
-              <div className="flex flex-col gap-[var(--spacing-6)] self-start">
+              {/* Info — poster on top, then the facts. Sits below the
+                  description on mobile, left of it from md up. */}
+              <div className="order-2 md:order-1 flex flex-col gap-[var(--spacing-6)] self-start">
                 {verticalUrl && (
                   <div className="relative w-full aspect-[2/3] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-border-subtle)]">
                     <Image
@@ -242,7 +243,7 @@ export default async function MoviePage({ params }: Props) {
 
               {/* Description */}
               {movie.description && (
-                <div dir={dir} className="flex flex-col gap-[var(--spacing-4)] self-start text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
+                <div dir={dir} className="order-1 md:order-2 flex flex-col gap-[var(--spacing-4)] self-start text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
                   <h2 className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-2xl)] leading-[var(--line-height-2xl)] text-[var(--color-text-primary)]">
                     {t('aboutTitle')}
                   </h2>
