@@ -74,6 +74,14 @@ export const Movie: CollectionConfig = {
       },
     },
     {
+      name: 'background',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Homepage hero image — used instead of the horizontal poster, on the homepage only',
+      },
+    },
+    {
       name: 'stills',
       type: 'upload',
       relationTo: 'media',

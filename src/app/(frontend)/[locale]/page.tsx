@@ -14,6 +14,12 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
+function mediaUrl(media: unknown): string | null {
+  return typeof media === 'object' && media !== null && typeof (media as { url?: unknown }).url === 'string'
+    ? (media as { url: string }).url
+    : null
+}
+
 export default async function HomePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
@@ -40,17 +46,24 @@ export default async function HomePage({ params }: Props) {
         <section className="w-full">
           <div className="max-w-[1600px] mx-auto p-[var(--container-side-paddings)]">
             <HeroSlider
-              slides={featuredMovies.map((f) => ({
-                slug: f.movie.slug,
-                title: f.movie.title,
-                genre: f.movie.genre || '',
-                ageRestriction: f.movie.ageRestriction || undefined,
-                posterUrl: typeof f.movie.posterHorizontal === 'object' && f.movie.posterHorizontal?.url ? f.movie.posterHorizontal.url : (typeof f.movie.posterVertical === 'object' && f.movie.posterVertical?.url ? f.movie.posterVertical.url : ''),
-                posterUrlMobile: typeof f.movie.posterVertical === 'object' && f.movie.posterVertical?.url ? f.movie.posterVertical.url : (typeof f.movie.posterHorizontal === 'object' && f.movie.posterHorizontal?.url ? f.movie.posterHorizontal.url : ''),
-                screenings: f.screenings,
-                screeningsLabel: t('hero.screenings'),
-                detailLabel: t('hero.details'),
-              }))}
+              slides={featuredMovies.map((f) => {
+                // The hero uses the dedicated background image; the horizontal
+                // poster is the fallback for movies that don't have one yet.
+                const background = mediaUrl(f.movie.background)
+                const horizontal = mediaUrl(f.movie.posterHorizontal)
+                const vertical = mediaUrl(f.movie.posterVertical)
+                return {
+                  slug: f.movie.slug,
+                  title: f.movie.title,
+                  genre: f.movie.genre || '',
+                  ageRestriction: f.movie.ageRestriction || undefined,
+                  posterUrl: background || horizontal || vertical || '',
+                  posterUrlMobile: vertical || background || horizontal || '',
+                  screenings: f.screenings,
+                  screeningsLabel: t('hero.screenings'),
+                  detailLabel: t('hero.details'),
+                }
+              })}
             />
           </div>
         </section>
