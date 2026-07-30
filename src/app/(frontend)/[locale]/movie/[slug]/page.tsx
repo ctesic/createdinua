@@ -192,6 +192,7 @@ export default async function MoviePage({ params }: Props) {
               screenings={screenings}
               movieTitle={movie.title as string}
               movieSlug={movie.slug as string}
+              ageRestriction={(movie.ageRestriction as string) || undefined}
               labels={{
                 title: t('screenings'),
                 upcoming: t('upcoming'),
