@@ -49,10 +49,11 @@ export function MovieScreenings({ screenings, movieTitle, movieSlug, ageRestrict
 
   return (
     <div className="flex flex-col gap-[var(--spacing-4)] px-[var(--spacing-5)] py-[var(--spacing-8)] md:px-[var(--spacing-8)]">
-      {/* Title centred in the row, age badge parked on the trailing edge. The
-          side padding keeps long titles from running under it. */}
-      <div className="relative flex items-center justify-center px-[var(--spacing-12)]">
-        <h1 className="text-center font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] md:font-[number:var(--font-weight-bold)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] md:text-[length:var(--text-4xl)] md:leading-[var(--line-height-4xl)] lg:text-[length:var(--text-5xl)] lg:leading-[var(--line-height-5xl)] text-[var(--color-text-primary)]">
+      {/* Title runs from the leading edge on mobile and centres from md up;
+          the age badge is parked on the trailing edge either way, with side
+          padding keeping long titles clear of it. */}
+      <div className="relative flex items-center justify-start md:justify-center pe-[var(--spacing-12)] md:ps-[var(--spacing-12)]">
+        <h1 className="text-start md:text-center font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] md:font-[number:var(--font-weight-bold)] text-[length:var(--text-3xl)] leading-[var(--line-height-3xl)] md:text-[length:var(--text-4xl)] md:leading-[var(--line-height-4xl)] lg:text-[length:var(--text-5xl)] lg:leading-[var(--line-height-5xl)] text-[var(--color-text-primary)]">
           {movieTitle}
         </h1>
         {ageRestriction && (
