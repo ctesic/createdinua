@@ -89,7 +89,8 @@
     "close": "סגור",
     "previous": "הקודם",
     "next": "הבא",
-    "image": "תמונה"
+    "image": "תמונה",
+    "hall": "אולם"
   },
   "error": {
     "notFound": "הדף לא נמצא",

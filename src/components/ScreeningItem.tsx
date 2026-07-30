@@ -14,6 +14,8 @@ type Props = {
   address?: string
   googleMapsUrl?: string
   mapQuery?: string
+  hall?: string
+  hallLabel?: string
   note?: string
   ticketUrl?: string | null
   ticketLabel: string
@@ -28,9 +30,11 @@ type Props = {
   trackingLocation?: 'movie-page' | 'schedule'
 }
 
-export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, cancelledLabel = 'Скасовано', isCancelled = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions', trackingLocation }: Props) {
+export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl, mapQuery, hall, hallLabel, note, ticketUrl, ticketLabel, soldOutLabel = 'Продано', soldOut = false, cancelledLabel = 'Скасовано', isCancelled = false, isPast = false, movieTitle, movieSlug, directionsLabel = 'Directions', trackingLocation }: Props) {
   const [showLocation, setShowLocation] = useState(false)
   const showButton = !isPast && !isCancelled
+  // "Зал 5" — the label is localised, the field holds just the number.
+  const hallText = hall ? [hallLabel, hall].filter(Boolean).join(' ') : null
 
   const buttonEl = isCancelled ? (
     <Button disabled className="w-full md:w-auto">{cancelledLabel}</Button>
@@ -85,6 +89,12 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
             )}
             <div className="flex items-start gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)] whitespace-nowrap">
               {locationButton}
+              {hallText && (
+                <>
+                  <span>•</span>
+                  <span>{hallText}</span>
+                </>
+              )}
               {note && (
                 <>
                   <span>•</span>
@@ -122,6 +132,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
           {/* Venue + notes */}
           <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
             {locationButton}
+            {hallText && <p>{hallText}</p>}
             {note && <p>{note}</p>}
           </div>
 

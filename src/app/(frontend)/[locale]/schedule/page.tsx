@@ -55,6 +55,7 @@ export default async function SchedulePage({ params }: Props) {
       address: place?.address || undefined,
       googleMapsUrl: place?.googleMapsUrl || undefined,
       mapQuery: hePlace ? [hePlace.name, hePlace.address, hePlace.city].filter(Boolean).join(', ') : undefined,
+      hall: screening.hall || undefined,
       note: screening.notes || undefined,
       ticketUrl: screening.ticketUrl || null,
       movieTitle: movie?.title || '',
@@ -88,6 +89,8 @@ export default async function SchedulePage({ params }: Props) {
                       address={s.address}
                       googleMapsUrl={s.googleMapsUrl}
                       mapQuery={s.mapQuery}
+                      hall={s.hall}
+                      hallLabel={tCommon('hall')}
                       note={s.note}
                       ticketUrl={s.isCancelled ? null : s.ticketUrl}
                       ticketLabel={t('buyTicket')}

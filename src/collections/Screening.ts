@@ -63,7 +63,7 @@ export const Screening: CollectionConfig = {
       name: 'hall',
       type: 'text',
       admin: {
-        description: 'Screen/hall number, e.g. "2" or "Hall 5"',
+        description: 'Screen/hall number only, e.g. "2" — the localised "Hall" label is added automatically',
       },
     },
     {

@@ -13,6 +13,7 @@ type Screening = {
   address?: string
   googleMapsUrl?: string
   mapQuery?: string
+  hall?: string
   note?: string
   ticketUrl?: string | null
   isPast: boolean
@@ -33,6 +34,7 @@ type Props = {
     noUpcomingScreenings: string
     noPastScreenings: string
     directions: string
+    hall: string
   }
 }
 
@@ -75,6 +77,8 @@ export function MovieScreenings({ screenings, movieTitle, movieSlug, labels }: P
               address={s.address}
               googleMapsUrl={s.googleMapsUrl}
               mapQuery={s.mapQuery}
+              hall={s.hall}
+              hallLabel={labels.hall}
               note={s.note}
               ticketUrl={s.ticketUrl}
               ticketLabel={labels.tickets}

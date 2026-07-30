@@ -98,6 +98,7 @@ export default async function MoviePage({ params }: Props) {
       address: place?.address || undefined,
       googleMapsUrl: place?.googleMapsUrl || undefined,
       mapQuery: hePlace ? [hePlace.name, hePlace.address, hePlace.city].filter(Boolean).join(', ') : undefined,
+      hall: s.hall || undefined,
       note: s.notes || undefined,
       ticketUrl: s.ticketUrl || null,
       isPast,
@@ -201,6 +202,7 @@ export default async function MoviePage({ params }: Props) {
                 noUpcomingScreenings: t('noUpcomingScreenings'),
                 noPastScreenings: t('noPastScreenings'),
                 directions: tCommon('directions'),
+                hall: tCommon('hall'),
               }}
             />
 

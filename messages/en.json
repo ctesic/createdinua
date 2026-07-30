@@ -89,7 +89,8 @@
     "close": "Close",
     "previous": "Previous",
     "next": "Next",
-    "image": "Image"
+    "image": "Image",
+    "hall": "Hall"
   },
   "error": {
     "notFound": "Page not found",
