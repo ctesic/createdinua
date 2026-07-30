@@ -60,6 +60,7 @@ export default async function HomePage({ params }: Props) {
                   ageRestriction: f.movie.ageRestriction || undefined,
                   posterUrl: background || horizontal || vertical || '',
                   posterUrlMobile: backgroundMobile || vertical || background || horizontal || '',
+                  videoUrl: mediaUrl(f.movie.backgroundVideo) || undefined,
                   screenings: f.screenings,
                   screeningsLabel: t('hero.screenings'),
                   detailLabel: t('hero.details'),

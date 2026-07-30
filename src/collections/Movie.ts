@@ -90,6 +90,15 @@ export const Movie: CollectionConfig = {
       },
     },
     {
+      name: 'backgroundVideo',
+      type: 'upload',
+      relationTo: 'videos',
+      admin: {
+        description:
+          'Homepage hero loop — plays silently over the background image once it has fully downloaded, desktop only. MP4 (H.264), 1920×660, no audio track, ≤5 MB.',
+      },
+    },
+    {
       name: 'stills',
       type: 'upload',
       relationTo: 'media',

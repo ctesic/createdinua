@@ -10,6 +10,7 @@ import { Movie } from '@/collections/Movie'
 import { Screening } from '@/collections/Screening'
 import { Place } from '@/collections/Place'
 import { Media } from '@/collections/Media'
+import { Video } from '@/collections/Video'
 import { Users } from '@/collections/Users'
 import { Announcement } from '@/globals/Announcement'
 import { SiteSettings } from '@/globals/SiteSettings'
@@ -19,7 +20,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   editor: lexicalEditor(),
-  collections: [Users, Movie, Screening, Place, Media],
+  collections: [Users, Movie, Screening, Place, Media, Video],
   globals: [Announcement, SiteSettings],
   secret: process.env.PAYLOAD_SECRET || 'default-secret',
   typescript: {
@@ -46,7 +47,10 @@ export default buildConfig({
     ...(process.env.BLOB_READ_WRITE_TOKEN
       ? [
           vercelBlobStorage({
-            collections: { media: true },
+            collections: { media: true, videos: true },
+            // Uploads go straight from the browser to Blob storage, so video
+            // files aren't capped by Vercel's 4.5 MB serverless body limit.
+            clientUploads: true,
             token: process.env.BLOB_READ_WRITE_TOKEN,
           }),
         ]

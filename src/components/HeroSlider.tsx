@@ -40,7 +40,7 @@ export function HeroSlider({ slides }: Props) {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Slides container */}
-      <div className="relative min-h-[520px]">
+      <div className="relative min-h-[580px]">
         {slides.map((slide, i) => (
           <div
             key={slide.slug}
@@ -51,7 +51,7 @@ export function HeroSlider({ slides }: Props) {
                 : 'opacity-0 pointer-events-none'
             } ${i === 0 ? 'relative' : 'absolute inset-0'}`}
           >
-            <HeroMovie {...slide} priority={i === 0} />
+            <HeroMovie {...slide} priority={i === 0} active={i === active} />
           </div>
         ))}
 

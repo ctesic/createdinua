@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation'
+import { HeroVideo } from './HeroVideo'
 import { Button } from './Button'
 import { ScreeningChip } from './ScreeningChip'
 
@@ -17,17 +18,20 @@ type Props = {
   ageRestriction?: string
   posterUrl: string
   posterUrlMobile?: string
+  videoUrl?: string
   screenings: Screening[]
   detailLabel: string
   screeningsLabel: string
   className?: string
   priority?: boolean
+  /** False for slides parked behind the visible one. */
+  active?: boolean
 }
 
-export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, posterUrlMobile, screenings, detailLabel, screeningsLabel, className, priority = false }: Props) {
+export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, posterUrlMobile, videoUrl, screenings, detailLabel, screeningsLabel, className, priority = false, active = true }: Props) {
   return (
     <div
-      className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[520px] overflow-hidden pt-[192px] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pt-[var(--spacing-24)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
+      className={`relative flex flex-col gap-[var(--spacing-4)] items-start justify-end min-h-[580px] overflow-hidden pt-[192px] pb-[var(--spacing-5)] px-[var(--spacing-5)] md:pt-[var(--spacing-24)] md:pb-[var(--spacing-8)] md:px-[var(--spacing-8)] rounded-[var(--radius-2xl)] w-full ${className ?? ''}`}
     >
       {/* Background image + gradient */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[var(--radius-2xl)]">
@@ -44,6 +48,7 @@ export function HeroMovie({ slug, title, genre, ageRestriction, posterUrl, poste
             />
           </picture>
         )}
+        {videoUrl && <HeroVideo src={videoUrl} active={active} />}
         <div
           className="absolute inset-0 rounded-[var(--radius-2xl)]"
           style={{ backgroundImage: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.8) 100%)' }}
