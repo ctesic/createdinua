@@ -124,6 +124,14 @@ export default async function MoviePage({ params }: Props) {
       height: s.height || undefined,
     }))
 
+  const facts = [
+    { label: t('directorLabel'), value: movie.director },
+    { label: t('producerLabel'), value: movie.producer },
+    { label: t('genreLabel'), value: movie.genre },
+    { label: t('languageLabel'), value: movie.language },
+    { label: t('ageRestrictionLabel'), value: movie.ageRestriction },
+  ].filter((f): f is { label: string; value: string } => Boolean(f.value))
+
   const plainDescription = movie.description ? richTextToPlain(movie.description).trim() : undefined
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -200,56 +208,35 @@ export default async function MoviePage({ params }: Props) {
 
           {/* About — sits on the page background, outside the white card */}
           <div className="flex flex-col gap-[var(--spacing-10)] pb-[var(--spacing-16)] pt-[var(--spacing-8)] md:pt-[var(--spacing-10)] px-[var(--spacing-5)] md:px-0">
-            <div className="flex flex-col md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-[var(--spacing-8)] lg:gap-[var(--spacing-10)] w-full">
+            <div className="flex flex-col md:grid md:grid-cols-[312px_minmax(0,1fr)] gap-[var(--spacing-8)] lg:gap-[var(--spacing-10)] w-full">
               {/* Info — poster on top, then the facts */}
-              <div className="flex flex-col gap-[var(--spacing-5)] self-start">
+              <div className="flex flex-col gap-[var(--spacing-6)] self-start">
                 {verticalUrl && (
                   <div className="relative w-full aspect-[2/3] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-border-subtle)]">
                     <Image
                       src={verticalUrl}
                       alt={movie.title as string}
                       fill
-                      sizes="(max-width: 768px) 100vw, 420px"
+                      sizes="(max-width: 768px) 100vw, 312px"
                       className="object-cover"
                     />
                   </div>
                 )}
-                <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
+                <div className="flex flex-col gap-[var(--spacing-5)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)]">
                   {(movie.country || movie.year) && (
                     <p className="text-[var(--color-text-primary)]">
                       {[movie.country, movie.year].filter(Boolean).join(' ')}
                     </p>
                   )}
-                  {movie.director && (
-                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
-                      <p className="text-[var(--color-text-primary)]">{t('directorLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.director}</p>
+                  {/* Label above, value below in bold */}
+                  {facts.map(({ label, value }) => (
+                    <div key={label} className="flex flex-col gap-[var(--spacing-2)]">
+                      <p className="text-[var(--color-text-secondary)]">{label}</p>
+                      <p className="font-[number:var(--font-weight-bold)] text-[var(--color-text-primary)] min-w-0 break-words">
+                        {value}
+                      </p>
                     </div>
-                  )}
-                  {movie.producer && (
-                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
-                      <p className="text-[var(--color-text-primary)]">{t('producerLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.producer}</p>
-                    </div>
-                  )}
-                  {movie.genre && (
-                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
-                      <p className="text-[var(--color-text-primary)]">{t('genreLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.genre}</p>
-                    </div>
-                  )}
-                  {movie.language && (
-                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
-                      <p className="text-[var(--color-text-primary)]">{t('languageLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.language}</p>
-                    </div>
-                  )}
-                  {movie.ageRestriction && (
-                    <div className="flex flex-wrap gap-x-[var(--spacing-1)] items-baseline">
-                      <p className="text-[var(--color-text-primary)]">{t('ageRestrictionLabel')}</p>
-                      <p className="text-[var(--color-text-secondary)] min-w-0 break-words">{movie.ageRestriction}</p>
-                    </div>
-                  )}
+                  ))}
                 </div>
               </div>
 
