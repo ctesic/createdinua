@@ -147,7 +147,9 @@ h1, h2, h3, h4, h5, h6 {
   border-inline-start: 3px solid var(--color-primary);
   border-start-end-radius: var(--radius-md);
   border-end-end-radius: var(--radius-md);
-  background-color: var(--color-surface);
+  /* A wash of the accent rule's colour, so the panel reads both on white cards
+     and on the grey page background. */
+  background-color: color-mix(in srgb, var(--color-primary) 7%, transparent);
   color: var(--color-text-secondary);
 }
 
@@ -226,9 +228,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Payload's rich text renderer emits inline `style="text-align:left"` for
-   Lexical paragraphs saved with `format: "start"`. That's correct in LTR but
-   forces a left-aligned block in RTL locales. Revert it inside any RTL
-   container so short lines end flush-right as expected. */
-[dir="rtl"] p[style*="text-align:left"] {
+   Lexical blocks saved with `format: "start"` — paragraphs, blockquotes,
+   headings alike. That's correct in LTR but forces a left-aligned block in RTL
+   locales. Revert it inside any RTL container so short lines end flush-right
+   as expected. */
+[dir="rtl"] [style*="text-align:left"] {
   text-align: start !important;
 }
