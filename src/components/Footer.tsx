@@ -80,7 +80,7 @@ export async function Footer({ locale }: Props) {
       <div className="h-[2px] bg-[var(--color-accent)]" />
 
       {/* Desktop */}
-      <div className="hidden md:flex items-center justify-between gap-[var(--spacing-3)] px-[var(--spacing-10)] py-[var(--spacing-8)]">
+      <div className="hidden md:flex items-center justify-between gap-[var(--spacing-3)] px-[var(--spacing-10)] pt-[var(--spacing-8)] pb-[var(--spacing-4)]">
         {/* Left: logo + brand + social */}
         <div className="flex items-center gap-[var(--spacing-3)]">
           <Logo />
@@ -118,7 +118,7 @@ export async function Footer({ locale }: Props) {
       </div>
 
       {/* Credit — deliberately quiet */}
-      <div className="flex justify-center md:justify-end px-[var(--spacing-10)] pb-[var(--spacing-6)]">
+      <div className="flex justify-center md:justify-end px-[var(--spacing-10)] md:pe-[var(--spacing-12)] pb-[var(--spacing-6)]">
         <a
           href="https://www.linkedin.com/in/kisets/"
           target="_blank"
