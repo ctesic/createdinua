@@ -59,7 +59,7 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
   )
 
   const locationButton = (
-    <Button variant="link" onClick={() => setShowLocation(true)}>
+    <Button variant="link" className="self-start" onClick={() => setShowLocation(true)}>
       {venue}
     </Button>
   )
@@ -89,19 +89,19 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
                 {city}
               </p>
             )}
-            <div className="flex items-start gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)] whitespace-nowrap">
+            <div className="flex flex-wrap items-start gap-x-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
               {locationButton}
               {hallText && (
-                <>
-                  <span>•</span>
-                  <span>{hallText}</span>
-                </>
+                <span className="inline-flex min-w-0 max-w-full items-start gap-[var(--spacing-1)]">
+                  <span aria-hidden="true" className="shrink-0">•</span>
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{hallText}</span>
+                </span>
               )}
               {note && (
-                <>
-                  <span>•</span>
-                  <span>{note}</span>
-                </>
+                <span className="inline-flex min-w-0 max-w-full items-start gap-[var(--spacing-1)]">
+                  <span aria-hidden="true" className="shrink-0">•</span>
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{note}</span>
+                </span>
               )}
             </div>
           </div>
@@ -134,8 +134,8 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
           {/* Venue + notes */}
           <div className="flex flex-col gap-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
             {locationButton}
-            {hallText && <p>{hallText}</p>}
-            {note && <p>{note}</p>}
+            {hallText && <p className="[overflow-wrap:anywhere]">{hallText}</p>}
+            {note && <p className="[overflow-wrap:anywhere]">{note}</p>}
           </div>
 
           {/* Full-width ticket button */}
