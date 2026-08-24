@@ -39,7 +39,7 @@ export function Button({ variant = 'default', children, className, disabled, ...
   if (variant === 'link') {
     return (
       <button
-        className={`inline-flex items-center gap-[var(--spacing-1)] px-[var(--spacing-1)] rounded-[var(--radius-sm)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] whitespace-nowrap cursor-pointer transition-colors ${
+        className={`inline-flex min-w-0 max-w-full items-start justify-start gap-[var(--spacing-1)] px-[var(--spacing-1)] rounded-[var(--radius-sm)] text-start font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] whitespace-normal [overflow-wrap:anywhere] cursor-pointer transition-colors ${
           disabled
             ? 'text-[var(--color-text-muted)] bg-[var(--color-surface)]'
             : 'text-[var(--color-text-primary)] hover:bg-[image:linear-gradient(var(--color-state-hover-on-light),var(--color-state-hover-on-light)),linear-gradient(white,white)] active:bg-[image:linear-gradient(var(--color-state-pressed-on-light),var(--color-state-pressed-on-light)),linear-gradient(white,white)]'
@@ -47,7 +47,7 @@ export function Button({ variant = 'default', children, className, disabled, ...
         disabled={disabled}
         {...props}
       >
-        <MapPin size={16} />
+        <MapPin size={16} className="mt-[0.25em] shrink-0" />
         {children}
       </button>
     )
