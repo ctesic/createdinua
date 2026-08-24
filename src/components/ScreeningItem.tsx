@@ -64,6 +64,12 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
     </Button>
   )
 
+  const desktopMetadata = [
+    { key: 'venue', content: locationButton },
+    ...(hallText ? [{ key: 'hall', content: hallText }] : []),
+    ...(note ? [{ key: 'note', content: note }] : []),
+  ]
+
   return (
     <>
       <div className={`border border-[var(--color-border)] overflow-hidden p-[var(--spacing-4)] md:px-[var(--spacing-6)] md:py-[var(--spacing-5)] rounded-[var(--radius-xl)] ${isCancelled ? 'opacity-60' : ''}`}>
@@ -90,19 +96,14 @@ export function ScreeningItem({ date, time, city, venue, address, googleMapsUrl,
               </p>
             )}
             <div className="flex flex-wrap items-start gap-x-[var(--spacing-1)] font-[family-name:var(--font-body)] text-[length:var(--text-lg)] leading-[var(--line-height-lg)] text-[var(--color-text-secondary)]">
-              {locationButton}
-              {hallText && (
-                <span className="inline-flex min-w-0 max-w-full items-start gap-[var(--spacing-1)]">
-                  <span aria-hidden="true" className="shrink-0">•</span>
-                  <span className="min-w-0 [overflow-wrap:anywhere]">{hallText}</span>
+              {desktopMetadata.map(({ key, content }, index) => (
+                <span key={key} className="inline-flex min-w-0 max-w-full items-end gap-[var(--spacing-1)]">
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{content}</span>
+                  {index < desktopMetadata.length - 1 && (
+                    <span aria-hidden="true" className="shrink-0">•</span>
+                  )}
                 </span>
-              )}
-              {note && (
-                <span className="inline-flex min-w-0 max-w-full items-start gap-[var(--spacing-1)]">
-                  <span aria-hidden="true" className="shrink-0">•</span>
-                  <span className="min-w-0 [overflow-wrap:anywhere]">{note}</span>
-                </span>
-              )}
+              ))}
             </div>
           </div>
           {buttonEl && <div className="shrink-0">{buttonEl}</div>}
