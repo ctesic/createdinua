@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ImageGrid } from '@/components/ImageGrid'
+import { rtlLocales, type Locale } from '@/i18n/routing'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -138,6 +139,8 @@ export default async function AboutPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'about' })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
+  const dir = rtlLocales.includes(locale as Locale) ? 'rtl' : 'ltr'
 
   return (
     <div className="bg-[var(--color-surface)]">
@@ -177,7 +180,15 @@ export default async function AboutPage({ params }: Props) {
       {/* Section — Image Grid */}
       <section className="bg-[var(--color-background)] md:bg-transparent w-full">
         <div className="max-w-[1600px] mx-auto overflow-hidden px-[var(--container-side-paddings)] py-[var(--spacing-10)]">
-          <ImageGrid />
+          <ImageGrid
+            dir={dir}
+            labels={{
+              close: tCommon('close'),
+              previous: tCommon('previous'),
+              next: tCommon('next'),
+              image: tCommon('image'),
+            }}
+          />
         </div>
       </section>
     </div>

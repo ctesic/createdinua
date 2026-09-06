@@ -8,7 +8,7 @@ import { Button } from '@/components/Button'
 import { HeroSlider } from '@/components/HeroSlider'
 import { ImageGrid } from '@/components/ImageGrid'
 import { MovieCard } from '@/components/MovieCard'
-import type { Locale } from '@/i18n/routing'
+import { rtlLocales, type Locale } from '@/i18n/routing'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -25,6 +25,8 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
+  const dir = rtlLocales.includes(locale as Locale) ? 'rtl' : 'ltr'
   const [announcement, recentMovies, featuredMovies] = await Promise.all([
     getAnnouncement(locale as Locale),
     getRecentlyScreenedMovies(locale as Locale, 4),
@@ -137,7 +139,15 @@ export default async function HomePage({ params }: Props) {
       {/* Section — Image Grid */}
       <section className="w-full">
         <div className="max-w-[1600px] mx-auto overflow-hidden p-[var(--container-side-paddings)]">
-          <ImageGrid />
+          <ImageGrid
+            dir={dir}
+            labels={{
+              close: tCommon('close'),
+              previous: tCommon('previous'),
+              next: tCommon('next'),
+              image: tCommon('image'),
+            }}
+          />
         </div>
       </section>
     </div>
