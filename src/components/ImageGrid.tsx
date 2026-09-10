@@ -35,11 +35,14 @@ const items: GridItem[] = [
   { src: '/images/grid-imgs/11.avif', width: 1080, height: 721, area: 'col-[3/5] row-[5] md:col-[1/5] md:row-[4]' },
   { src: '/images/grid-imgs/18.avif', width: 1600, height: 1066, area: 'col-[5/8] row-[5] md:col-[5/9] md:row-[4]' },
   { src: '/images/grid-imgs/12.avif', width: 1200, height: 800, area: 'col-[1/5] row-[6] md:col-[9/12] md:row-[4]' },
-  // Row 6–7 (mobile) / Row 5 (md)
-  { src: '/images/grid-imgs/13.avif', width: 1080, height: 721, area: 'col-[5/8] row-[6] md:col-[1/4] md:row-[5]' },
-  { src: '/images/grid-imgs/14.avif', width: 1080, height: 721, area: 'col-[1/3] row-[7] md:col-[4/6] md:row-[5]' },
-  { src: '/images/grid-imgs/15.avif', width: 1080, height: 721, area: 'col-[3/5] row-[7] md:col-[6/8] md:row-[5]' },
-  { src: '/images/grid-imgs/16.webp', width: 2048, height: 1367, area: 'col-[5/8] row-[7] md:col-[8/12] md:row-[5]' },
+  // Row 6–8 (mobile) / Row 5–6 (md)
+  { src: '/images/grid-imgs/13.avif', width: 1080, height: 721, area: 'col-[5/8] row-[6] md:col-[4/8] md:row-[5]' },
+  // The two square Q&A shots take ~1:1 slots (3 cols) so they barely crop.
+  { src: '/images/grid-imgs/19.avif', width: 1440, height: 1440, area: 'col-[1/4] row-[7] md:col-[1/4] md:row-[5]' },
+  { src: '/images/grid-imgs/14.avif', width: 1080, height: 721, area: 'col-[4/6] row-[7] md:col-[8/12] md:row-[5]' },
+  { src: '/images/grid-imgs/15.avif', width: 1080, height: 721, area: 'col-[6/8] row-[7] md:col-[1/5] md:row-[6]' },
+  { src: '/images/grid-imgs/20.avif', width: 1436, height: 1403, area: 'col-[1/4] row-[8] md:col-[9/12] md:row-[6]' },
+  { src: '/images/grid-imgs/16.webp', width: 2048, height: 1367, area: 'col-[4/8] row-[8] md:col-[5/9] md:row-[6]' },
 ]
 
 type Props = {
