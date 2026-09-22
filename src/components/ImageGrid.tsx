@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 
-const sizes = '(max-width: 768px) 40vw, (max-width: 1024px) 18vw, 16vw'
+const sizes = '(max-width: 767px) 58vw, (max-width: 1600px) 37vw, 582px'
 
 type GridItem = {
   src: string
   width: number
   height: number
+  sizes?: string
   /** Placement on the 7-column mobile grid and the 11-column grid from md up. */
   area: string
 }
@@ -43,6 +44,22 @@ const items: GridItem[] = [
   { src: '/images/grid-imgs/15.avif', width: 1080, height: 721, area: 'col-[6/8] row-[7] md:col-[1/5] md:row-[6]' },
   { src: '/images/grid-imgs/20.avif', width: 1436, height: 1403, area: 'col-[1/4] row-[8] md:col-[9/12] md:row-[6]' },
   { src: '/images/grid-imgs/16.webp', width: 2048, height: 1367, area: 'col-[4/8] row-[8] md:col-[5/9] md:row-[6]' },
+  // A full-width closing pair: the portrait sets the row height, while the
+  // landscape fills the wider slot. Both breakpoints keep every column filled.
+  {
+    src: '/images/future/WhatsApp Image 2026-09-17 at 13.05.11.jpeg',
+    width: 1366,
+    height: 2048,
+    area: 'col-[1/3] row-[9] md:col-[1/4] md:row-[7] aspect-[1366/2048]',
+    sizes: '(max-width: 1600px) 29vw, 425px',
+  },
+  {
+    src: '/images/future/2.jpeg',
+    width: 2048,
+    height: 1365,
+    area: 'col-[3/8] row-[9] md:col-[4/12] md:row-[7]',
+    sizes: '(max-width: 1600px) 73vw, 1152px',
+  },
 ]
 
 type Props = {
@@ -93,7 +110,7 @@ export function ImageGrid({ dir = 'ltr', labels }: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] auto-rows-[120px] md:grid-cols-[repeat(11,minmax(0,1fr))] md:auto-rows-[200px] lg:auto-rows-[400px] gap-4 overflow-hidden">
+      <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] grid-rows-[repeat(8,120px)_auto] md:grid-cols-[repeat(11,minmax(0,1fr))] md:grid-rows-[repeat(6,200px)_auto] lg:grid-rows-[repeat(6,400px)_auto] gap-4 overflow-hidden">
         {items.map((item, i) => (
           <button
             key={item.src}
@@ -106,7 +123,7 @@ export function ImageGrid({ dir = 'ltr', labels }: Props) {
               src={item.src}
               alt=""
               fill
-              sizes={sizes}
+              sizes={item.sizes ?? sizes}
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </button>
