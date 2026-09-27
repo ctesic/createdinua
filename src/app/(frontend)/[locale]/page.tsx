@@ -113,7 +113,7 @@ export default async function HomePage({ params }: Props) {
           <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-4xl)] leading-[var(--line-height-4xl)] text-[var(--color-primary)] text-center w-full">
             {t('nav.hashtag')}
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid auto-rows-fr grid-cols-2 lg:grid-cols-4 gap-[var(--spacing-4)] sm:gap-[var(--spacing-8)]">
             {[
               { value: '100+', label: t('stats.films') },
               { value: '14', label: t('stats.cities') },
@@ -122,12 +122,12 @@ export default async function HomePage({ params }: Props) {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="flex flex-col gap-2 items-start p-[var(--spacing-5)] rounded-[var(--radius-xl)] bg-[var(--color-accent)]"
+                className="min-w-0 flex flex-col gap-[var(--spacing-2)] items-start p-[var(--spacing-3)] sm:p-[var(--spacing-5)] rounded-[var(--radius-xl)] bg-[var(--color-accent)]"
               >
-                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-5xl)] leading-[var(--line-height-5xl)] text-black w-full">
+                <p dir="ltr" className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:clamp(var(--text-2xl),8vw,var(--text-5xl))] lg:text-[length:clamp(var(--text-3xl),3.2vw,var(--text-5xl))] leading-tight whitespace-nowrap rtl:text-right text-black w-full">
                   {stat.value}
                 </p>
-                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-xl)] leading-[var(--line-height-xl)] text-[var(--color-text-secondary)] w-full">
+                <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-medium)] text-[length:var(--text-base)] leading-[var(--line-height-base)] sm:text-[length:var(--text-xl)] sm:leading-[var(--line-height-xl)] text-[var(--color-text-secondary)] w-full">
                   {stat.label}
                 </p>
               </div>
