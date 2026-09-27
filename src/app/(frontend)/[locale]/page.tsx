@@ -118,7 +118,7 @@ export default async function HomePage({ params }: Props) {
               { value: '100+', label: t('stats.films') },
               { value: '14', label: t('stats.cities') },
               { value: '1+2', label: t('stats.festivals') },
-              { value: '30 000+', label: t('stats.viewers') },
+              { value: '30 000+', label: t('stats.tickets') },
             ].map((stat, i) => (
               <div
                 key={i}

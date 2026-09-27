@@ -396,7 +396,7 @@ export async function POST(request: Request) {
           { value: '100+', label: 'сучасних українських фільмів' },
           { value: '14', label: 'міст Ізраїлю' },
           { value: '1+2', label: 'кінофестиваль + Українавів' },
-          { value: '30 000+', label: 'глядачів' },
+          { value: '30 000+', label: 'квитків' },
         ],
       },
     })
@@ -410,7 +410,7 @@ export async function POST(request: Request) {
           { value: '100+', label: 'contemporary Ukrainian films' },
           { value: '14', label: 'Israeli cities' },
           { value: '1+2', label: 'film festival + Ukraineaviv' },
-          { value: '30 000+', label: 'viewers' },
+          { value: '30 000+', label: 'tickets' },
         ],
       },
     })
@@ -424,7 +424,7 @@ export async function POST(request: Request) {
           { value: '100+', label: 'סרטים אוקראיניים עכשוויים' },
           { value: '14', label: 'ערים בישראל' },
           { value: '1+2', label: 'פסטיבל קולנוע + אוקראינאביב' },
-          { value: '30 000+', label: 'צופים' },
+          { value: '30 000+', label: 'כרטיסים' },
         ],
       },
     })
