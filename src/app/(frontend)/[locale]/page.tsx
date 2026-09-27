@@ -113,16 +113,17 @@ export default async function HomePage({ params }: Props) {
           <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-4xl)] leading-[var(--line-height-4xl)] text-[var(--color-primary)] text-center w-full">
             {t('nav.hashtag')}
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 2xl:grid-cols-5 gap-8">
             {[
-              { value: '50 +', label: t('stats.films') },
+              { value: '100+', label: t('stats.films') },
               { value: '14', label: t('stats.cities') },
               { value: '3', label: t('stats.chains') },
               { value: '1+2', label: t('stats.festivals') },
+              { value: '30 000+', label: t('stats.viewers') },
             ].map((stat, i) => (
               <div
                 key={i}
-                className="flex flex-col gap-2 items-start p-[var(--spacing-5)] rounded-[var(--radius-xl)] bg-[var(--color-accent)]"
+                className="last:col-span-2 2xl:last:col-span-1 flex flex-col gap-2 items-start p-[var(--spacing-5)] rounded-[var(--radius-xl)] bg-[var(--color-accent)]"
               >
                 <p className="font-[family-name:var(--font-heading)] font-[number:var(--font-weight-bold)] text-[length:var(--text-5xl)] leading-[var(--line-height-5xl)] text-black w-full">
                   {stat.value}

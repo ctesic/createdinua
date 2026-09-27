@@ -181,10 +181,11 @@ async function seed() {
         instagram: 'https://www.instagram.com/createdinua',
       },
       stats: [
-        { value: '50+', label: 'сучасних українських фільмів' },
+        { value: '100+', label: 'сучасних українських фільмів' },
         { value: '14', label: 'міст Ізраїлю' },
         { value: '3', label: 'мережі кінотеатрів' },
         { value: '1', label: 'фестиваль' },
+        { value: '30 000+', label: 'глядачів' },
       ],
     },
   })
@@ -195,10 +196,11 @@ async function seed() {
       heroTitle: 'Created in Ukraine',
       heroTagline: 'Ukrainian cinema in Israel',
       stats: [
-        { value: '50+', label: 'contemporary Ukrainian films' },
+        { value: '100+', label: 'contemporary Ukrainian films' },
         { value: '14', label: 'Israeli cities' },
         { value: '3', label: 'cinema chains' },
         { value: '1', label: 'festival' },
+        { value: '30 000+', label: 'viewers' },
       ],
     },
   })
@@ -209,10 +211,11 @@ async function seed() {
       heroTitle: 'נוצר באוקראינה',
       heroTagline: 'קולנוע אוקראיני בישראל',
       stats: [
-        { value: '50+', label: 'סרטים אוקראיניים עכשוויים' },
+        { value: '100+', label: 'סרטים אוקראיניים עכשוויים' },
         { value: '14', label: 'ערים בישראל' },
         { value: '3', label: 'רשתות קולנוע' },
         { value: '1', label: 'פסטיבל' },
+        { value: '30 000+', label: 'צופים' },
       ],
     },
   })

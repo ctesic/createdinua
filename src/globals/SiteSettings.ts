@@ -30,7 +30,7 @@ export const SiteSettings: GlobalConfig = {
           name: 'value',
           type: 'text',
           required: true,
-          admin: { description: 'e.g. "50+"' },
+          admin: { description: 'e.g. "100+"' },
         },
         {
           name: 'label',
