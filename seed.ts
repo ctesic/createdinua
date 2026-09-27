@@ -183,7 +183,6 @@ async function seed() {
       stats: [
         { value: '100+', label: 'сучасних українських фільмів' },
         { value: '14', label: 'міст Ізраїлю' },
-        { value: '3', label: 'мережі кінотеатрів' },
         { value: '1', label: 'фестиваль' },
         { value: '30 000+', label: 'глядачів' },
       ],
@@ -198,7 +197,6 @@ async function seed() {
       stats: [
         { value: '100+', label: 'contemporary Ukrainian films' },
         { value: '14', label: 'Israeli cities' },
-        { value: '3', label: 'cinema chains' },
         { value: '1', label: 'festival' },
         { value: '30 000+', label: 'viewers' },
       ],
@@ -213,7 +211,6 @@ async function seed() {
       stats: [
         { value: '100+', label: 'סרטים אוקראיניים עכשוויים' },
         { value: '14', label: 'ערים בישראל' },
-        { value: '3', label: 'רשתות קולנוע' },
         { value: '1', label: 'פסטיבל' },
         { value: '30 000+', label: 'צופים' },
       ],
